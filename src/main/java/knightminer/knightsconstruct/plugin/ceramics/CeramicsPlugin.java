@@ -33,20 +33,18 @@ public class CeramicsPlugin extends KnightsPulse {
 	public static CommonProxy proxy;
 
 	public static Block porcelainCasting;
-	public static ItemStack porcelainBrick;
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		porcelainCasting = registerBlock(new BlockCasting(), "porcelain_casting", BlockCasting.TYPE);
 		porcelainCasting.setCreativeTab(KnightsRegistry.tabGeneral);
 
-		porcelainBrick = GameRegistry.makeItemStack(ModIds.Ceramics.clayUnfired, ModIds.Ceramics.porcelainMeta, 1, null);
-
 		proxy.preInit();
 	}
 
 	@Subscribe
 	public void init(FMLInitializationEvent event) {
+		ItemStack porcelainBrick = GameRegistry.makeItemStack(ModIds.Ceramics.clayUnfired, ModIds.Ceramics.porcelainMeta, 1, null);
 		if(!porcelainBrick.isEmpty()) {
 			GameRegistry.addRecipe(new ItemStack(porcelainCasting, 1, CastingType.TABLE.getMeta()),
 					"bbb", "b b", "b b", 'b', porcelainBrick); // Table

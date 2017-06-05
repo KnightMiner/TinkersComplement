@@ -11,10 +11,10 @@ import com.google.common.eventbus.Subscribe;
 import knightminer.knightsconstruct.common.CommonProxy;
 import knightminer.knightsconstruct.common.Config;
 import knightminer.knightsconstruct.common.KnightsPulse;
+import knightminer.knightsconstruct.common.ModIds;
 import knightminer.knightsconstruct.feature.blocks.BlockMelter;
 import knightminer.knightsconstruct.feature.tileentity.TileMelter;
 import knightminer.knightsconstruct.library.KnightsRegistry;
-import knightminer.knightsconstruct.plugin.ceramics.CeramicsPlugin;
 import knightminer.knightsconstruct.shared.KnightsCommons;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -84,7 +84,7 @@ public class KnightsFeature extends KnightsPulse {
 
 		// porcelain tanks and melter
 		if(isCeramicsPluginLoaded()) {
-			ItemStack porcelainBrick = CeramicsPlugin.porcelainBrick;
+			ItemStack porcelainBrick = GameRegistry.makeItemStack(ModIds.Ceramics.clayUnfired, ModIds.Ceramics.porcelainMeta, 1, null);
 			if(!porcelainBrick.isEmpty()) {
 
 				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(porcelainTank, 1, BlockTank.TankType.TANK.getMeta()),
