@@ -127,6 +127,10 @@ public class KnightsFeature extends KnightsPulse {
 				registerOredictMeltingCasting(integration.fluid, integration.oreSuffix);
 			}
 		}
+
+		// don't allow seared stone from cobblestone or stone
+		KnightsRegistry.registerMelterBlacklist(RecipeMatch.of("cobblestone"));
+		KnightsRegistry.registerMelterBlacklist(RecipeMatch.of("stone"));
 	}
 
 	private static void registerOredictMeltingCasting(Fluid fluid, String ore) {
@@ -141,7 +145,7 @@ public class KnightsFeature extends KnightsPulse {
 
 		// register oredicts
 		for(Pair<List<ItemStack>, Integer> pair : knownOres) {
-			KnightsRegistry.registerMeltingOverride(new MeltingRecipe(RecipeMatch.of(pair.getLeft(), pair.getRight()), fluid));
+			KnightsRegistry.registerMelterOverride(new MeltingRecipe(RecipeMatch.of(pair.getLeft(), pair.getRight()), fluid));
 		}
 	}
 }
