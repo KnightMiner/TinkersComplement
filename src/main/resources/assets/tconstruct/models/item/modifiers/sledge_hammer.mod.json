@@ -1,0 +1,24 @@
+{
+    "textures": {
+        "bane_spider": "kconstruct:items/sledge_hammer/mod_bane_spider",
+        "beheading": "kconstruct:items/sledge_hammer/mod_beheading",
+        "blasting": "kconstruct:items/sledge_hammer/mod_blasting",
+        "diamond": "kconstruct:items/sledge_hammer/mod_diamond",
+        "emerald": "kconstruct:items/sledge_hammer/mod_emerald",
+        "fiery": "kconstruct:items/sledge_hammer/mod_fiery",
+        "fortified": "kconstruct:items/sledge_hammer/mod_fortified",
+        "glowing": "kconstruct:items/sledge_hammer/mod_glowing",
+        "haste": "kconstruct:items/sledge_hammer/mod_haste",
+        "knockback": "kconstruct:items/sledge_hammer/mod_knockback",
+        "luck": "kconstruct:items/sledge_hammer/mod_luck",
+        "mending_moss": "kconstruct:items/sledge_hammer/mod_mending_moss",
+        "necrotic": "kconstruct:items/sledge_hammer/mod_necrotic",
+        "reinforced": "kconstruct:items/sledge_hammer/mod_reinforced",
+        "sharpness": "kconstruct:items/sledge_hammer/mod_sharpness",
+        "shulking": "kconstruct:items/sledge_hammer/mod_shulking",
+        "silk": "kconstruct:items/sledge_hammer/mod_silk",
+        "smite": "kconstruct:items/sledge_hammer/mod_smite",
+        "soulbound": "kconstruct:items/sledge_hammer/mod_soulbound",
+        "web": "kconstruct:items/sledge_hammer/mod_web"
+    }
+}

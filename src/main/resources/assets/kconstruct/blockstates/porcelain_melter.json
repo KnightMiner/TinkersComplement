@@ -1,0 +1,29 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "kconstruct:melter",
+		"textures": {
+			"front": "kconstruct:blocks/porcelain/melter_front_inactive",
+			"top": "kconstruct:blocks/porcelain/window_top",
+			"brick": "ceramics:blocks/porcelain_bricks",
+			"side": "kconstruct:blocks/porcelain/melter_side",
+			"active": "kconstruct:blocks/porcelain/melter_front_active"
+		},
+		"uvlock": true
+	},
+	"variants": {
+		"facing": {
+			"north": {},
+			"south": { "y": 180 },
+			"west": { "y": 270 },
+			"east": { "y": 90 }
+		},
+		"active": {
+			"true": {
+				"textures": { "front": "#active" }
+			},
+			"false": {}
+		},
+		"inventory": [{}]
+	}
+}

@@ -1,0 +1,39 @@
+################
+#    Blocks    #
+################
+
+tile.kconstruct.porcelain_casting.basin.name=Porcelain Casting Basin
+tile.kconstruct.porcelain_casting.table.name=Porcelain Casting Table
+tile.kconstruct.porcelain_casting.tooltip=Cast items using molten metals from a melter
+
+tile.kconstruct.melter.name=Melter
+tile.kconstruct.melter.tooltip=Smaller version of a smeltery.\nCan melt metals but cannot make alloys.
+
+tile.kconstruct.porcelain_melter.name=Porcelain Melter
+tile.kconstruct.porcelain_melter.tooltip=tile.kconstruct.melter.tooltip
+
+tile.kconstruct.porcelain_tank.tank.name=Porcelain Tank
+tile.kconstruct.porcelain_tank.gauge.name=Porcelain Gauge
+tile.kconstruct.porcelain_tank.window.name=Porcelain Window
+tile.kconstruct.porcelain_tank.tooltip=Heart of the Melter\nRetains liquid when broken.
+
+
+################
+#    Items     #
+################
+
+item.kconstruct.materials.burnt_brick.name=Burnt Brick
+
+item.kconstruct.cast.bucket.name=Bucket Cast
+
+item.kconstruct.sledge_head.name=Sledge Hammer Head
+item.kconstruct.sledge_hammer.name=Sledge Hammer
+
+
+################
+#     GUI      #
+################
+
+gui.melter.name=Melter
+gui.melter.progress.no_space=Not enough free space in the melter
+gui.melter.progress.wrong_fluid=Resulting fluid is different than fluid in melter
