@@ -1,16 +1,16 @@
 [
-{
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+	{
+		"modid": "tcompliment",
+		"name": "Tinkers' Compliment",
+		"description": "Addon for Tinkers Construct adding various features to complement those from Tinkers",
+		"version": "${version}",
+		"mcversion": "${mcversion}",
+		"url": "https://minecraft.curseforge.com/projects/tinkers-compliment",
+		"updateUrl": "",
+		"authorList": ["KnightMiner"],
+		"credits": "",
+		"logoFile": "",
+		"screenshots": [],
+		"dependencies": []
+	}
 ]

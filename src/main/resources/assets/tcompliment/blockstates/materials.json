@@ -1,0 +1,10 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-item",
+        "model": "forge:item-layer"
+    },
+    "variants": {
+        "burnt_brick": [{ "textures": { "layer0": "tcompliment:items/materials/burnt_brick" }}]
+    }
+}

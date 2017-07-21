@@ -11,8 +11,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 //Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
 
-group = "knightminer.knightsconstruct"
-archivesBaseName = "KnightsConstruct"
+group = "knightminer.tcompliment"
+archivesBaseName = "TinkersCompliment"
 
 // External properties
 ext.configFile = file "build.properties"
@@ -79,4 +79,14 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+// Create deobf dev jars
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+artifacts {
+    archives deobfJar
 }

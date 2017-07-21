@@ -1,9 +1,0 @@
-{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "tconstruct:items/pickaxe/handle",
-        "layer1": "kconstruct:items/sledge_hammer/head",
-		"layer2": "kconstruct:items/sledge_hammer/binding",
-		"broken1": "kconstruct:items/sledge_hammer/broken_head"
-    }
-}

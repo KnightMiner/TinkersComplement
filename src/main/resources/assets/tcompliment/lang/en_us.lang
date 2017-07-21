@@ -1,0 +1,41 @@
+itemGroup.TCompGeneral=Tinkers' Compliment
+
+################
+#    Blocks    #
+################
+
+tile.tcompliment.porcelain_casting.basin.name=Porcelain Casting Basin
+tile.tcompliment.porcelain_casting.table.name=Porcelain Casting Table
+tile.tcompliment.porcelain_casting.tooltip=Cast items using molten metals from a melter
+
+tile.tcompliment.melter.name=Melter
+tile.tcompliment.melter.tooltip=Smaller version of a smeltery.\nCan melt metals but cannot make alloys.
+
+tile.tcompliment.porcelain_melter.name=Porcelain Melter
+tile.tcompliment.porcelain_melter.tooltip=tile.tcompliment.melter.tooltip
+
+tile.tcompliment.porcelain_tank.tank.name=Porcelain Tank
+tile.tcompliment.porcelain_tank.gauge.name=Porcelain Gauge
+tile.tcompliment.porcelain_tank.window.name=Porcelain Window
+tile.tcompliment.porcelain_tank.tooltip=Heart of the Melter\nRetains liquid when broken.
+
+
+################
+#    Items     #
+################
+
+item.tcompliment.materials.burnt_brick.name=Burnt Brick
+
+item.tcompliment.cast.bucket.name=Bucket Cast
+
+item.tcompliment.sledge_head.name=Sledge Hammer Head
+item.tcompliment.sledge_hammer.name=Sledge Hammer
+
+
+################
+#     GUI      #
+################
+
+gui.melter.name=Melter
+gui.melter.progress.no_space=Not enough free space in the melter
+gui.melter.progress.wrong_fluid=Resulting fluid is different than fluid in melter
