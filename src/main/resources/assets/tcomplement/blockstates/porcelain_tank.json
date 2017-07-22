@@ -1,0 +1,52 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "tconstruct:tank",
+        "textures": {
+            "side": "#side_normal",
+            "particle": "#side",
+            "top": "#side",
+            "bottom": "#top"
+        }
+    },
+	"variants": {
+        "type": {
+            "tank": {
+                "textures": {
+                    "side": "tcomplement:blocks/porcelain/tank_side",
+                    "top": "ceramics:blocks/porcelain_bricks"
+                }
+            },
+            "gauge": {
+                "textures": {
+                    "side": "tcomplement:blocks/porcelain/gauge_side",
+                    "top": "tcomplement:blocks/porcelain/window_top"
+                }
+            },
+            "window": {
+                "textures": {
+                    "side": "tcomplement:blocks/porcelain/window_side",
+                    "top": "tcomplement:blocks/porcelain/window_top"
+                }
+            }
+        },
+        "has_knob": {
+            "true": {
+                "submodel": {
+                    "knob": {
+                        "model": "tconstruct:tank_knob",
+                        "textures": {
+                            "top": "ceramics:blocks/porcelain_bricks",
+                            "side": "ceramics:blocks/porcelain_bricks"
+                        },
+                        "transform": {
+                            "translation": [0, 1, 0]
+                        }
+                    }
+                }
+            },
+            "false": {}
+        }
+    }
+}

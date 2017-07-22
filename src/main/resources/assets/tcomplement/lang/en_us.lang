@@ -1,0 +1,41 @@
+itemGroup.TCompGeneral=Tinkers' Complement
+
+################
+#    Blocks    #
+################
+
+tile.tcomplement.porcelain_casting.basin.name=Porcelain Casting Basin
+tile.tcomplement.porcelain_casting.table.name=Porcelain Casting Table
+tile.tcomplement.porcelain_casting.tooltip=Cast items using molten metals from a melter
+
+tile.tcomplement.melter.name=Melter
+tile.tcomplement.melter.tooltip=Smaller version of a smeltery.\nCan melt metals but cannot make alloys.
+
+tile.tcomplement.porcelain_melter.name=Porcelain Melter
+tile.tcomplement.porcelain_melter.tooltip=tile.tcomplement.melter.tooltip
+
+tile.tcomplement.porcelain_tank.tank.name=Porcelain Tank
+tile.tcomplement.porcelain_tank.gauge.name=Porcelain Gauge
+tile.tcomplement.porcelain_tank.window.name=Porcelain Window
+tile.tcomplement.porcelain_tank.tooltip=Heart of the Melter\nRetains liquid when broken.
+
+
+################
+#    Items     #
+################
+
+item.tcomplement.materials.burnt_brick.name=Burnt Brick
+
+item.tcomplement.cast.bucket.name=Bucket Cast
+
+item.tcomplement.sledge_head.name=Sledge Hammer Head
+item.tcomplement.sledge_hammer.name=Sledge Hammer
+
+
+################
+#     GUI      #
+################
+
+gui.tcomplement.melter.name=Melter
+gui.tcomplement.melter.progress.no_space=Not enough free space in the melter
+gui.tcomplement.melter.progress.wrong_fluid=Resulting fluid is different than fluid in melter

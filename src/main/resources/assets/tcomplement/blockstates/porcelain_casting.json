@@ -1,0 +1,32 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "type": {
+            "table": {
+                "model": "tconstruct:casting_table",
+				"textures": {
+					"top": "tcomplement:blocks/porcelain/table_top",
+					"side": "tcomplement:blocks/porcelain/table_side",
+					"leg": "tcomplement:blocks/porcelain/table_side",
+					"legBottom": "tcomplement:blocks/porcelain/table_bottom",
+					"bottom": "tcomplement:blocks/porcelain/table_bottom",
+					"particle": "tcomplement:blocks/porcelain/table_top"
+				}
+            },
+            "basin": {
+                "model": "tconstruct:casting_basin",
+				"textures": {
+					"top": "tcomplement:blocks/porcelain/basin_top",
+					"side": "tcomplement:blocks/porcelain/basin_side",
+					"leg": "tcomplement:blocks/porcelain/basin_side",
+					"bottom": "tcomplement:blocks/porcelain/basin_bottom",
+					"legBottom": "tcomplement:blocks/porcelain/basin_bottom",
+					"particle": "tcomplement:blocks/porcelain/basin_top"
+				}
+            }
+        }
+    }
+}

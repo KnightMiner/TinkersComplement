@@ -1,11 +1,11 @@
 [
 	{
-		"modid": "tcompliment",
-		"name": "Tinkers' Compliment",
+		"modid": "tcomplement",
+		"name": "Tinkers' Complement",
 		"description": "Addon for Tinkers Construct adding various features to complement those from Tinkers",
 		"version": "${version}",
 		"mcversion": "${mcversion}",
-		"url": "https://minecraft.curseforge.com/projects/tinkers-compliment",
+		"url": "https://minecraft.curseforge.com/projects/tinkers-complement",
 		"updateUrl": "",
 		"authorList": ["KnightMiner"],
 		"credits": "",

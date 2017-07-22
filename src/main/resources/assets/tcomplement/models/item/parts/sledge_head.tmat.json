@@ -1,0 +1,10 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "tcomplement:items/sledge_hammer/head"
+    },
+    "offset": {
+        "x": -3,
+        "y": 2
+    }
+}
