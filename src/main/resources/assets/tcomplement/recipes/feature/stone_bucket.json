@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "S S",
+    " S "
+  ],
+  "key": {
+    "S": [
+      {
+        "item": "minecraft:cobblestone",
+        "data": 0
+      },
+      {
+        "item": "minecraft:stone",
+        "data": 0
+      }
+    ]
+  },
+  "result": {
+    "item": "tcomplement:materials",
+    "data": 0
+  }
+}

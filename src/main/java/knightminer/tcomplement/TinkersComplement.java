@@ -7,14 +7,8 @@ import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.TCompNetwork;
 import knightminer.tcomplement.feature.ModuleFeature;
 import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
-import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import knightminer.tcomplement.shared.ModuleCommons;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLMissingMappingsEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import slimeknights.mantle.common.GuiHandler;
@@ -28,7 +22,7 @@ import slimeknights.mantle.pulsar.control.PulseManager;
 				+ "required-after:mantle;"
 				+ "required-after:tconstruct;"
 				+ "after:exnihiloadscensio",
-				acceptedMinecraftVersions = "[1.11.2, 1.12)")
+				acceptedMinecraftVersions = "[1.12, 1.13)")
 public class TinkersComplement {
 	public static final String modID = "tcomplement";
 	public static final String modVersion = "${version}";
@@ -45,7 +39,6 @@ public class TinkersComplement {
 	static {
 		pulseManager.registerPulse(new ModuleCommons());
 		pulseManager.registerPulse(new ModuleFeature());
-		pulseManager.registerPulse(new ExNihiloPlugin());
 		pulseManager.registerPulse(new CeramicsPlugin());
 	}
 
@@ -55,32 +48,5 @@ public class TinkersComplement {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, guiHandler);
 
 		TCompNetwork.instance.setup();
-	}
-
-	// Old version compatibility
-	@Mod.EventHandler
-	public void onMissingMapping(FMLMissingMappingsEvent event) {
-		// TODO: safe to remove when I update to 1.12
-		// thanks to /u/Thiakil on reddit for this code
-		for (FMLMissingMappingsEvent.MissingMapping mapping : event.getAll()){
-			if (mapping.resourceLocation.getResourceDomain().equals( "tcompliment" )){
-				ResourceLocation newLoc = new ResourceLocation( modID, mapping.resourceLocation.getResourcePath() );
-				switch( mapping.type ){
-					case ITEM:
-						Item newItem = Item.REGISTRY.getObject( newLoc );
-						if (newItem != null)
-							mapping.remap( newItem );
-						else
-							mapping.warn();
-						break;
-					case BLOCK:
-						Block newBlock = Block.REGISTRY.getObject( newLoc );
-						if (newBlock != null && newBlock != Blocks.AIR)
-							mapping.remap( newBlock );
-						else
-							mapping.warn();
-				}
-			}
-		}
 	}
 }

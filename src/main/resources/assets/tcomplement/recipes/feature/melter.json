@@ -1,0 +1,29 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " T ",
+    "BFB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "#SEARED_BRICK"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "T": {
+      "item": "#ANY_SEARED_TANK"
+    }
+  },
+  "result": {
+    "item": "tcomplement:melter",
+    "data": 0
+  }
+}

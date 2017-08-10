@@ -4,7 +4,7 @@ buildscript {
         maven { url = "http://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -44,22 +44,12 @@ repositories {
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
     }
-	maven { // TOP
-        name 'tterrag maven'
-        url "http://maven.tterrag.com/"
-    }
-    maven { // compatlayer
-        name 'K-4u maven'
-        url "http://maven.k-4u.nl/"
-    }
 }
 
 dependencies {
-    deobfCompile "mezz.jei:jei_${config.minecraft_version}:${config.jei_version}"
-    deobfCompile "slimeknights.mantle:Mantle:${config.minecraft_version}-${config.mantle_version}"
-    deobfCompile "slimeknights:TConstruct:${config.minecraft_version}-${config.tinkers_version}"
-    deobfCompile "mcjty.theoneprobe:TheOneProbe:${config.probe_version}"
-    deobfCompile "com.github.mcjty:compatlayer:${config.minecraft_version}-${config.compat_version}"
+    deobfCompile "mezz.jei:jei_${config.minecraft_base_version}:${config.jei_version}"
+    deobfCompile "slimeknights.mantle:Mantle:${config.minecraft_base_version}-${config.mantle_version}"
+    deobfCompile "slimeknights:TConstruct:${config.minecraft_base_version}-${config.tinkers_version}"
 }
 
 processResources {

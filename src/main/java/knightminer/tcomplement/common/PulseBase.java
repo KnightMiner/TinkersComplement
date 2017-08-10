@@ -1,5 +1,7 @@
 package knightminer.tcomplement.common;
 
+import java.util.Locale;
+
 import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.feature.ModuleFeature;
 import knightminer.tcomplement.library.Util;
@@ -8,23 +10,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.IForgeRegistryEntry;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.IForgeRegistryEntry;
+import slimeknights.mantle.block.BlockStairsBase;
 import slimeknights.mantle.block.EnumBlock;
 import slimeknights.mantle.block.EnumBlockSlab;
 import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.item.ItemBlockSlab;
 import slimeknights.tconstruct.TConstruct;
-import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.tools.Pattern;
-import slimeknights.tconstruct.library.tools.ToolCore;
-import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
-import slimeknights.tconstruct.smeltery.block.BlockMolten;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 public class PulseBase {
@@ -45,129 +43,108 @@ public class PulseBase {
 		return TinkersComplement.pulseManager.isPulseLoaded(CeramicsPlugin.pulseID);
 	}
 
-	/* Blocks */
+	protected static <T extends Block> T registerBlock(IForgeRegistry<Block> registry, T block, String name) {
+		if(!name.equals(name.toLowerCase(Locale.US))) {
+			throw new IllegalArgumentException(
+					String.format("Unlocalized names need to be all lowercase! Block: %s", name));
+		}
 
-	protected static <T extends Block> T registerBlock(T block, String name) {
+		String prefixedName = Util.prefix(name);
+		block.setUnlocalizedName(prefixedName);
+
+		register(registry, block, name);
+		return block;
+	}
+
+	protected static <E extends Enum<E> & EnumBlock.IEnumMeta & IStringSerializable> BlockStairsBase registerBlockStairsFrom(
+			IForgeRegistry<Block> registry, EnumBlock<E> block, E value, String name) {
+		return registerBlock(registry, new BlockStairsBase(block.getDefaultState().withProperty(block.prop, value)),
+				name);
+	}
+
+	protected static <T extends Block> T registerItemBlock(IForgeRegistry<Item> registry, T block) {
+
 		ItemBlock itemBlock = new ItemBlockMeta(block);
-		registerBlock(block, itemBlock, name);
+
+		itemBlock.setUnlocalizedName(block.getUnlocalizedName());
+
+		register(registry, itemBlock, block.getRegistryName());
 		return block;
 	}
 
-	protected static <T extends EnumBlock<?>> T registerEnumBlock(T block, String name) {
-		registerBlock(block, new ItemBlockMeta(block), name);
-		ItemBlockMeta.setMappingProperty(block, block.prop);
-		return block;
-	}
+	protected static <T extends EnumBlock<?>> T registerEnumItemBlock(IForgeRegistry<Item> registry, T block) {
+		ItemBlock itemBlock = new ItemBlockMeta(block);
 
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	protected static <T extends EnumBlockSlab<?>> T registerEnumBlockSlab(T block, String name) {
-		registerBlock(block, new ItemBlockSlab(block), name);
+		itemBlock.setUnlocalizedName(block.getUnlocalizedName());
+
+		register(registry, itemBlock, block.getRegistryName());
 		ItemBlockMeta.setMappingProperty(block, block.prop);
 		return block;
 	}
 
 	@SuppressWarnings("unchecked")
-	protected static <T extends Block> T registerBlock(ItemBlock itemBlock, String name) {
-		Block block = itemBlock.getBlock();
-		return (T) registerBlock(block, itemBlock, name);
+	protected static <T extends Block> T registerItemBlock(IForgeRegistry<Item> registry, ItemBlock itemBlock) {
+		itemBlock.setUnlocalizedName(itemBlock.getBlock().getUnlocalizedName());
+
+		register(registry, itemBlock, itemBlock.getBlock().getRegistryName());
+		return (T) itemBlock.getBlock();
 	}
 
-	protected static <T extends Block> T registerBlock(T block, String name, IProperty<?> property) {
+	protected static ItemBlockMeta registerItemBlock(IForgeRegistry<Item> registry, Block block,
+			IProperty<?> property) {
 		ItemBlockMeta itemBlock = new ItemBlockMeta(block);
-		registerBlock(block, itemBlock, name);
-		ItemBlockMeta.setMappingProperty(block, property);
+		itemBlock.setUnlocalizedName(itemBlock.getBlock().getUnlocalizedName());
+
+		register(registry, itemBlock, itemBlock.getBlock().getRegistryName());
+		ItemBlockMeta.setMappingProperty(itemBlock.getBlock(), property);
+		return itemBlock;
+	}
+
+	protected static <T extends EnumBlockSlab<?>> T registerEnumItemBlockSlab(IForgeRegistry<Item> registry, T block) {
+		@SuppressWarnings({"unchecked", "rawtypes"})
+		ItemBlock itemBlock = new ItemBlockSlab(block);
+
+		itemBlock.setUnlocalizedName(block.getUnlocalizedName());
+
+		register(registry, itemBlock, block.getRegistryName());
+		ItemBlockMeta.setMappingProperty(block, block.prop);
 		return block;
 	}
 
-	protected static <T extends Block> T registerBlock(T block, ItemBlock itemBlock, String name) {
-		String prefixedName = Util.prefix(name);
-		block.setUnlocalizedName(prefixedName);
-		itemBlock.setUnlocalizedName(prefixedName);
+	/**
+	 * Sets the correct unlocalized name and registers the item.
+	 */
+	protected static <T extends Item> T registerItem(IForgeRegistry<Item> registry, T item, String name) {
+		if(!name.equals(name.toLowerCase(Locale.US))) {
+			throw new IllegalArgumentException(
+					String.format("Unlocalized names need to be all lowercase! Item: %s", name));
+		}
 
-		register(block, name);
-		register(itemBlock, name);
-		return block;
-	}
-
-	protected static <T extends Block> T registerBlockNoItem(T block, String name) {
-		String prefixedName = Util.prefix(name);
-		block.setUnlocalizedName(prefixedName);
-
-		register(block, name);
-		return block;
-	}
-
-
-	/* Items */
-
-	protected static <T extends Item> T registerItem(T item, String name) {
 		item.setUnlocalizedName(Util.prefix(name));
-		register(item, name);
-
+		item.setRegistryName(Util.getResource(name));
+		registry.register(item);
 		return item;
 	}
 
-	// Tinkers Items
-
-	protected static <T extends ToolCore> T registerTool(T tool, String name) {
-		T ret = registerItem(tool, name);
-
-		return ret;
-	}
-
-	protected static <T extends ToolPart> T registerToolPart(T part, String name) {
-		T item = registerItem(part, name);
-		registerStencil(part);
-
-		return item;
-	}
-
-	protected static void registerStencil(ToolPart part) {
-		ItemStack stencil = new ItemStack(TinkerTools.pattern);
-		Pattern.setTagForPart(stencil, part);
-		TinkerRegistry.registerStencilTableCrafting(stencil);
-	}
-
-	/* Misc */
-	public static BlockMolten registerMoltenBlock(Fluid fluid) {
-		BlockMolten block = new BlockMolten(fluid);
-		return registerBlockNoItem(block, "molten_" + fluid.getName()); // molten_foobar prefix
-	}
-
-	protected static <T extends Fluid> T registerFluid(T fluid) {
-		fluid.setUnlocalizedName(Util.prefix(fluid.getName()));
-		FluidRegistry.registerFluid(fluid);
-
-		return fluid;
-	}
-
-	protected static void registerTE(Class<? extends TileEntity> teClazz, String name) {
-		GameRegistry.registerTileEntity(teClazz, Util.resource(name));
-	}
-
-	protected static void registerTE(Class<? extends TileEntity> teClazz, String name, String... alts) {
-		GameRegistry.registerTileEntityWithAlternatives(teClazz, Util.resource(name), alts);
-	}
-
-	protected static <T extends IForgeRegistryEntry<?>> T register(T thing, String name) {
+	protected static <T extends IForgeRegistryEntry<T>> T register(IForgeRegistry<T> registry, T thing, String name) {
 		thing.setRegistryName(Util.getResource(name));
-		GameRegistry.register(thing);
+		registry.register(thing);
 		return thing;
 	}
 
-	/* recipes */
-
-	// sets the stack size to make Knights Commons easier, as it uses base itemstacks there
-	protected static void addSlabRecipe(ItemStack slab, ItemStack input) {
-		GameRegistry.addShapedRecipe(new ItemStack(slab.getItem(), 6, slab.getItemDamage()), "BBB", 'B', input);
+	protected static <T extends IForgeRegistryEntry<T>> T register(IForgeRegistry<T> registry, T thing,
+			ResourceLocation name) {
+		thing.setRegistryName(name);
+		registry.register(thing);
+		return thing;
 	}
 
-	protected static void addBrickRecipe(Block block, EnumBlock.IEnumMeta out, EnumBlock.IEnumMeta in) {
-		ItemStack brickBlockIn = new ItemStack(block, 1, in.getMeta());
-		ItemStack brickBlockOut = new ItemStack(block, 1, out.getMeta());
+	protected static void registerTE(Class<? extends TileEntity> teClazz, String name) {
+		if(!name.equals(name.toLowerCase(Locale.US))) {
+			throw new IllegalArgumentException(
+					String.format("Unlocalized names need to be all lowercase! TE: %s", name));
+		}
 
-		// todo: convert to chisel recipes if chisel is present
-		//GameRegistry.addShapedRecipe(searedBrickBlockOut, "BB", "BB", 'B', searedBrickBlockIn);
-		GameRegistry.addShapelessRecipe(brickBlockOut, brickBlockIn);
+		GameRegistry.registerTileEntity(teClazz, Util.prefix(name));
 	}
 }

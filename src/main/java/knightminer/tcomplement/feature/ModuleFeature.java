@@ -10,25 +10,25 @@ import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.Config;
-import knightminer.tcomplement.common.ModIds;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.feature.blocks.BlockMelter;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.shared.ModuleCommons;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.MaterialIntegration;
@@ -36,7 +36,6 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
-import slimeknights.tconstruct.shared.TinkerCommons;
 import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.block.BlockTank;
@@ -55,60 +54,43 @@ public class ModuleFeature extends PulseBase {
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
+		proxy.preInit();
+	}
+
+	@SubscribeEvent
+	public void registerBlocks(Register<Block> event) {
+		IForgeRegistry<Block> r = event.getRegistry();
 
 		// functional blocks
-		melter = registerBlock(new BlockMelter(TinkerSmeltery.searedTank), "melter");
-		TCompRegistry.tabGeneral.setDisplayIcon(new ItemStack(melter));
+		melter = registerBlock(r, new BlockMelter(TinkerSmeltery.searedTank), "melter");
 
 		if(isCeramicsPluginLoaded()) {
-			porcelainTank = registerEnumBlock(new BlockTank(), "porcelain_tank");
+			porcelainTank = registerBlock(r, new BlockTank(), "porcelain_tank");
 			porcelainTank.setCreativeTab(TCompRegistry.tabGeneral);
-			porcelainMelter = registerBlock(new BlockMelter(porcelainTank), "porcelain_melter");
+			porcelainMelter = registerBlock(r, new BlockMelter(porcelainTank), "porcelain_melter");
 
 		}
 
-		registerTE(TileMelter.class, "melter", "tcompliment:melter");
+		registerTE(TileMelter.class, "melter");
+	}
 
-		proxy.preInit();
+	@SubscribeEvent
+	public void registerItems(Register<Item> event) {
+		IForgeRegistry<Item> r = event.getRegistry();
+
+		/* itemblocks */
+		registerItemBlock(r, melter);
+		TCompRegistry.tabGeneral.setDisplayIcon(new ItemStack(melter));
+
+		if(isCeramicsPluginLoaded()) {
+			registerEnumItemBlock(r, porcelainTank);
+			registerItemBlock(r, porcelainMelter);
+		}
 	}
 
 	@Subscribe
 	public void init(FMLInitializationEvent event) {
 		proxy.init();
-
-		registerRecipes();
-	}
-
-	private void registerRecipes() {
-		// melter recipe
-		GameRegistry.addRecipe(new ItemStack(melter), " t ", "bfb", "bbb",
-				't', new ItemStack(TinkerSmeltery.searedTank, 1, OreDictionary.WILDCARD_VALUE),
-				'b', TinkerCommons.searedBrick,
-				'f', Blocks.FURNACE);
-
-		// craft the stone bucket
-		GameRegistry.addRecipe(ModuleCommons.stoneBucket.copy(), "s s", " s ", 's', Blocks.COBBLESTONE);
-
-		// porcelain tanks and melter
-		if(isCeramicsPluginLoaded()) {
-			ItemStack porcelainBrick = GameRegistry.makeItemStack(ModIds.Ceramics.clayUnfired, ModIds.Ceramics.porcelainMeta, 1, null);
-			if(!porcelainBrick.isEmpty()) {
-
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(porcelainTank, 1, BlockTank.TankType.TANK.getMeta()),
-						"bbb", "bgb", "bbb", 'b', porcelainBrick, 'g', "blockGlass")); // Tank
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(porcelainTank, 1, BlockTank.TankType.GAUGE.getMeta()),
-						"bgb", "ggg", "bgb", 'b', porcelainBrick, 'g', "blockGlass")); // Glass
-				GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(porcelainTank, 1, BlockTank.TankType.WINDOW.getMeta()),
-						"bgb", "bgb", "bgb", 'b', porcelainBrick, 'g', "blockGlass")); // Window
-
-				// melter recipe
-				GameRegistry.addRecipe(new ItemStack(porcelainMelter), " t ", "bfb", "bbb",
-						't', new ItemStack(porcelainTank, 1, OreDictionary.WILDCARD_VALUE),
-						'b', porcelainBrick,
-						'f', Blocks.FURNACE);
-			}
-		}
-
 	}
 
 	// POST-INITIALIZATION
@@ -145,12 +127,12 @@ public class ModuleFeature extends PulseBase {
 
 	private static void registerOredictMeltingCasting(Fluid fluid, String ore) {
 		ImmutableSet.Builder<Pair<List<ItemStack>, Integer>> builder = ImmutableSet.builder();
-		Pair<List<ItemStack>, Integer> oreOre = Pair.of(OreDictionary.getOres("ore" + ore), (int) (Material.VALUE_Ingot * Config.oreToIngotRatio));
-		Pair<List<ItemStack>, Integer> oreNetherOre = Pair.of(OreDictionary.getOres("oreNether" + ore), (int) (2 * Material.VALUE_Ingot * Config.oreToIngotRatio));
-		Pair<List<ItemStack>, Integer> oreDenseOre = Pair.of(OreDictionary.getOres("denseore" + ore), (int) (3 * Material.VALUE_Ingot * Config.oreToIngotRatio));
-		Pair<List<ItemStack>, Integer> orePoorOre = Pair.of(OreDictionary.getOres("orePoor" + ore), (int) (Material.VALUE_Nugget * Config.oreToIngotRatio));
+		builder.add(Pair.of(OreDictionary.getOres("ore" + ore), (int) (Material.VALUE_Ingot * Config.oreToIngotRatio)));
+		builder.add(Pair.of(OreDictionary.getOres("oreNether" + ore), (int) (2 * Material.VALUE_Ingot * Config.oreToIngotRatio)));
+		builder.add(Pair.of(OreDictionary.getOres("denseore" + ore), (int) (3 * Material.VALUE_Ingot * Config.oreToIngotRatio)));
+		builder.add(Pair.of(OreDictionary.getOres("orePoor" + ore), (int) (Material.VALUE_Nugget * 3 * Config.oreToIngotRatio)));
+		builder.add(Pair.of(OreDictionary.getOres("oreNugget" + ore), (int) (Material.VALUE_Nugget * Config.oreToIngotRatio)));
 
-		builder.add(oreOre, oreNetherOre, oreDenseOre, orePoorOre);
 		Set<Pair<List<ItemStack>, Integer>> knownOres = builder.build();
 
 		// register oredicts

@@ -1,0 +1,31 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "CeramicsPlugin"
+    },
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "BGB",
+    "GGG",
+    "BGB"
+  ],
+  "key": {
+    "B": {
+      "item": "#PORCELAIN_BRICK"
+    },
+    "G": {
+      "type": "forge:ore_dict",
+      "ore": "blockGlass"
+    }
+  },
+  "result": {
+    "item": "tcomplement:porcelain_tank",
+    "data": 1
+  }
+}

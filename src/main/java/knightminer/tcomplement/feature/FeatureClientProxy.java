@@ -7,13 +7,15 @@ import knightminer.tcomplement.feature.client.MelterRenderer;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.smeltery.block.BlockTank;
 
 public class FeatureClientProxy extends ClientProxy {
-	@Override
-	public void registerModels() {
+	@SubscribeEvent
+	public void registerModels(ModelRegistryEvent event) {
 		registerItemModel(ModuleFeature.melter);
 		registerItemModel(ModuleFeature.porcelainMelter);
 

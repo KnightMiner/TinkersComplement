@@ -14,7 +14,7 @@ public class MelterRenderer extends TileEntitySpecialRenderer<TileMelter> {
 	protected static Minecraft mc = Minecraft.getMinecraft();
 
 	@Override
-	public void renderTileEntityAt(@Nonnull TileMelter tile, double x, double y, double z, float partialTicks, int destroyStage) {
+	public void render(@Nonnull TileMelter tile, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		FluidTankAnimated tank = tile.getTank();
 		FluidStack liquid = tank.getFluid();
 

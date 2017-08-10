@@ -1,0 +1,23 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "CeramicsPlugin"
+    }
+  ],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "B B",
+    "B B",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "#PORCELAIN_BRICK"
+    }
+  },
+  "result": {
+    "item": "tcomplement:porcelain_casting",
+    "data": 1
+  }
+}

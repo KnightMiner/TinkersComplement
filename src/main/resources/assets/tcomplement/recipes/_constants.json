@@ -1,0 +1,68 @@
+[
+  {
+    "name": "ANY_SEARED_TANK",
+    "ingredient": [
+      {
+        "item": "tconstruct:seared_tank",
+        "data": 0
+      },
+      {
+        "item": "tconstruct:seared_tank",
+        "data": 1
+      },
+      {
+        "item": "tconstruct:seared_tank",
+        "data": 2
+      }
+    ]
+  },
+  {
+    "conditions": [
+      {
+        "type": "pulse_loaded",
+        "pulse": "CeramicsPlugin"
+      },
+      {
+        "type": "pulse_loaded",
+        "pulse": "ModuleFeature"
+      }
+    ],
+    "name": "ANY_PORCELAIN_TANK",
+    "ingredient": [
+      {
+        "item": "tcomplement:porcelain_tank",
+        "data": 0
+      },
+      {
+        "item": "tcomplement:porcelain_tank",
+        "data": 1
+      },
+      {
+        "item": "tcomplement:porcelain_tank",
+        "data": 2
+      }
+    ]
+  },
+  
+  {
+    "name": "SEARED_BRICK",
+    "ingredient": {
+      "item": "tconstruct:materials",
+      "data": 0
+    }
+  },
+  
+  {
+    "conditions": [
+      {
+        "type": "forge:mod_loaded",
+        "modid": "ceramics"
+      }
+    ],
+    "name": "PORCELAIN_BRICK",
+    "ingredient": {
+      "item": "ceramics:unfired_clay",
+      "data": 5
+    }
+  }
+]

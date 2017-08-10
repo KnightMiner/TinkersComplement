@@ -5,10 +5,14 @@ import com.google.common.eventbus.Subscribe;
 import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.mantle.item.ItemMetaDynamic;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.tconstruct.library.materials.Material;
@@ -29,21 +33,25 @@ public class ModuleCommons extends PulseBase {
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
+		proxy.preInit();
+	}
+
+	@SubscribeEvent
+	public void registerItems(Register<Item> event) {
+		IForgeRegistry<Item> r = event.getRegistry();
 
 		// materials
-		materials = registerItem(new ItemMetaDynamic(), "materials");
+		materials = registerItem(r, new ItemMetaDynamic(), "materials");
 		materials.setCreativeTab(TCompRegistry.tabGeneral);
 
 		// custom casts
-		castCustom = registerItem(new CastCustom(), "cast");
+		castCustom = registerItem(r, new CastCustom(), "cast");
 		castCustom.setCreativeTab(TCompRegistry.tabGeneral);
 
 		if(isFeaturesLoaded()) {
 			stoneBucket = materials.addMeta(0, "stone_bucket");
 			castBucket = castCustom.addMeta(0, "bucket", Material.VALUE_Ingot);
 		}
-
-		proxy.preInit();
 	}
 
 	@Subscribe

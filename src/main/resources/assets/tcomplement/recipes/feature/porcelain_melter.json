@@ -1,0 +1,33 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "CeramicsPlugin"
+    },
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " T ",
+    "BFB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "#PORCELAIN_BRICK"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "T": {
+      "item": "#ANY_PORCELAIN_TANK"
+    }
+  },
+  "result": {
+    "item": "tcomplement:porcelain_melter",
+    "data": 0
+  }
+}

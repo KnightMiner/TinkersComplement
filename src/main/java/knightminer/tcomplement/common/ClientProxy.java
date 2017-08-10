@@ -12,16 +12,16 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 
 public class ClientProxy extends CommonProxy {
 	@Override
 	public void preInit() {
 		super.preInit();
-		registerModels();
-	}
 
-	protected void registerModels() {}
+		MinecraftForge.EVENT_BUS.register(this);
+	}
 
 	public void registerFluidModels(Fluid fluid) {
 		if(fluid == null) {
