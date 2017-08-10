@@ -32,7 +32,7 @@ public class ModuleCommons extends PulseBase {
 
 		// materials
 		materials = registerItem(new ItemMetaDynamic(), "materials");
-
+		materials.setCreativeTab(TCompRegistry.tabGeneral);
 
 		// custom casts
 		castCustom = registerItem(new CastCustom(), "cast");
