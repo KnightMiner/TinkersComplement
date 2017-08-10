@@ -99,7 +99,7 @@ public class ModuleFeature extends PulseBase {
 						"bgb", "bgb", "bgb", 'b', porcelainBrick, 'g', "blockGlass")); // Window
 
 				// melter recipe
-				GameRegistry.addRecipe(new ItemStack(melter), " t ", "bfb", "bbb",
+				GameRegistry.addRecipe(new ItemStack(porcelainMelter), " t ", "bfb", "bbb",
 						't', new ItemStack(porcelainTank, 1, OreDictionary.WILDCARD_VALUE),
 						'b', porcelainBrick,
 						'f', Blocks.FURNACE);
