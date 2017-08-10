@@ -2,16 +2,19 @@ package knightminer.tcomplement.plugin.jei;
 
 import com.google.common.collect.ImmutableList;
 
+import knightminer.tcomplement.feature.ModuleFeature;
 import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import mezz.jei.api.IJeiRuntime;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.ingredients.IModIngredientRegistration;
+import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 
 @mezz.jei.api.JEIPlugin
 public class JEIPlugin implements IModPlugin {
+	private static final String TINKERS_SMELTERY = "tconstruct.smeltery";
 
 	@Override
 	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry) {}
@@ -30,6 +33,14 @@ public class JEIPlugin implements IModPlugin {
 							TinkerMaterials.paper
 							)),
 					"exnihiloadscensio:hammer");
+		}
+
+		// smeltery alternatives
+		if(ModuleFeature.melter != null) {
+			registry.addRecipeCategoryCraftingItem(new ItemStack(ModuleFeature.melter), TINKERS_SMELTERY);
+		}
+		if(ModuleFeature.porcelainMelter != null) {
+			registry.addRecipeCategoryCraftingItem(new ItemStack(ModuleFeature.porcelainMelter), TINKERS_SMELTERY);
 		}
 	}
 
