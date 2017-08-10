@@ -24,7 +24,7 @@ tile.tcomplement.porcelain_tank.tooltip=Heart of the Melter\nRetains liquid when
 #    Items     #
 ################
 
-item.tcomplement.materials.burnt_brick.name=Burnt Brick
+item.tcomplement.materials.stone_bucket.name=Stone Bucket
 
 item.tcomplement.cast.bucket.name=Bucket Cast
 

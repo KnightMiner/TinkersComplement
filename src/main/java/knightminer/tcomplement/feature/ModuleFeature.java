@@ -86,6 +86,9 @@ public class ModuleFeature extends PulseBase {
 				'b', TinkerCommons.searedBrick,
 				'f', Blocks.FURNACE);
 
+		// craft the stone bucket
+		GameRegistry.addRecipe(ModuleCommons.stoneBucket.copy(), "s s", " s ", 's', Blocks.COBBLESTONE);
+
 		// porcelain tanks and melter
 		if(isCeramicsPluginLoaded()) {
 			ItemStack porcelainBrick = GameRegistry.makeItemStack(ModIds.Ceramics.clayUnfired, ModIds.Ceramics.porcelainMeta, 1, null);
@@ -113,17 +116,17 @@ public class ModuleFeature extends PulseBase {
 	public void postInit(FMLPostInitializationEvent event) {
 		registerMeltingCasting();
 
-		// add cast recipes for bucket cast
-		for(FluidStack fs : TinkerSmeltery.castCreationFluids) {
-			TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucket, new RecipeMatch.Item(new ItemStack(Items.BUCKET), 1), fs, true, true));
-		}
-
 		proxy.postInit();
 	}
 
 	private void registerMeltingCasting() {
 		// cast iron buckets, because it sounds cool and opens an option for bucket gating with Ceramics
 		TinkerRegistry.registerTableCasting(new ItemStack(Items.BUCKET), ModuleCommons.castBucket, TinkerFluids.iron, Material.VALUE_Ingot * 3);
+
+		// add cast recipes for bucket cast
+		for(FluidStack fs : TinkerSmeltery.castCreationFluids) {
+			TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucket, new RecipeMatch.Item(ModuleCommons.stoneBucket, 1), fs, true, true));
+		}
 
 		// override ore recipes to prevent ore doubling
 		for(MaterialIntegration integration : TinkerRegistry.getMaterialIntegrations()) {

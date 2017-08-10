@@ -5,6 +5,6 @@
         "model": "forge:item-layer"
     },
     "variants": {
-        "burnt_brick": [{ "textures": { "layer0": "tcomplement:items/materials/burnt_brick" }}]
+        "stone_bucket": [{ "textures": { "layer0": "tcomplement:items/materials/stone_bucket" }}]
     }
 }

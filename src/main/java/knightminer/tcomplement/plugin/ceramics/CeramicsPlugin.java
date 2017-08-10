@@ -9,19 +9,15 @@ import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.shared.ModuleCommons;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import slimeknights.mantle.pulsar.pulse.Pulse;
-import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
-import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 import slimeknights.tconstruct.shared.TinkerFluids;
-import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.block.BlockCasting;
 import slimeknights.tconstruct.smeltery.block.BlockCasting.CastingType;
 
@@ -60,11 +56,6 @@ public class CeramicsPlugin extends PulseBase {
 		if(ModuleCommons.castBucket != null && isSmelteryLoaded()) {
 			ItemStack bucket = GameRegistry.makeItemStack(ModIds.Ceramics.bucket, 0, 1, null);
 			if(!bucket.isEmpty()) {
-				// register remaining cast creation
-				for(FluidStack fs : TinkerSmeltery.castCreationFluids) {
-					TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucket, new RecipeMatch.Item(bucket, 1), fs, true, true));
-				}
-
 				TinkerRegistry.registerTableCasting(bucket, ModuleCommons.castBucket, TinkerFluids.clay, Material.VALUE_Ingot * 3);
 			}
 		}
