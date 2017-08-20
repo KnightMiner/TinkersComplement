@@ -181,8 +181,7 @@ public class GuiMelter extends GuiHeatingStructureFuelTank implements IGuiLiquid
 		}
 	}
 
-	@Override
-	public FluidStack getFluidStackAtPosition(int x, int y) {
+	protected FluidStack getHoveredFluidStack(int x, int y) {
 		FluidTankAnimated tank = melter.getTank();
 		FluidStack fluid = tank.getFluid();
 		if(fluid != null && fluid.amount > 0) {
@@ -193,6 +192,12 @@ public class GuiMelter extends GuiHeatingStructureFuelTank implements IGuiLiquid
 			}
 		}
 		return null;
+	}
+
+	// used by JEI, factor in the modules
+	@Override
+	public FluidStack getFluidStackAtPosition(int x, int y) {
+		return getHoveredFluidStack(x - cornerX, y - cornerY);
 	}
 
 	/**
@@ -241,7 +246,7 @@ public class GuiMelter extends GuiHeatingStructureFuelTank implements IGuiLiquid
 	protected List<String> getTankTooltip(int x, int y) {
 		if(x >= 90 && x < 142 && y >= 16 && y < 68) {
 			FluidTankAnimated tank = melter.getTank();
-			FluidStack hovered = getFluidStackAtPosition(x, y);
+			FluidStack hovered = getHoveredFluidStack(x, y);
 
 			List<String> text = Lists.newArrayList();
 			Consumer<Integer> stringFn = Util.isShiftKeyDown() ? (i) -> GuiUtil.amountToString(i, text) : (i) -> GuiUtil.amountToIngotString(i, text);

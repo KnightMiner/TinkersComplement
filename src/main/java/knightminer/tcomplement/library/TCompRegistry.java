@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.google.common.collect.Lists;
 
+import knightminer.tcomplement.library.events.TCompRegisterEvent;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import slimeknights.mantle.client.CreativeTab;
@@ -30,11 +31,30 @@ public class TCompRegistry {
 	private static List<IBlacklist> meltingBlacklist = Lists.newLinkedList();
 
 	public static void registerMelterOverride(MeltingRecipe recipe) {
-		meltingOverrides.add(recipe);
+		if(new TCompRegisterEvent.MelterOverrideRegisterEvent(recipe).fire()) {
+			meltingOverrides.add(recipe);
+		}
+		else {
+			try {
+				String input = recipe.input.getInputs().stream().findFirst().map(ItemStack::getUnlocalizedName).orElse("?");
+				log.debug("Registration of melting recipe for " + recipe.getResult().getUnlocalizedName() + " from " + input + " has been cancelled by event");
+			} catch(Exception e) {
+				log.error("Error when logging melting event", e);
+			}
+		}
 	}
 
 	public static void registerMelterBlacklist(IBlacklist blacklist) {
-		meltingBlacklist.add(blacklist);
+		if(new TCompRegisterEvent.MelterBlackListRegisterEvent(blacklist).fire()) {
+			meltingBlacklist.add(blacklist);
+		}
+		else {
+			try {
+				log.debug("Registration of melter blacklist recipe has been cancelled by event");
+			} catch(Exception e) {
+				log.error("Error when logging melting event", e);
+			}
+		}
 	}
 
 	public static void registerMelterBlacklist(RecipeMatch blacklist) {
