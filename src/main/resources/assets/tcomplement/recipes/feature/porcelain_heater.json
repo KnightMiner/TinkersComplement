@@ -12,19 +12,19 @@
   "type": "forge:ore_shaped",
   "pattern": [
     " B ",
-    "BTB",
-    "BBB"
+    "BBB",
+    "BFB"
   ],
   "key": {
     "B": {
       "item": "#PORCELAIN_BRICK"
     },
-    "T": {
-      "item": "#ANY_PORCELAIN_TANK"
+    "F": {
+      "item": "minecraft:furnace"
     }
   },
   "result": {
     "item": "tcomplement:porcelain_melter",
-    "data": 0
+    "data": 8
   }
 }

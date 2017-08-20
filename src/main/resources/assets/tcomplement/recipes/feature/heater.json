@@ -8,19 +8,19 @@
   "type": "forge:ore_shaped",
   "pattern": [
     " B ",
-    "BTB",
-    "BBB"
+    "BBB",
+    "BFB"
   ],
   "key": {
     "B": {
       "item": "#SEARED_BRICK"
     },
-    "T": {
-      "item": "#ANY_SEARED_TANK"
+    "F": {
+      "item": "minecraft:furnace"
     }
   },
   "result": {
     "item": "tcomplement:melter",
-    "data": 0
+    "data": 8
   }
 }

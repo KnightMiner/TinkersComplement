@@ -2,6 +2,7 @@ package knightminer.tcomplement.common;
 
 import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.feature.network.FluidUpdatePacket;
+import knightminer.tcomplement.feature.network.MelterFuelUpdatePacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +25,7 @@ public class TCompNetwork extends NetworkWrapper {
 
 		// MELTER
 		registerPacketClient(FluidUpdatePacket.class);
+		registerPacketClient(MelterFuelUpdatePacket.class);
 	}
 
 	public static void sendToAll(AbstractPacket packet) {

@@ -12,6 +12,7 @@ import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.feature.blocks.BlockMelter;
+import knightminer.tcomplement.feature.tileentity.TileHeater;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.shared.ModuleCommons;
@@ -72,6 +73,7 @@ public class ModuleFeature extends PulseBase {
 		}
 
 		registerTE(TileMelter.class, "melter");
+		registerTE(TileHeater.class, "heater");
 	}
 
 	@SubscribeEvent
@@ -79,12 +81,12 @@ public class ModuleFeature extends PulseBase {
 		IForgeRegistry<Item> r = event.getRegistry();
 
 		/* itemblocks */
-		registerItemBlock(r, melter);
+		registerItemBlock(r, melter, BlockMelter.TYPE);
 		TCompRegistry.tabGeneral.setDisplayIcon(new ItemStack(melter));
 
 		if(isCeramicsPluginLoaded()) {
 			registerEnumItemBlock(r, porcelainTank);
-			registerItemBlock(r, porcelainMelter);
+			registerItemBlock(r, porcelainMelter, BlockMelter.TYPE);
 		}
 	}
 

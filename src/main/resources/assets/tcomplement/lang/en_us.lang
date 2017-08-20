@@ -8,11 +8,15 @@ tile.tcomplement.porcelain_casting.basin.name=Porcelain Casting Basin
 tile.tcomplement.porcelain_casting.table.name=Porcelain Casting Table
 tile.tcomplement.porcelain_casting.tooltip=Cast items using molten metals from a melter
 
-tile.tcomplement.melter.name=Melter
-tile.tcomplement.melter.tooltip=Smaller version of a smeltery.\nCan melt metals but cannot make alloys.
+tile.tcomplement.melter.melter.name=Melter
+tile.tcomplement.melter.melter.tooltip=Smaller version of a smeltery.\nCan melt metals but cannot make alloys.
+tile.tcomplement.melter.heater.name=Seared Heater
+tile.tcomplement.melter.heater.tooltip=Can heat the melter using solid fuels, but has a more limited temperature.
 
-tile.tcomplement.porcelain_melter.name=Porcelain Melter
-tile.tcomplement.porcelain_melter.tooltip=tile.tcomplement.melter.tooltip
+tile.tcomplement.porcelain_melter.melter.name=Porcelain Melter
+tile.tcomplement.porcelain_melter.melter.tooltip=tile.tcomplement.melter.melter.tooltip
+tile.tcomplement.porcelain_melter.heater.name=Porcelain Heater
+tile.tcomplement.porcelain_melter.heater.tooltip=tile.tcomplement.melter.heater.tooltip
 
 tile.tcomplement.porcelain_tank.tank.name=Porcelain Tank
 tile.tcomplement.porcelain_tank.gauge.name=Porcelain Gauge
@@ -40,3 +44,7 @@ item.tcomplement.sledge_hammer.name=Sledge Hammer
 gui.tcomplement.melter.name=Melter
 gui.tcomplement.melter.progress.no_space=Not enough free space in the melter
 gui.tcomplement.melter.progress.wrong_fluid=Resulting fluid is different than fluid in melter
+gui.tcomplement.melter.solid_fuel=Heater
+gui.tcomplement.melter.solid_fuel.amount=%s units
+
+gui.tcomplement.heater.name=Heater

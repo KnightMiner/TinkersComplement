@@ -3,12 +3,14 @@ package knightminer.tcomplement.feature.multiblock;
 import com.google.common.collect.ImmutableList;
 
 import knightminer.tcomplement.feature.blocks.BlockMelter;
+import knightminer.tcomplement.feature.blocks.BlockMelter.MelterType;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import slimeknights.mantle.multiblock.MultiServantLogic;
+import slimeknights.mantle.multiblock.IServantLogic;
 import slimeknights.tconstruct.smeltery.multiblock.MultiblockDetection;
 
 public class MultiblockMelter extends MultiblockDetection {
@@ -43,8 +45,11 @@ public class MultiblockMelter extends MultiblockDetection {
 
 		// safety check, make sure the block is a melter and ask it what block it needs for a tank
 		if(block instanceof BlockMelter) {
-			Block tank = world.getBlockState(pos).getBlock();
-			return tank == ((BlockMelter)block).getMelterTank();
+			// allow if the block is the specified tank or our block's heater
+			IBlockState state = world.getBlockState(pos);
+			Block tank = state.getBlock();
+			return tank == ((BlockMelter)block).getMelterTank()
+					|| (tank == block && state.getValue(BlockMelter.TYPE) == MelterType.HEATER);
 		}
 
 		return false;
@@ -58,10 +63,11 @@ public class MultiblockMelter extends MultiblockDetection {
 		TileEntity te = world.getTileEntity(pos);
 
 		// slave-blocks are only allowed if they already belong to this structure
-		if(te instanceof MultiServantLogic) {
-			MultiServantLogic slave = (MultiServantLogic) te;
-			if(slave.hasValidMaster()) {
-				if(!tile.getPos().equals(slave.getMasterPosition())) {
+		if(te instanceof IServantLogic) {
+			IServantLogic slave = (IServantLogic) te;
+			BlockPos masterPos = slave.getMasterPosition();
+			if(masterPos != null) {
+				if(!tile.getPos().equals(masterPos)) {
 					return false;
 				}
 			}

@@ -1,13 +1,8 @@
 {
 	"forge_marker": 1,
 	"defaults": {
-		"model": "tcomplement:melter",
 		"textures": {
-			"front": "tcomplement:blocks/melter/front_inactive",
-			"top": "tconstruct:blocks/smeltery/seared_window_top",
-			"brick": "tconstruct:blocks/smeltery/seared_brick",
-			"side": "tcomplement:blocks/melter/side",
-			"active": "tcomplement:blocks/melter/front_active"
+			"brick": "tconstruct:blocks/smeltery/seared_brick"
 		},
 		"uvlock": true
 	},
@@ -18,12 +13,31 @@
 			"west": { "y": 270 },
 			"east": { "y": 90 }
 		},
+    "type": {
+      "melter": {
+      "model": "tcomplement:melter",
+        "textures": {
+          "front": "tcomplement:blocks/melter/front_inactive",
+          "active": "tcomplement:blocks/melter/front_active",
+          "top": "tconstruct:blocks/smeltery/seared_window_top",
+          "side": "tcomplement:blocks/melter/side"
+        }
+      },
+      "heater": {
+        "model": "orientable",
+        "textures": {
+          "front": "tcomplement:blocks/melter/heater_front_inactive",
+          "active": "tcomplement:blocks/melter/heater_front_active",
+          "top": "#brick",
+          "side": "#brick"
+        }
+      }
+    },
 		"active": {
 			"true": {
 				"textures": { "front": "#active" }
 			},
 			"false": {}
-		},
-		"inventory": [{}]
+		}
 	}
 }
