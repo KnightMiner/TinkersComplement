@@ -58,7 +58,7 @@ public class TCompRegistry {
 	}
 
 	public static void registerMelterBlacklist(RecipeMatch blacklist) {
-		meltingBlacklist.add(new RecipeMatchBlacklist(blacklist));
+		registerMelterBlacklist(new RecipeMatchBlacklist(blacklist));
 	}
 
 	public static MeltingRecipe getMelting(ItemStack stack) {
