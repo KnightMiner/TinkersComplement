@@ -8,8 +8,8 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
-
-//Only edit below this line, the above code adds and enables the nessasary things for Forge to be setup.
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 group = "knightminer.tcomplement"
 archivesBaseName = "TinkersComplement"
@@ -71,12 +71,27 @@ processResources {
     }
 }
 
-// Create deobf dev jars
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
+// because the normal output has been made to be obfuscated
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
 }
 
 artifacts {
-    archives deobfJar
+    archives sourcesJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourcesJar
+        }
+    }
+
+    repositories {
+        if (project.hasProperty('DEPLOY_DIR')) {
+            maven { url DEPLOY_DIR }
+        }
+    }
 }
