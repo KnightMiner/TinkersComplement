@@ -27,6 +27,10 @@ configurations {
 }
 
 version = "${config.minecraft_version}-${config.mod_version}"
+//adds the build number to the end of the version string if on a build server
+if (System.getenv().BUILD_NUMBER != null) {
+	version += ".${System.getenv().BUILD_NUMBER}"
+}
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
