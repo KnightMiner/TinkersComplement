@@ -1,5 +1,7 @@
 package knightminer.tcomplement.feature;
 
+import static slimeknights.tconstruct.common.ModelRegisterUtil.registerItemModel;
+
 import knightminer.tcomplement.common.ClientProxy;
 import knightminer.tcomplement.feature.blocks.BlockMelter;
 import knightminer.tcomplement.feature.blocks.BlockMelter.MelterType;
@@ -21,6 +23,12 @@ public class FeatureClientProxy extends ClientProxy {
 	public void registerModels(ModelRegistryEvent event) {
 		registerMelterModel(ModuleFeature.melter);
 		registerMelterModel(ModuleFeature.porcelainMelter);
+
+		// armor
+		registerItemModel(ModuleFeature.manyullynHelmet);
+		registerItemModel(ModuleFeature.manyullynChestplate);
+		registerItemModel(ModuleFeature.manyullynLeggings);
+		registerItemModel(ModuleFeature.manyullynBoots);
 
 		// porcelain tank items
 		Item tank = Item.getItemFromBlock(ModuleFeature.porcelainTank);

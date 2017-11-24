@@ -12,14 +12,20 @@ import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.feature.blocks.BlockMelter;
+import knightminer.tcomplement.feature.items.ItemArmorBase;
 import knightminer.tcomplement.feature.tileentity.TileHeater;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
 import knightminer.tcomplement.library.TCompRegistry;
+import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.shared.ModuleCommons;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -53,8 +59,18 @@ public class ModuleFeature extends PulseBase {
 	public static Block porcelainMelter;
 	public static BlockTank porcelainTank;
 
+	// armor
+	public static ArmorMaterial manyullynArmor;
+	public static Item manyullynHelmet;
+	public static Item manyullynChestplate;
+	public static Item manyullynLeggings;
+	public static Item manyullynBoots;
+
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
+		manyullynArmor = EnumHelper.addArmorMaterial(Util.prefix("manyullyn"), Util.resource("manyullyn"),
+				15, new int[]{4, 7, 9, 4}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
+
 		proxy.preInit();
 	}
 
@@ -80,7 +96,13 @@ public class ModuleFeature extends PulseBase {
 	public void registerItems(Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
 
-		/* itemblocks */
+		// armor
+		manyullynHelmet = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.HEAD), "manyullyn_helmet");
+		manyullynChestplate = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.CHEST), "manyullyn_chestplate");
+		manyullynLeggings = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.LEGS), "manyullyn_leggings");
+		manyullynBoots = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.FEET), "manyullyn_boots");
+
+		// itemblocks
 		registerItemBlock(r, melter, BlockMelter.TYPE);
 		TCompRegistry.tabGeneral.setDisplayIcon(new ItemStack(melter));
 

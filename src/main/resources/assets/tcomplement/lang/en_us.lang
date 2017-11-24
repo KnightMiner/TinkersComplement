@@ -36,6 +36,11 @@ item.tcomplement.cast.bucket.name=Bucket Cast
 item.tcomplement.sledge_head.name=Sledge Hammer Head
 item.tcomplement.sledge_hammer.name=Sledge Hammer
 
+item.tcomplement.manyullyn_helmet.name=Manyullyn Helmet
+item.tcomplement.manyullyn_chestplate.name=Manyullyn Chestplate
+item.tcomplement.manyullyn_leggings.name=Manyullyn Leggings
+item.tcomplement.manyullyn_boots.name=Manyullyn Boots
+
 
 ################
 #     GUI      #
