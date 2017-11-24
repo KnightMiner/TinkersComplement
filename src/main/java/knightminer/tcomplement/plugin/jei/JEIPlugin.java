@@ -9,6 +9,7 @@ import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.feature.ModuleFeature;
 import knightminer.tcomplement.feature.client.GuiMelter;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
+import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.gui.IAdvancedGuiHandler;
@@ -23,6 +24,7 @@ import slimeknights.tconstruct.tools.TinkerMaterials;
 public class JEIPlugin implements IModPlugin {
 	private static final String FURNACE_FUEL = VanillaRecipeCategoryUid.FUEL;
 	private static final String TINKERS_SMELTERY = "tconstruct.smeltery";
+	private static final String EXNIHILO_HAMMER = "exnihilocreatio:hammer";
 	private static final String CHISEL_CHISELING = "chisel.chiseling";
 
 	@Override
@@ -46,10 +48,19 @@ public class JEIPlugin implements IModPlugin {
 			registry.addRecipeCatalyst(
 					ChiselPlugin.chisel.buildItem(ImmutableList.of(
 							TinkerMaterials.wood,
+							TinkerMaterials.iron
+							)),
+					CHISEL_CHISELING);
+		}
+		// add our hammer to the ex nihilo hammer group
+		if(ExNihiloPlugin.sledgeHammer != null) {
+			registry.addRecipeCatalyst(
+					ExNihiloPlugin.sledgeHammer.buildItem(ImmutableList.of(
+							TinkerMaterials.wood,
 							TinkerMaterials.iron,
 							TinkerMaterials.paper
 							)),
-					CHISEL_CHISELING);
+					EXNIHILO_HAMMER);
 		}
 	}
 

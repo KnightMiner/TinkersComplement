@@ -52,6 +52,10 @@ repositories {
 		name 'tterrag'
 		url 'http://maven.tterrag.com/'
 	}
+	maven {
+		name 'Jared'
+		url 'http://maven.blamejared.com/'
+	}
 }
 
 dependencies {
@@ -61,6 +65,9 @@ dependencies {
     deobfCompile "team.chisel.ctm:CTM:MC${config.minecraft_base_version}-${config.ctm_version}"
     deobfCompile "team.chisel:Chisel:MC${config.minecraft_base_version}-${config.chisel_version}"
     // deobfCompile "team.chisel:Chisel:MC${config.minecraft_base_version}-${config.chisel_version}:api"
+    deobfCompile("exnihilocreatio:exnihilocreatio:${config.minecraft_base_version}-${config.exnihilo_version}") {
+		transitive = false
+	}
 }
 
 processResources {
