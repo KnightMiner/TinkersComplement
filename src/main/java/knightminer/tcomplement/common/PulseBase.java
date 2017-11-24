@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -22,11 +23,14 @@ import slimeknights.mantle.block.EnumBlockSlab;
 import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.item.ItemBlockSlab;
 import slimeknights.tconstruct.TConstruct;
+import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.library.tools.Pattern;
+import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 public class PulseBase {
-
+	/* Loaded */
 	protected boolean isToolsLoaded() {
 		return TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId);
 	}
@@ -43,6 +47,7 @@ public class PulseBase {
 		return TinkersComplement.pulseManager.isPulseLoaded(CeramicsPlugin.pulseID);
 	}
 
+	/* Normal registration */
 	protected static <T extends Block> T registerBlock(IForgeRegistry<Block> registry, T block, String name) {
 		if(!name.equals(name.toLowerCase(Locale.US))) {
 			throw new IllegalArgumentException(
@@ -146,5 +151,10 @@ public class PulseBase {
 		}
 
 		GameRegistry.registerTileEntity(teClazz, Util.prefix(name));
+	}
+
+	/* Tinkers Registration */
+	protected static void registerStencil(ToolPart part) {
+		TinkerRegistry.registerStencilTableCrafting(Pattern.setTagForPart(new ItemStack(TinkerTools.pattern), part));
 	}
 }

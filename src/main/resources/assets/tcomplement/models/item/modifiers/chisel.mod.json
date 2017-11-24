@@ -1,0 +1,24 @@
+{
+    "textures": {
+        "bane_spider": "tcomplement:items/chisel/mod_bane_spider",
+        "beheading": "tcomplement:items/chisel/mod_beheading",
+        "blasting": "tcomplement:items/chisel/mod_blasting",
+        "diamond": "tcomplement:items/chisel/mod_diamond",
+        "emerald": "tcomplement:items/chisel/mod_emerald",
+        "fiery": "tcomplement:items/chisel/mod_fiery",
+        "fortified": "tcomplement:items/chisel/mod_fortified",
+        "glowing": "tcomplement:items/chisel/mod_glowing",
+        "haste": "tcomplement:items/chisel/mod_haste",
+        "knockback": "tcomplement:items/chisel/mod_knockback",
+        "luck": "tcomplement:items/chisel/mod_luck",
+        "mending_moss": "tcomplement:items/chisel/mod_mending_moss",
+        "necrotic": "tcomplement:items/chisel/mod_necrotic",
+        "reinforced": "tcomplement:items/chisel/mod_reinforced",
+        "sharpness": "tcomplement:items/chisel/mod_sharpness",
+        "shulking": "tcomplement:items/chisel/mod_shulking",
+        "silk": "tcomplement:items/chisel/mod_silk",
+        "smite": "tcomplement:items/chisel/mod_smite",
+        "soulbound": "tcomplement:items/chisel/mod_soulbound",
+        "web": "tcomplement:items/chisel/mod_web"
+    }
+}

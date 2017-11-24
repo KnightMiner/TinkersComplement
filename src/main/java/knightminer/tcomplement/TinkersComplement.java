@@ -7,6 +7,7 @@ import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.TCompNetwork;
 import knightminer.tcomplement.feature.ModuleFeature;
 import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
+import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.shared.ModuleCommons;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -40,6 +41,7 @@ public class TinkersComplement {
 		pulseManager.registerPulse(new ModuleCommons());
 		pulseManager.registerPulse(new ModuleFeature());
 		pulseManager.registerPulse(new CeramicsPlugin());
+		pulseManager.registerPulse(new ChiselPlugin());
 	}
 
 	@Mod.EventHandler
