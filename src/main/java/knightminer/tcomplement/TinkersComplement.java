@@ -21,7 +21,8 @@ import slimeknights.mantle.pulsar.control.PulseManager;
 		version = TinkersComplement.modVersion,
 		dependencies = "required-after:forge;"
 				+ "required-after:mantle;"
-				+ "required-after:tconstruct;"
+				+ "required-after:tconstruct@[1.12-2.7.4.38,);"
+				+ "after:chisel;"
 				+ "after:exnihiloadscensio",
 				acceptedMinecraftVersions = "[1.12, 1.13)")
 public class TinkersComplement {
