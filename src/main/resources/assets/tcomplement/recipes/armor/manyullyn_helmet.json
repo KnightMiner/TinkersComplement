@@ -1,0 +1,21 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "result": {
+    "item": "tcomplement:manyullyn_helmet"
+  },
+  "pattern": [
+    "ccc",
+    "c c"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {
+      "item": "#MANYULLYN_INGOT"
+    }
+  }
+}

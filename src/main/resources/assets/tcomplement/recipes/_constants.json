@@ -51,6 +51,13 @@
       "data": 0
     }
   },
+  {
+    "name": "MANYULLYN_INGOT",
+    "ingredient": {
+      "item": "tconstruct:ingots",
+      "data": 2
+    }
+  },
   
   {
     "conditions": [

@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "result": {
+    "item": "tcomplement:manyullyn_leggings"
+  },
+  "pattern": [
+    "ccc",
+    "c c",
+    "c c"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {
+      "item": "#MANYULLYN_INGOT"
+    }
+  }
+}

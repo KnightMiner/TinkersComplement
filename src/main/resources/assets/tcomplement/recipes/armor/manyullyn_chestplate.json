@@ -1,0 +1,22 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "result": {
+    "item": "tcomplement:manyullyn_chestplate"
+  },
+  "pattern": [
+    "c c",
+    "ccc",
+    "ccc"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {
+      "item": "#MANYULLYN_INGOT"
+    }
+  }
+}
