@@ -1,11 +1,12 @@
 package knightminer.tcomplement.plugin.exnihilo;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
-import knightminer.tcomplement.plugin.exnihilo.items.SledgeHammer;
+import knightminer.tcomplement.plugin.exnihilo.items.ItemSledgeHammer;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -20,6 +21,7 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
+import slimeknights.tconstruct.tools.TinkerMaterials;
 
 @Pulse(id = ExNihiloPlugin.pulseID, description = "Adds an Tinkers Construct version of the Ex Nihilo hammer", modsRequired = "exnihilocreatio")
 public class ExNihiloPlugin extends PulseBase {
@@ -40,14 +42,16 @@ public class ExNihiloPlugin extends PulseBase {
 	public void registerItems(Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
 		sledgeHead = registerItem(r, new ToolPart(Material.VALUE_Ingot * 2), "sledge_head");
-		sledgeHead.setCreativeTab(TCompRegistry.tabGeneral);
-		sledgeHammer = registerItem(r, new SledgeHammer(), "sledge_hammer");
+		sledgeHead.setCreativeTab(TCompRegistry.tabTools);
+		sledgeHammer = registerItem(r, new ItemSledgeHammer(), "sledge_hammer");
 	}
 
 	@Subscribe
 	public void init(FMLInitializationEvent event) {
 		TinkerRegistry.registerToolCrafting(sledgeHammer);
 		registerStencil(sledgeHead);
+
+		TCompRegistry.tabTools.setDisplayIcon(sledgeHammer.buildItem(ImmutableList.of(TinkerMaterials.wood, TinkerMaterials.iron, TinkerMaterials.cobalt)));
 
 		proxy.init();
 	}

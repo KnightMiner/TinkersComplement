@@ -22,18 +22,18 @@ import slimeknights.tconstruct.tools.TinkerTools;
 
 // apparently Forge does not like that this class is referenced from ExNihiloPlugin
 //@Optional.Interface(iface="exnihilocreatio.items.tools.IHammer", modid="exnihilocreatio")
-public class SledgeHammer extends AoeToolCore implements IHammer {
+public class ItemSledgeHammer extends AoeToolCore implements IHammer {
 
-	public SledgeHammer() {
+	public ItemSledgeHammer() {
 		this(PartMaterialType.handle(TinkerTools.toolRod),
 				PartMaterialType.head(ExNihiloPlugin.sledgeHead),
 				PartMaterialType.extra(TinkerTools.binding));
 	}
 
-	public SledgeHammer(PartMaterialType... requiredComponents) {
+	public ItemSledgeHammer(PartMaterialType... requiredComponents) {
 		super(requiredComponents);
 
-		setCreativeTab(TCompRegistry.tabGeneral);
+		setCreativeTab(TCompRegistry.tabTools);
 		addCategory(Category.HARVEST);
 		addCategory(Category.WEAPON);
 	}

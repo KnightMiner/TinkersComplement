@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import com.google.common.collect.Lists;
 
 import knightminer.tcomplement.library.events.TCompRegisterEvent;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import slimeknights.mantle.client.CreativeTab;
@@ -20,7 +21,8 @@ public class TCompRegistry {
 	/*---------------------------------------------------------------------------
 	| CREATIVE TABS                                                             |
 	---------------------------------------------------------------------------*/
-	public static CreativeTab tabGeneral = new CreativeTab("TCompGeneral", new ItemStack(Items.IRON_SWORD));
+	public static CreativeTab tabGeneral = new CreativeTab("TCompGeneral", new ItemStack(Blocks.BRICK_BLOCK));
+	public static CreativeTab tabTools = new CreativeTab("TCompTools", new ItemStack(Items.IRON_PICKAXE));
 
 	/*---------------------------------------------------------------------------
 	| Melter                                                                    |

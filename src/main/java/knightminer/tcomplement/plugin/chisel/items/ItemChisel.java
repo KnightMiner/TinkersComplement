@@ -28,8 +28,8 @@ public class ItemChisel extends TinkerToolCore implements IChiselItem {
 		super(PartMaterialType.handle(TinkerTools.toolRod),
 				PartMaterialType.head(ChiselPlugin.chiselHead));
 
-		setCreativeTab(TCompRegistry.tabGeneral);
 		addCategory(Category.HARVEST);
+		setCreativeTab(TCompRegistry.tabTools);
 		addCategory(Category.WEAPON);
 	}
 

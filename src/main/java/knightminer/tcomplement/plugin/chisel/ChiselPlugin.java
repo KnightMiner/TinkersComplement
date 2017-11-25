@@ -1,5 +1,6 @@
 package knightminer.tcomplement.plugin.chisel;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
@@ -18,6 +19,7 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
+import slimeknights.tconstruct.tools.TinkerMaterials;
 
 @Pulse(id = ChiselPlugin.pulseID, description = "Add a Tinkers version of the Chisel Chisel", modsRequired = "chisel")
 public class ChiselPlugin extends PulseBase {
@@ -39,7 +41,7 @@ public class ChiselPlugin extends PulseBase {
 		IForgeRegistry<Item> r = event.getRegistry();
 
 		chiselHead = registerItem(r, new ToolPart(Material.VALUE_Ingot), "chisel_head");
-		chiselHead.setCreativeTab(TCompRegistry.tabGeneral);
+		chiselHead.setCreativeTab(TCompRegistry.tabTools);
 		chisel = registerItem(r, new ItemChisel(), "chisel");
 	}
 
@@ -47,6 +49,8 @@ public class ChiselPlugin extends PulseBase {
 	public void init(FMLInitializationEvent event) {
 		TinkerRegistry.registerToolCrafting(chisel);
 		registerStencil(chiselHead);
+
+		TCompRegistry.tabTools.setDisplayIcon(chisel.buildItem(ImmutableList.of(TinkerMaterials.wood, TinkerMaterials.iron)));
 
 		proxy.init();
 	}
