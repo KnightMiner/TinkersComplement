@@ -5,6 +5,8 @@ import com.google.common.eventbus.Subscribe;
 import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
+import knightminer.tcomplement.shared.item.ItemCast;
+import knightminer.tcomplement.shared.item.ItemMaterials;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -41,11 +43,11 @@ public class ModuleCommons extends PulseBase {
 		IForgeRegistry<Item> r = event.getRegistry();
 
 		// materials
-		materials = registerItem(r, new ItemMetaDynamic(), "materials");
+		materials = registerItem(r, new ItemMaterials(), "materials");
 		materials.setCreativeTab(TCompRegistry.tabGeneral);
 
 		// custom casts
-		castCustom = registerItem(r, new CastCustom(), "cast");
+		castCustom = registerItem(r, new ItemCast(), "cast");
 		castCustom.setCreativeTab(TCompRegistry.tabGeneral);
 
 		if(isFeaturesLoaded()) {
