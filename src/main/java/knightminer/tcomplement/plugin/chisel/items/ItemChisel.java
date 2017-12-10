@@ -7,28 +7,37 @@ import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import slimeknights.tconstruct.library.materials.HandleMaterialStats;
+import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.materials.MaterialTypes;
 import slimeknights.tconstruct.library.tinkering.Category;
 import slimeknights.tconstruct.library.tinkering.PartMaterialType;
-import slimeknights.tconstruct.library.tools.TinkerToolCore;
+import slimeknights.tconstruct.library.tools.AoeToolCore;
 import slimeknights.tconstruct.library.tools.ToolNBT;
+import slimeknights.tconstruct.library.utils.TagUtil;
+import slimeknights.tconstruct.library.utils.TinkerUtil;
 import slimeknights.tconstruct.library.utils.ToolHelper;
+import slimeknights.tconstruct.tools.TinkerModifiers;
 import slimeknights.tconstruct.tools.TinkerTools;
 import team.chisel.api.IChiselGuiType;
 import team.chisel.api.IChiselGuiType.ChiselGuiType;
 import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.ICarvingVariation;
+import team.chisel.api.carving.IChiselMode;
 
-public class ItemChisel extends TinkerToolCore implements IChiselItem {
+public class ItemChisel extends AoeToolCore implements IChiselItem {
+
+	public static final float DURABILITY_MODIFIER = 2.25f;
 
 	public ItemChisel() {
 		super(PartMaterialType.handle(TinkerTools.toolRod),
 				PartMaterialType.head(ChiselPlugin.chiselHead));
 
-		addCategory(Category.HARVEST);
 		setCreativeTab(TCompRegistry.tabTools);
 		addCategory(Category.WEAPON);
 	}
@@ -37,7 +46,7 @@ public class ItemChisel extends TinkerToolCore implements IChiselItem {
 
 	@Override
 	public float damagePotential() {
-		return 0.6f;
+		return 0.5f;
 	}
 
 	@Override
@@ -46,8 +55,23 @@ public class ItemChisel extends TinkerToolCore implements IChiselItem {
 	}
 
 	@Override
-	protected ToolNBT buildTagData(List<Material> materials) {
-		return buildDefaultTag(materials);
+	public float getRepairModifierForPart(int index) {
+		return DURABILITY_MODIFIER;
+	}
+
+	@Override
+	public ToolNBT buildTagData(List<Material> materials) {
+		HandleMaterialStats handle = materials.get(0).getStatsOrUnknown(MaterialTypes.HANDLE);
+		HeadMaterialStats head = materials.get(1).getStatsOrUnknown(MaterialTypes.HEAD);
+
+		ToolNBT data = new ToolNBT();
+		data.head(head);
+		data.handle(handle);
+
+		data.harvestLevel = head.harvestLevel;
+		data.durability *= DURABILITY_MODIFIER;
+
+		return data;
 	}
 
 	/* Chisel logic */
@@ -62,9 +86,32 @@ public class ItemChisel extends TinkerToolCore implements IChiselItem {
 	}
 
 	@Override
-	public boolean onChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
-		ToolHelper.damageTool(chisel, 1, player);
+	public boolean supportsMode(EntityPlayer player, ItemStack stack, IChiselMode mode) {
+		String name = mode.name();
+		if(name.equals("SINGLE")) {
+			return true;
+		}
+
+		// use expanders to determine ability
+		NBTTagCompound tags = TagUtil.getTagSafe(stack);
+		boolean hasWidth = TinkerUtil.hasModifier(tags, TinkerModifiers.modHarvestWidth.getIdentifier());
+		boolean hasHeight = TinkerUtil.hasModifier(tags, TinkerModifiers.modHarvestHeight.getIdentifier());
+
+		switch(name) {
+			case "COLUMN":
+				return hasHeight;
+			case "ROW":
+				return hasWidth;
+			case "PANEL":
+				return hasWidth && hasHeight;
+		}
+
 		return false;
+	}
+
+	@Override
+	public boolean onChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
+		return true;
 	}
 
 	@Override
@@ -86,9 +133,16 @@ public class ItemChisel extends TinkerToolCore implements IChiselItem {
 	}
 
 	@Override
-	public boolean hasModes(EntityPlayer player, EnumHand hand) {
-		// TODO: supports mode
-		return false;
+	public ItemStack craftItem(ItemStack chisel, ItemStack source, ItemStack target, EntityPlayer player) {
+		int toCraft = Math.min(source.getCount(), target.getMaxStackSize());
+		int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage();
+		toCraft = Math.min(toCraft, damageLeft);
+		ToolHelper.damageTool(chisel, toCraft, player);
+
+		ItemStack res = target.copy();
+		source.shrink(toCraft);
+		res.setCount(toCraft);
+		return res;
 	}
 
 }
