@@ -40,18 +40,21 @@ public class ChiselPlugin extends PulseBase {
 	public void registerItems(Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
 
-		chiselHead = registerItem(r, new ToolPart(Material.VALUE_Ingot), "chisel_head");
-		chiselHead.setCreativeTab(TCompRegistry.tabTools);
-		chisel = registerItem(r, new ItemChisel(), "chisel");
+		if(isToolsLoaded()) {
+			chiselHead = registerItem(r, new ToolPart(Material.VALUE_Ingot), "chisel_head");
+			chiselHead.setCreativeTab(TCompRegistry.tabTools);
+			chisel = registerItem(r, new ItemChisel(), "chisel");
+		}
 	}
 
 	@Subscribe
 	public void init(FMLInitializationEvent event) {
-		TinkerRegistry.registerToolCrafting(chisel);
-		registerStencil(chiselHead);
+		if(isToolsLoaded()) {
+			TinkerRegistry.registerToolCrafting(chisel);
+			registerStencil(chiselHead);
 
-		TCompRegistry.tabTools.setDisplayIcon(chisel.buildItem(ImmutableList.of(TinkerMaterials.wood, TinkerMaterials.iron)));
-
+			TCompRegistry.tabTools.setDisplayIcon(chisel.buildItem(ImmutableList.of(TinkerMaterials.wood, TinkerMaterials.iron)));
+		}
 		proxy.init();
 	}
 }

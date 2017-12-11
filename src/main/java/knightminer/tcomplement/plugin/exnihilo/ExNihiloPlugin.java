@@ -41,18 +41,21 @@ public class ExNihiloPlugin extends PulseBase {
 	@SubscribeEvent
 	public void registerItems(Register<Item> event) {
 		IForgeRegistry<Item> r = event.getRegistry();
-		sledgeHead = registerItem(r, new ToolPart(Material.VALUE_Ingot * 2), "sledge_head");
-		sledgeHead.setCreativeTab(TCompRegistry.tabTools);
-		sledgeHammer = registerItem(r, new ItemSledgeHammer(), "sledge_hammer");
+		if(isToolsLoaded()) {
+			sledgeHead = registerItem(r, new ToolPart(Material.VALUE_Ingot * 2), "sledge_head");
+			sledgeHead.setCreativeTab(TCompRegistry.tabTools);
+			sledgeHammer = registerItem(r, new ItemSledgeHammer(), "sledge_hammer");
+		}
 	}
 
 	@Subscribe
 	public void init(FMLInitializationEvent event) {
-		TinkerRegistry.registerToolCrafting(sledgeHammer);
-		registerStencil(sledgeHead);
+		if(isToolsLoaded()) {
+			TinkerRegistry.registerToolCrafting(sledgeHammer);
+			registerStencil(sledgeHead);
 
-		TCompRegistry.tabTools.setDisplayIcon(sledgeHammer.buildItem(ImmutableList.of(TinkerMaterials.wood, TinkerMaterials.iron, TinkerMaterials.cobalt)));
-
+			TCompRegistry.tabTools.setDisplayIcon(sledgeHammer.buildItem(ImmutableList.of(TinkerMaterials.wood, TinkerMaterials.iron, TinkerMaterials.cobalt)));
+		}
 		proxy.init();
 	}
 

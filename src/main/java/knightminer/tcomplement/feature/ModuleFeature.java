@@ -79,17 +79,22 @@ public class ModuleFeature extends PulseBase {
 		IForgeRegistry<Block> r = event.getRegistry();
 
 		// functional blocks
-		melter = registerBlock(r, new BlockMelter(TinkerSmeltery.searedTank), "melter");
+		if(isSmelteryLoaded()) {
+			melter = registerBlock(r, new BlockMelter(TinkerSmeltery.searedTank), "melter");
+		}
 
 		if(isCeramicsPluginLoaded()) {
 			porcelainTank = registerBlock(r, new BlockTank(), "porcelain_tank");
 			porcelainTank.setCreativeTab(TCompRegistry.tabGeneral);
-			porcelainMelter = registerBlock(r, new BlockMelter(porcelainTank), "porcelain_melter");
-
+			if(isSmelteryLoaded()) {
+				porcelainMelter = registerBlock(r, new BlockMelter(porcelainTank), "porcelain_melter");
+			}
 		}
 
-		registerTE(TileMelter.class, "melter");
-		registerTE(TileHeater.class, "heater");
+		if(isSmelteryLoaded()) {
+			registerTE(TileMelter.class, "melter");
+			registerTE(TileHeater.class, "heater");
+		}
 	}
 
 	@SubscribeEvent
@@ -103,12 +108,16 @@ public class ModuleFeature extends PulseBase {
 		manyullynBoots = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.FEET), "manyullyn_boots");
 
 		// itemblocks
-		registerItemBlock(r, melter, BlockMelter.TYPE);
-		TCompRegistry.tabGeneral.setDisplayIcon(new ItemStack(melter));
+		if(isSmelteryLoaded()) {
+			registerItemBlock(r, melter, BlockMelter.TYPE);
+			TCompRegistry.tabGeneral.setDisplayIcon(new ItemStack(melter));
+		}
 
 		if(isCeramicsPluginLoaded()) {
 			registerEnumItemBlock(r, porcelainTank);
-			registerItemBlock(r, porcelainMelter, BlockMelter.TYPE);
+			if(isSmelteryLoaded()) {
+				registerItemBlock(r, porcelainMelter, BlockMelter.TYPE);
+			}
 		}
 	}
 

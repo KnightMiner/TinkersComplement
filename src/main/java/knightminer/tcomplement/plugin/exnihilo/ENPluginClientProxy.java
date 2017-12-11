@@ -21,10 +21,12 @@ public class ENPluginClientProxy extends ClientProxy {
 		// yeah, basically the same locations as the pickaxe
 		ToolBuildGuiInfo info;
 
-		info = new ToolBuildGuiInfo(ExNihiloPlugin.sledgeHammer);
-		info.addSlotPosition(33 - 18, 42 + 18); // rod
-		info.addSlotPosition(33 + 20, 42 - 20); // sledge head
-		info.addSlotPosition(33, 42); // binding
-		TinkerRegistryClient.addToolBuilding(info);
+		if(ExNihiloPlugin.sledgeHammer != null) {
+			info = new ToolBuildGuiInfo(ExNihiloPlugin.sledgeHammer);
+			info.addSlotPosition(33 - 18, 42 + 18); // rod
+			info.addSlotPosition(33 + 20, 42 - 20); // sledge head
+			info.addSlotPosition(33, 42); // binding
+			TinkerRegistryClient.addToolBuilding(info);
+		}
 	}
 }
