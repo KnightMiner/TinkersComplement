@@ -9,6 +9,7 @@ import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.common.Optional;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.tinkering.Category;
 import slimeknights.tconstruct.library.tinkering.PartMaterialType;
@@ -21,7 +22,7 @@ import slimeknights.tconstruct.library.utils.ToolHelper;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 // apparently Forge does not like that this class is referenced from ExNihiloPlugin
-//@Optional.Interface(iface="exnihilocreatio.items.tools.IHammer", modid="exnihilocreatio")
+@Optional.Interface(iface="exnihilocreatio.items.tools.IHammer", modid="exnihilocreatio")
 public class ItemSledgeHammer extends AoeToolCore implements IHammer {
 
 	public ItemSledgeHammer() {
@@ -92,11 +93,13 @@ public class ItemSledgeHammer extends AoeToolCore implements IHammer {
 	}
 
 	/* Hammer things */
+	@Optional.Method(modid="exnihilocreatio")
 	@Override
 	public boolean isHammer(ItemStack stack) {
 		return true;
 	}
 
+	@Optional.Method(modid="exnihilocreatio")
 	@Override
 	public int getMiningLevel(ItemStack stack) {
 		return ToolHelper.getHarvestLevelStat(stack);

@@ -11,6 +11,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
@@ -30,6 +31,7 @@ import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IChiselMode;
 
+@Optional.Interface(iface="team.chisel.api.IChiselItem", modid="chisel")
 public class ItemChisel extends AoeToolCore implements IChiselItem {
 
 	public static final float DURABILITY_MODIFIER = 2.25f;
@@ -75,16 +77,19 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 	}
 
 	/* Chisel logic */
+	@Optional.Method(modid="chisel")
 	@Override
 	public boolean canOpenGui(World world, EntityPlayer player, EnumHand hand) {
 		return !ToolHelper.isBroken(player.getHeldItem(hand));
 	}
 
+	@Optional.Method(modid="chisel")
 	@Override
 	public IChiselGuiType getGuiType(World world, EntityPlayer player, EnumHand hand) {
 		return ChiselGuiType.NORMAL;
 	}
 
+	@Optional.Method(modid="chisel")
 	@Override
 	public boolean supportsMode(EntityPlayer player, ItemStack stack, IChiselMode mode) {
 		String name = mode.name();
@@ -109,17 +114,20 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 		return false;
 	}
 
+	@Optional.Method(modid="chisel")
 	@Override
 	public boolean onChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
 		return true;
 	}
 
+	@Optional.Method(modid="chisel")
 	@Override
 	public boolean canChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
 		// block if broken
 		return !ToolHelper.isBroken(chisel);
 	}
 
+	@Optional.Method(modid="chisel")
 	@Override
 	public boolean canChiselBlock(World world, EntityPlayer player, EnumHand hand, BlockPos pos, IBlockState state) {
 		// block if broken
@@ -132,6 +140,7 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 		return ToolHelper.getHarvestLevelStat(chisel) >= state.getBlock().getHarvestLevel(state);
 	}
 
+	@Optional.Method(modid="chisel")
 	@Override
 	public ItemStack craftItem(ItemStack chisel, ItemStack source, ItemStack target, EntityPlayer player) {
 		int toCraft = Math.min(source.getCount(), target.getMaxStackSize());
