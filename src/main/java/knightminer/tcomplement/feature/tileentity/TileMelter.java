@@ -78,7 +78,7 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 		}
 
 		// are we fully formed?
-		if(!isActive()) {
+		if(!isActive() && tick % 20 == 0) {
 			checkMultiblockStructure();
 		} else {
 			if(tick % 4 == 0) {
@@ -173,11 +173,20 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 
 	@Override
 	protected void updateStructureInfo(MultiblockDetection.MultiblockStructure structure) {
+		if(structure.blocks.size() < 2) {
+			return;
+		}
+
 		tanks.clear();
 		BlockPos down = pos.down();
 		if(getWorld().getBlockState(down).getBlock() instanceof BlockTank) {
 			// find all tanks for input
 			tanks.add(down);
+			if(isSolidFuel()) {
+				this.fuel = 0;
+				this.temperature = 0;
+				this.needsFuel = true;
+			}
 		}
 
 		this.resize(3);
