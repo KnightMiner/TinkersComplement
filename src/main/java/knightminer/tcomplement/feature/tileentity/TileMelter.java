@@ -311,7 +311,7 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 		// just return the current contents of the tank below, don't worry about last fluid
 		if(hasFuel() && currentFuel != null) {
 			info.fluid = currentFuel.copy();
-			info.heat = this.temperature;
+			info.heat = this.temperature + 300;
 			info.maxCap = currentFuel.amount;
 		} else {
 			IFluidTank tank = getTankAt(pos.down());
@@ -320,7 +320,7 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 				if(fuel != null) {
 					info.fluid = fuel.copy();
 				}
-				info.heat = this.temperature;
+				info.heat = this.temperature + 300;
 				info.maxCap = tank.getCapacity();
 			}
 		}
