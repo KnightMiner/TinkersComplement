@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.Config;
+import knightminer.tcomplement.common.ModIds;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.feature.blocks.BlockMelter;
 import knightminer.tcomplement.feature.items.ItemArmorBase;
@@ -35,6 +36,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.mantle.util.RecipeMatch;
@@ -106,6 +108,10 @@ public class ModuleFeature extends PulseBase {
 		manyullynChestplate = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.CHEST), "manyullyn_chestplate");
 		manyullynLeggings = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.LEGS), "manyullyn_leggings");
 		manyullynBoots = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.FEET), "manyullyn_boots");
+		ItemStack manyullyn = GameRegistry.makeItemStack(ModIds.TConstruct.ingots, ModIds.TConstruct.manyullynMeta, 1, null);
+		if(!manyullyn.isEmpty()) {
+			manyullynArmor.setRepairItem(manyullyn);
+		}
 
 		// itemblocks
 		if(isSmelteryLoaded()) {

@@ -6,4 +6,11 @@ public interface ModIds {
 
 		String bucket = ID + ":clay_bucket";
 	}
+
+	public interface TConstruct {
+		String ID = "tconstruct";
+		String ingots = ID + ":ingots";
+
+		int manyullynMeta = 2;
+	}
 }
