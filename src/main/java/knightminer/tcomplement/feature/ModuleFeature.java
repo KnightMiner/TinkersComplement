@@ -1,6 +1,5 @@
 package knightminer.tcomplement.feature;
 
-import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -35,7 +34,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.mantle.pulsar.pulse.Pulse;
@@ -165,17 +163,17 @@ public class ModuleFeature extends PulseBase {
 	}
 
 	private static void registerOredictMeltingCasting(Fluid fluid, String ore) {
-		ImmutableSet.Builder<Pair<List<ItemStack>, Integer>> builder = ImmutableSet.builder();
-		builder.add(Pair.of(OreDictionary.getOres("ore" + ore), (int) (Material.VALUE_Ingot * Config.oreToIngotRatio)));
-		builder.add(Pair.of(OreDictionary.getOres("oreNether" + ore), (int) (2 * Material.VALUE_Ingot * Config.oreToIngotRatio)));
-		builder.add(Pair.of(OreDictionary.getOres("denseore" + ore), (int) (3 * Material.VALUE_Ingot * Config.oreToIngotRatio)));
-		builder.add(Pair.of(OreDictionary.getOres("orePoor" + ore), (int) (Material.VALUE_Nugget * 3 * Config.oreToIngotRatio)));
-		builder.add(Pair.of(OreDictionary.getOres("oreNugget" + ore), (int) (Material.VALUE_Nugget * Config.oreToIngotRatio)));
+		ImmutableSet.Builder<Pair<String, Integer>> builder = ImmutableSet.builder();
+		builder.add(Pair.of("ore" + ore, (int) (Material.VALUE_Ingot * Config.oreToIngotRatio)));
+		builder.add(Pair.of("oreNether" + ore, (int) (2 * Material.VALUE_Ingot * Config.oreToIngotRatio)));
+		builder.add(Pair.of("denseore" + ore, (int) (3 * Material.VALUE_Ingot * Config.oreToIngotRatio)));
+		builder.add(Pair.of("orePoor" + ore, (int) (Material.VALUE_Nugget * 3 * Config.oreToIngotRatio)));
+		builder.add(Pair.of("oreNugget" + ore, (int) (Material.VALUE_Nugget * Config.oreToIngotRatio)));
 
-		Set<Pair<List<ItemStack>, Integer>> knownOres = builder.build();
+		Set<Pair<String, Integer>> knownOres = builder.build();
 
 		// register oredicts
-		for(Pair<List<ItemStack>, Integer> pair : knownOres) {
+		for(Pair<String, Integer> pair : knownOres) {
 			TCompRegistry.registerMelterOverride(new MeltingRecipe(RecipeMatch.of(pair.getLeft(), pair.getRight()), fluid));
 		}
 	}
