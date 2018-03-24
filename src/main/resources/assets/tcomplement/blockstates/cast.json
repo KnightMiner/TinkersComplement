@@ -5,7 +5,6 @@
         "model": "forge:item-layer"
     },
     "variants": {
-        "bucket": [{ "textures": { "layer0": "tcomplement:items/materials/cast_bucket" }}],
-        "bucket_old": [{ "textures": { "layer0": "tcomplement:items/materials/cast_bucket_old" }}]
+        "bucket": [{ "textures": { "layer0": "tcomplement:items/materials/cast_bucket" }}]
     }
 }

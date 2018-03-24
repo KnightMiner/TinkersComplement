@@ -20,12 +20,12 @@ import slimeknights.mantle.pulsar.control.PulseManager;
 		modid = TinkersComplement.modID,
 		name = TinkersComplement.modName,
 		version = TinkersComplement.modVersion,
-		dependencies = "required-after:forge;"
+		dependencies = "required-after:forge@[14.23.1.2574,);"
 				+ "required-after:mantle;"
 				+ "required-after:tconstruct@[1.12-2.7.4.38,);"
 				+ "after:chisel@[MC1.12-0.1.0.22,);"
 				+ "after:exnihilocreatio",
-				acceptedMinecraftVersions = "[1.12, 1.13)")
+				acceptedMinecraftVersions = "[1.12.2, 1.13)")
 public class TinkersComplement {
 	public static final String modID = "tcomplement";
 	public static final String modVersion = "${version}";

@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 
 import knightminer.tcomplement.TinkersComplement;
 import net.minecraft.util.JsonUtils;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;
@@ -20,9 +19,6 @@ public class Config {
 	public static float oreToIngotRatio = 1.0f;
 	public static boolean blacklistMelterStone = true;
 
-	//client
-	public static boolean oldBucketTexture = false;
-
 
 	static Configuration configFile;
 
@@ -34,9 +30,6 @@ public class Config {
 				"Disallows creating seared stone in the melter using cobblestone or tool parts");
 		oreToIngotRatio = configFile.getFloat("oreToIngotRatio", "melter", 1.0f, 0f, 16.0f,
 				"Ratio of ore to material produced in the melter.");
-
-		// client
-		oldBucketTexture = MinecraftForge.MC_VERSION.equals("1.12") || MinecraftForge.MC_VERSION.equals("1.12.1");
 
 		if(configFile.hasChanged()) {
 			configFile.save();
