@@ -13,6 +13,7 @@ import knightminer.tcomplement.common.ModIds;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.feature.blocks.BlockMelter;
 import knightminer.tcomplement.feature.items.ItemArmorBase;
+import knightminer.tcomplement.feature.items.ItemKnightSlimeArmor;
 import knightminer.tcomplement.feature.tileentity.TileHeater;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
 import knightminer.tcomplement.library.TCompRegistry;
@@ -25,6 +26,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
@@ -66,10 +68,18 @@ public class ModuleFeature extends PulseBase {
 	public static Item manyullynLeggings;
 	public static Item manyullynBoots;
 
+	public static ArmorMaterial knightSlimeArmor;
+	public static Item knightSlimeHelmet;
+	public static Item knightSlimeChestplate;
+	public static Item knightSlimeLeggings;
+	public static Item knightSlimeBoots;
+
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		manyullynArmor = EnumHelper.addArmorMaterial(Util.prefix("manyullyn"), Util.resource("manyullyn"),
 				15, new int[]{3, 6, 8, 3}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F);
+		knightSlimeArmor = EnumHelper.addArmorMaterial(Util.prefix("knightslime"), Util.resource("knightslime"),
+				12, new int[]{2, 5, 6, 2}, 4, SoundEvents.BLOCK_SLIME_PLACE, 1.0F);
 
 		proxy.preInit();
 	}
@@ -111,6 +121,16 @@ public class ModuleFeature extends PulseBase {
 			manyullynArmor.setRepairItem(manyullyn);
 		}
 
+		// knight slime armor
+		knightSlimeHelmet = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.HEAD), "knightslime_helmet");
+		knightSlimeChestplate = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.CHEST), "knightslime_chestplate");
+		knightSlimeLeggings = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.LEGS), "knightslime_leggings");
+		knightSlimeBoots = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.FEET), "knightslime_boots");
+		ItemStack knightSlime = GameRegistry.makeItemStack(ModIds.TConstruct.ingots, ModIds.TConstruct.knightSlimeMeta, 1, null);
+		if(!knightSlime.isEmpty()) {
+			knightSlimeArmor.setRepairItem(knightSlime);
+		}
+
 		// itemblocks
 		if(isSmelteryLoaded()) {
 			registerItemBlock(r, melter, BlockMelter.TYPE);
@@ -133,6 +153,8 @@ public class ModuleFeature extends PulseBase {
 	// POST-INITIALIZATION
 	@Subscribe
 	public void postInit(FMLPostInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(ItemKnightSlimeArmor.class);
+
 		registerMeltingCasting();
 
 		proxy.postInit();

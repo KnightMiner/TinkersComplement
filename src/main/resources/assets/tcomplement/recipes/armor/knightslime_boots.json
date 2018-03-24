@@ -1,0 +1,21 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "result": {
+    "item": "tcomplement:knightslime_boots"
+  },
+  "pattern": [
+    "c c",
+    "c c"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {
+      "item": "#KNIGHTSLIME_INGOT"
+    }
+  }
+}

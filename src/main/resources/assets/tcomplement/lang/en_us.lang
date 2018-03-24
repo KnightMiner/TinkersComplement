@@ -47,6 +47,11 @@ item.tcomplement.manyullyn_chestplate.name=Manyullyn Chestplate
 item.tcomplement.manyullyn_leggings.name=Manyullyn Leggings
 item.tcomplement.manyullyn_boots.name=Manyullyn Boots
 
+item.tcomplement.knightslime_helmet.name=Knightslime Helmet
+item.tcomplement.knightslime_chestplate.name=Knightslime Chestplate
+item.tcomplement.knightslime_leggings.name=Knightslime Leggings
+item.tcomplement.knightslime_boots.name=Knightslime Boots
+
 
 ################
 #     GUI      #

@@ -30,6 +30,11 @@ public class FeatureClientProxy extends ClientProxy {
 		registerItemModel(ModuleFeature.manyullynLeggings);
 		registerItemModel(ModuleFeature.manyullynBoots);
 
+		registerItemModel(ModuleFeature.knightSlimeHelmet);
+		registerItemModel(ModuleFeature.knightSlimeChestplate);
+		registerItemModel(ModuleFeature.knightSlimeLeggings);
+		registerItemModel(ModuleFeature.knightSlimeBoots);
+
 		// porcelain tank items
 		Item tank = Item.getItemFromBlock(ModuleFeature.porcelainTank);
 		if(tank != null && tank != Items.AIR) {

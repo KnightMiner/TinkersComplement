@@ -12,5 +12,6 @@ public interface ModIds {
 		String ingots = ID + ":ingots";
 
 		int manyullynMeta = 2;
+		int knightSlimeMeta = 3;
 	}
 }
