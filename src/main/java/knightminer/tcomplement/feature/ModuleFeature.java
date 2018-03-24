@@ -71,7 +71,7 @@ public class ModuleFeature extends PulseBase {
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		manyullynArmor = EnumHelper.addArmorMaterial(Util.prefix("manyullyn"), Util.resource("manyullyn"),
-				15, new int[]{4, 7, 9, 4}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 2.0F);
+				15, new int[]{3, 6, 8, 3}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F);
 
 		proxy.preInit();
 	}
