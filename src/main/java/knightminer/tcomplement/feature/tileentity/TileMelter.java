@@ -78,8 +78,10 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 		}
 
 		// are we fully formed?
-		if(!isActive() && tick % 20 == 0) {
-			checkMultiblockStructure();
+		if(!isActive()) {
+			if(tick % 20 == 0) {
+				checkMultiblockStructure();
+			}
 		} else {
 			if(tick % 4 == 0) {
 				heatItems();
