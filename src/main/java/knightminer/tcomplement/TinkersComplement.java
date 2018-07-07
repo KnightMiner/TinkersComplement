@@ -10,6 +10,10 @@ import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import knightminer.tcomplement.shared.ModuleCommons;
+import knightminer.tcomplement.shared.legacy.TileEntityRenamer;
+import net.minecraft.util.datafix.FixTypes;
+import net.minecraftforge.common.util.ModFixs;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -53,5 +57,8 @@ public class TinkersComplement {
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, guiHandler);
 
 		TCompNetwork.instance.setup();
+
+		ModFixs fixer = FMLCommonHandler.instance().getDataFixer().init(modID, 1);
+		fixer.registerFix(FixTypes.BLOCK_ENTITY, new TileEntityRenamer());
 	}
 }
