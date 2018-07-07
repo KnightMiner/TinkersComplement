@@ -13,11 +13,15 @@ tile.tcomplement.melter.melter.name=Melter
 tile.tcomplement.melter.melter.tooltip=Smaller version of a smeltery.\nCan melt metals but cannot make alloys.
 tile.tcomplement.melter.heater.name=Seared Heater
 tile.tcomplement.melter.heater.tooltip=Can heat the melter using solid fuels, but has a more limited temperature.
+tile.tcomplement.alloy_tank.name=Alloy Tank
+tile.tcomplement.alloy_tank.tooltip=Alloys liquids from adjecent seared tanks and melters
 
 tile.tcomplement.porcelain_melter.melter.name=Porcelain Melter
 tile.tcomplement.porcelain_melter.melter.tooltip=tile.tcomplement.melter.melter.tooltip
 tile.tcomplement.porcelain_melter.heater.name=Porcelain Heater
 tile.tcomplement.porcelain_melter.heater.tooltip=tile.tcomplement.melter.heater.tooltip
+tile.tcomplement.porcelain_alloy_tank.name=Porcelain Alloy Tank
+tile.tcomplement.porcelain_alloy_tank.tooltip=Alloys liquids from adjecent porcelain tanks and porcelain melters
 
 tile.tcomplement.porcelain_tank.tank.name=Porcelain Tank
 tile.tcomplement.porcelain_tank.gauge.name=Porcelain Gauge

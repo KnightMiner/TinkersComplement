@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -39,6 +40,12 @@ public class ClientProxy extends CommonProxy {
 				ModelLoader.setCustomMeshDefinition(item, mapper);
 			}
 			// block-model
+			ModelLoader.setCustomStateMapper(block, mapper);
+		}
+	}
+
+	protected static void setModelStateMapper(Block block, IStateMapper mapper) {
+		if(block != null) {
 			ModelLoader.setCustomStateMapper(block, mapper);
 		}
 	}

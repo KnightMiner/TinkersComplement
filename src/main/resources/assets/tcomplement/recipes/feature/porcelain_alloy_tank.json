@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "CeramicsPlugin"
+    },
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleFeature"
+    }
+  ],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "FTF"
+  ],
+  "key": {
+    "F": { "item": "ceramics:faucet", "data": 0 },
+    "T": { "item": "#ANY_PORCELAIN_TANK" }
+  },
+  "result": {
+    "item": "tcomplement:porcelain_alloy_tank",
+    "data": 0
+  }
+}

@@ -9,7 +9,8 @@ import knightminer.tcomplement.feature.inventory.ContainerMelter;
 import knightminer.tcomplement.feature.multiblock.MultiblockMelter;
 import knightminer.tcomplement.feature.network.MelterFuelUpdatePacket;
 import knightminer.tcomplement.library.TCompRegistry;
-import knightminer.tcomplement.library.feature.MelterTank;
+import knightminer.tcomplement.library.tanks.FluidHandlerDrainOnlyWrapper;
+import knightminer.tcomplement.library.tanks.MelterTank;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -25,6 +26,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.mantle.common.IInventoryGui;
@@ -45,6 +47,7 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 
 	// liquid stored inside
 	private FluidTankAnimated tank;
+	private IFluidHandler tankWrapper;
 
 	protected static final int CAPACITY = Material.VALUE_Ingot * 16;
 
@@ -53,6 +56,7 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 
 		setMultiblock(new MultiblockMelter(this));
 		tank = new MelterTank(CAPACITY, this);
+		tankWrapper = new FluidHandlerDrainOnlyWrapper(tank);
 	}
 
 	public FluidTankAnimated getTank() {
@@ -276,7 +280,7 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
 		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
 			// only allow extraction
-			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tank);
+			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tankWrapper);
 		}
 		return super.getCapability(capability, facing);
 	}

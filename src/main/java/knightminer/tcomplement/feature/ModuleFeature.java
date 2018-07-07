@@ -11,9 +11,11 @@ import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.ModIds;
 import knightminer.tcomplement.common.PulseBase;
+import knightminer.tcomplement.feature.blocks.BlockAlloyTank;
 import knightminer.tcomplement.feature.blocks.BlockMelter;
 import knightminer.tcomplement.feature.items.ItemArmorBase;
 import knightminer.tcomplement.feature.items.ItemKnightSlimeArmor;
+import knightminer.tcomplement.feature.tileentity.TileAlloyTank;
 import knightminer.tcomplement.feature.tileentity.TileHeater;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
 import knightminer.tcomplement.library.TCompRegistry;
@@ -58,7 +60,9 @@ public class ModuleFeature extends PulseBase {
 	public static CommonProxy proxy;
 
 	public static Block melter;
+	public static Block alloyTank;
 	public static Block porcelainMelter;
+	public static Block porcelainAlloyTank;
 	public static BlockTank porcelainTank;
 
 	// armor
@@ -91,6 +95,11 @@ public class ModuleFeature extends PulseBase {
 		// functional blocks
 		if(isSmelteryLoaded()) {
 			melter = registerBlock(r, new BlockMelter(TinkerSmeltery.searedTank), "melter");
+			alloyTank = registerBlock(r, new BlockAlloyTank(melter, TinkerSmeltery.searedTank), "alloy_tank");
+
+			registerTE(TileMelter.class, "melter");
+			registerTE(TileHeater.class, "heater");
+			registerTE(TileAlloyTank.class, "alloy_tank");
 		}
 
 		if(isCeramicsPluginLoaded()) {
@@ -98,12 +107,8 @@ public class ModuleFeature extends PulseBase {
 			porcelainTank.setCreativeTab(TCompRegistry.tabGeneral);
 			if(isSmelteryLoaded()) {
 				porcelainMelter = registerBlock(r, new BlockMelter(porcelainTank), "porcelain_melter");
+				porcelainAlloyTank = registerBlock(r, new BlockAlloyTank(porcelainMelter, porcelainTank), "porcelain_alloy_tank");
 			}
-		}
-
-		if(isSmelteryLoaded()) {
-			registerTE(TileMelter.class, "melter");
-			registerTE(TileHeater.class, "heater");
 		}
 	}
 
@@ -134,6 +139,7 @@ public class ModuleFeature extends PulseBase {
 		// itemblocks
 		if(isSmelteryLoaded()) {
 			registerItemBlock(r, melter, BlockMelter.TYPE);
+			registerItemBlock(r, alloyTank);
 			TCompRegistry.tabGeneral.setDisplayIcon(new ItemStack(melter));
 		}
 
@@ -141,6 +147,7 @@ public class ModuleFeature extends PulseBase {
 			registerEnumItemBlock(r, porcelainTank);
 			if(isSmelteryLoaded()) {
 				registerItemBlock(r, porcelainMelter, BlockMelter.TYPE);
+				registerItemBlock(r, porcelainAlloyTank);
 			}
 		}
 	}

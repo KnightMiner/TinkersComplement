@@ -1,4 +1,4 @@
-package knightminer.tcomplement.library.feature;
+package knightminer.tcomplement.library.tanks;
 
 import knightminer.tcomplement.common.TCompNetwork;
 import knightminer.tcomplement.feature.network.FluidUpdatePacket;
