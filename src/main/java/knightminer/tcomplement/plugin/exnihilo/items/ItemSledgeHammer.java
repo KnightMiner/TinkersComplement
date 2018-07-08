@@ -45,11 +45,11 @@ public class ItemSledgeHammer extends AoeToolCore implements IHammer {
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState state) {
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
 		if(isEffective(state)) {
 			return calcDigSpeed(stack, state);
 		}
-		return super.getStrVsBlock(stack, state);
+		return super.getDestroySpeed(stack, state);
 	}
 
 	// separated to bypass canHarvest, as that checks tool type and hammers base on block type
