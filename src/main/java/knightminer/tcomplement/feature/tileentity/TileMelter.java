@@ -1,8 +1,13 @@
 package knightminer.tcomplement.feature.tileentity;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import knightminer.tcomplement.TinkersComplement;
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.TCompNetwork;
 import knightminer.tcomplement.feature.client.GuiMelter;
 import knightminer.tcomplement.feature.inventory.ContainerMelter;
@@ -14,6 +19,7 @@ import knightminer.tcomplement.library.tanks.MelterTank;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -42,6 +48,8 @@ import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructureFuelTank;
 import slimeknights.tconstruct.smeltery.tileentity.TileTank;
 
 public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> implements ITickable, IInventoryGui {
+
+	private static Map<String, Integer> fuelsMap = new HashMap<>();
 
 	private int tick;
 
@@ -74,6 +82,38 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 		}
 		return null;
 	}
+
+	public static void init() {
+		for(String item : Config.heaterFuels) {
+			boolean valid = false;
+
+			if(item.contains("=")) {
+				String[] parts = item.split("=");
+
+				if(parts.length == 2) {
+					if(parts[0].contains(":")) {
+						String[] name = parts[0].split(":");
+						Item fuel = Item.getByNameOrId(name[0] + ":" + name[1]);
+						if(fuel == null) {
+							TinkersComplement.log.error("heatersFuels item '" + parts[0] + "' not found");
+							continue;
+						} else {
+							try {
+								fuelsMap.put(parts[0], Integer.parseInt(parts[1]));
+								valid = true;
+							} catch (NumberFormatException e) {
+								// Won't be valid
+							}
+						}
+					}
+				}
+			}
+
+			if(!valid) {
+				TinkersComplement.log.error("heatersFuels item '" + item + "' has an incorrect format");
+			}
+    }
+  }
 
 	@Override
 	public void update() {
@@ -148,12 +188,12 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 			if(!stack.isEmpty()) {
 				ItemStack fuel = stack.copy();
 				int time = TileEntityFurnace.getItemBurnTime(fuel) / 2;
-				if(time > 0) {
+				int temperature = getTemperature(fuel);
+				if(time > 0 && temperature > 0) {
 					currentFuel = null;
 					fuelQuality = time;
-					// just about enough to melt clay or most metals, but not iron
-					// also, about the temperature of a conventional oven I guess
-					addFuel(time, 200);
+
+					addFuel(time, temperature);
 
 					fuel.shrink(1);
 					// if the stack is now empty, return the container
@@ -175,6 +215,29 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 
 			fuelQuality = 0;
 		}
+	}
+
+	public static boolean isFuelValid(ItemStack stack) {
+		return (TileEntityFurnace.isItemFuel(stack) && getTemperature(stack) > 0);
+	}
+
+	protected static int getTemperature(ItemStack stack) {
+		// 1. with metadata
+		String itemName = stack.getItem().getRegistryName().toString();
+
+		Integer temp = fuelsMap.get(itemName + ":" + String.valueOf(stack.getMetadata()));
+
+		if(temp != null) {
+			return temp;
+		}
+		// 2. Generic item (without metadata)
+		temp = fuelsMap.get(itemName);
+		if(temp != null) {
+			return temp;
+ 		}
+
+		// 3. Default temp
+		return Config.defaultHeaterFuelTemperature;
 	}
 
 	@Override
