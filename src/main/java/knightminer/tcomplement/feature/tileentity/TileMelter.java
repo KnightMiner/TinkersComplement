@@ -319,15 +319,20 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 			info.fluid = currentFuel.copy();
 			info.heat = this.temperature + 300;
 			info.maxCap = currentFuel.amount;
-		} else {
-			IFluidTank tank = getTankAt(pos.down());
-			if(tank != null) {
-				FluidStack fuel = tank.getFluid();
-				if(fuel != null) {
+		}
+
+		IFluidTank tank = getTankAt(pos.down());
+		if(tank != null) {
+			FluidStack fuel = tank.getFluid();
+			if(fuel != null) {
+				if (info.fluid == null) {
 					info.fluid = fuel.copy();
+					info.heat = info.fluid.getFluid().getTemperature(info.fluid);
+					info.maxCap = tank.getCapacity();
+				} else if(tank.getFluid().isFluidEqual(info.fluid)) {
+					info.fluid.amount += tank.getFluidAmount();
+					info.maxCap += tank.getCapacity();
 				}
-				info.heat = this.temperature + 300;
-				info.maxCap = tank.getCapacity();
 			}
 		}
 
