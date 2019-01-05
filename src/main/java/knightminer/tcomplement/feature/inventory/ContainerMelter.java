@@ -5,6 +5,8 @@ import knightminer.tcomplement.feature.tileentity.TileMelter;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import slimeknights.mantle.inventory.ContainerMultiModule;
 
@@ -25,7 +27,7 @@ public class ContainerMelter extends ContainerMultiModule<TileMelter>{
 
 		slots = new Slot[3];
 		for(int i = 0; i < 3; i++) {
-			SlotItemHandler slot = new SlotItemHandler(itemHandler, i, 22, 16 + i * 18);
+			SlotItemHandler slot = new HeaterSlot(itemHandler, i, 22, 16 + i * 18);
 			this.addSlotToContainer(slot);
 			slots[i] = slot;
 		}
@@ -97,5 +99,21 @@ public class ContainerMelter extends ContainerMultiModule<TileMelter>{
 
 	public Slot[] getInventorySlots() {
 		return slots;
+	}
+
+	private static class HeaterSlot extends SlotItemHandler {
+		public HeaterSlot(IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+			super(itemHandler, index, xPosition, yPosition);
+		}
+
+		@Override
+		public boolean isItemValid(ItemStack stack) {
+			return true;
+		}
+
+		@Override
+		public int getItemStackLimit(ItemStack stack) {
+			return 1;
+		}
 	}
 }

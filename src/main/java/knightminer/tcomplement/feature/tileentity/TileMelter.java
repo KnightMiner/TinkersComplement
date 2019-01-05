@@ -210,16 +210,10 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 		if(!stack.isEmpty()) {
 			MeltingRecipe melting = TCompRegistry.getMelting(stack);
 			if(melting != null) {
-				FluidStack current = tank.getFluid();
-				if(current == null || current.getFluid() == melting.getResult().getFluid()) {
-					setHeatRequiredForSlot(index, Math.max(5, melting.getUsableTemperature()));
-
-					// instantly consume fuel if required
-					if(!hasFuel()) {
-						consumeFuel();
-					}
-				} else {
-					setHeatRequiredForSlot(index, Math.max(5, melting.getUsableTemperature()));
+				setHeatRequiredForSlot(index, Math.max(5, melting.getUsableTemperature()));
+				// instantly consume fuel if required
+				if(!hasFuel()) {
+					consumeFuel();
 				}
 
 				return;
