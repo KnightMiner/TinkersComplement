@@ -1,0 +1,7 @@
+{
+    "parent": "tconstruct:block/tank/base/6",
+    "textures": {
+        "side": "tcomplement:blocks/porcelain/gauge_side",
+        "top": "tcomplement:blocks/porcelain/window_top"
+    }
+}

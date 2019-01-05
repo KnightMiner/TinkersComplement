@@ -1,0 +1,19 @@
+{
+  "parent": "tconstruct:block/tank",
+  "textures": {
+    "side": "tcomplement:blocks/melter/alloy_tank_side",
+    "top": "tcomplement:blocks/melter/alloy_tank_top"
+  },
+  "overrides": [
+    { "predicate": { "amount": 0.0000 }, "model": "tcomplement:block/tank/alloy_tank" },
+    { "predicate": { "amount": 0.0001 }, "model": "tcomplement:block/tank/alloy_tank/0" },
+    { "predicate": { "amount": 0.0625 }, "model": "tcomplement:block/tank/alloy_tank/1" },
+    { "predicate": { "amount": 0.1875 }, "model": "tcomplement:block/tank/alloy_tank/2" },
+    { "predicate": { "amount": 0.3125 }, "model": "tcomplement:block/tank/alloy_tank/3" },
+    { "predicate": { "amount": 0.4375 }, "model": "tcomplement:block/tank/alloy_tank/4" },
+    { "predicate": { "amount": 0.5625 }, "model": "tcomplement:block/tank/alloy_tank/5" },
+    { "predicate": { "amount": 0.6875 }, "model": "tcomplement:block/tank/alloy_tank/6" },
+    { "predicate": { "amount": 0.8125 }, "model": "tcomplement:block/tank/alloy_tank/7" },
+    { "predicate": { "amount": 0.9375 }, "model": "tcomplement:block/tank/alloy_tank/8" }
+  ]
+}

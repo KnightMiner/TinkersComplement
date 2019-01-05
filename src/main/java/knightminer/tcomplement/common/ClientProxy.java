@@ -9,6 +9,8 @@ import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,6 +49,14 @@ public class ClientProxy extends CommonProxy {
 	protected static void setModelStateMapper(Block block, IStateMapper mapper) {
 		if(block != null) {
 			ModelLoader.setCustomStateMapper(block, mapper);
+		}
+	}
+
+	protected static void registerItemColors(ItemColors colors, IItemColor handler, Block... blocks) {
+		for (Block block : blocks) {
+			if (block != null) {
+				colors.registerItemColorHandler(handler, block);
+			}
 		}
 	}
 

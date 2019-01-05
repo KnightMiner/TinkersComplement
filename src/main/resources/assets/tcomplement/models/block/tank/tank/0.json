@@ -1,0 +1,7 @@
+{
+    "parent": "tconstruct:block/tank/tank/0",
+    "textures": {
+        "side": "tcomplement:blocks/porcelain/tank_side",
+        "top": "ceramics:blocks/porcelain_bricks"
+    }
+}

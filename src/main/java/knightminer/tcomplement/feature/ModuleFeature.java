@@ -50,6 +50,7 @@ import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
 import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.block.BlockTank;
+import slimeknights.tconstruct.smeltery.item.ItemTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 
 @Pulse(id = ModuleFeature.pulseID, description = "Adds standalone Knights' Construct features")
@@ -139,15 +140,15 @@ public class ModuleFeature extends PulseBase {
 		// itemblocks
 		if(isSmelteryLoaded()) {
 			registerItemBlock(r, melter, BlockMelter.TYPE);
-			registerItemBlock(r, alloyTank);
+			registerItemBlock(r, new ItemTank(alloyTank));
 			TCompRegistry.tabGeneral.setDisplayIcon(new ItemStack(melter));
 		}
 
 		if(isCeramicsPluginLoaded()) {
-			registerEnumItemBlock(r, porcelainTank);
+			registerItemBlock(r, new ItemTank(porcelainTank), BlockTank.TYPE);
 			if(isSmelteryLoaded()) {
 				registerItemBlock(r, porcelainMelter, BlockMelter.TYPE);
-				registerItemBlock(r, porcelainAlloyTank);
+				registerItemBlock(r, new ItemTank(porcelainAlloyTank));
 			}
 		}
 	}

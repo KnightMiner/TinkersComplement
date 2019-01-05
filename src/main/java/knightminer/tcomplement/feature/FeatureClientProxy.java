@@ -10,16 +10,22 @@ import knightminer.tcomplement.feature.client.MelterRenderer;
 import knightminer.tcomplement.feature.tileentity.TileAlloyTank;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.smeltery.block.BlockTank;
+import slimeknights.tconstruct.smeltery.client.TankItemModel;
 import slimeknights.tconstruct.smeltery.client.TankRenderer;
 
 public class FeatureClientProxy extends ClientProxy {
@@ -49,18 +55,36 @@ public class FeatureClientProxy extends ClientProxy {
 		Item tank = Item.getItemFromBlock(ModuleFeature.porcelainTank);
 		if(tank != null && tank != Items.AIR) {
 			for(BlockTank.TankType type : BlockTank.TankType.values()) {
-				String variant = String.format("%s=%s,%s=%s",
-						BlockTank.KNOB.getName(),
-						BlockTank.KNOB.getName(type == BlockTank.TankType.TANK),
-						BlockTank.TYPE.getName(),
-						BlockTank.TYPE.getName(type)
-						);
-				ModelLoader.setCustomModelResourceLocation(tank, type.meta, new ModelResourceLocation(tank.getRegistryName(), variant));
+				ModelLoader.setCustomModelResourceLocation(tank, type.meta, new ModelResourceLocation(tank.getRegistryName(), type.getName()));
 			}
 		}
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMelter.class, new MelterRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileAlloyTank.class, new TankRenderer());
+	}
+
+	@SubscribeEvent
+	public void registerItemColors(ColorHandlerEvent.Item event) {
+		ItemColors colors = event.getItemColors();
+		registerItemColors(colors, (stack, tintIndex) -> {
+			if(!stack.hasTagCompound()) {
+				return 0xFFFFFF;
+			}
+			FluidStack fluid = FluidStack.loadFluidStackFromNBT(stack.getTagCompound());
+			if (fluid != null && fluid.amount > 0 && fluid.getFluid() != null) {
+				return fluid.getFluid().getColor(fluid);
+			}
+			return 0xFFFFFF;
+		}, ModuleFeature.porcelainTank, ModuleFeature.alloyTank, (Block)null, ModuleFeature.porcelainAlloyTank);
+	}
+
+	@SubscribeEvent
+	public void onModelBake(ModelBakeEvent event) {
+		for (BlockTank.TankType type : BlockTank.TankType.values()) {
+			replaceTankModel(event, ModuleFeature.porcelainTank, type.getName());
+		}
+		replaceTankModel(event, ModuleFeature.alloyTank, "inventory");
+		replaceTankModel(event, ModuleFeature.porcelainAlloyTank, "inventory");
 	}
 
 	private void registerMelterModel(Block block) {
@@ -78,6 +102,17 @@ public class FeatureClientProxy extends ClientProxy {
 						);
 				ModelLoader.setCustomModelResourceLocation(melter, type.meta << 3, new ModelResourceLocation(melter.getRegistryName(), variant));
 			}
+		}
+	}
+
+	private void replaceTankModel(ModelBakeEvent event, Block block, String variant) {
+		if (block == null) {
+			return;
+		}
+		ModelResourceLocation loc = new ModelResourceLocation(block.getRegistryName(), variant);
+		IBakedModel baked = event.getModelRegistry().getObject(loc);
+		if(baked != null) {
+			event.getModelRegistry().putObject(loc, new TankItemModel(baked));
 		}
 	}
 }

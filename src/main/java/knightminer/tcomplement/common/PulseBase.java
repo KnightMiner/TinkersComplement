@@ -95,14 +95,16 @@ public class PulseBase {
 		return (T) itemBlock.getBlock();
 	}
 
-	protected static ItemBlockMeta registerItemBlock(IForgeRegistry<Item> registry, Block block,
-			IProperty<?> property) {
-		ItemBlockMeta itemBlock = new ItemBlockMeta(block);
+	protected static <T extends ItemBlock> T registerItemBlock(IForgeRegistry<Item> registry, T itemBlock, IProperty<?> property) {
 		itemBlock.setUnlocalizedName(itemBlock.getBlock().getUnlocalizedName());
 
 		register(registry, itemBlock, itemBlock.getBlock().getRegistryName());
 		ItemBlockMeta.setMappingProperty(itemBlock.getBlock(), property);
 		return itemBlock;
+	}
+
+	protected static ItemBlockMeta registerItemBlock(IForgeRegistry<Item> registry, Block block, IProperty<?> property) {
+		return registerItemBlock(registry, new ItemBlockMeta(block), property);
 	}
 
 	protected static <T extends EnumBlockSlab<?>> T registerEnumItemBlockSlab(IForgeRegistry<Item> registry, T block) {

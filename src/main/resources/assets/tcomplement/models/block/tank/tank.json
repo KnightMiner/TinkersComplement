@@ -1,0 +1,19 @@
+{
+  "parent": "tconstruct:block/tank/tank",
+  "textures": {
+    "side": "tcomplement:blocks/porcelain/tank_side",
+    "top": "ceramics:blocks/porcelain_bricks"
+  },
+  "overrides": [
+      { "predicate": { "amount": 0.0000 }, "model": "tcomplement:block/tank/tank" },
+      { "predicate": { "amount": 0.0001 }, "model": "tcomplement:block/tank/tank/0" },
+      { "predicate": { "amount": 0.0625 }, "model": "tcomplement:block/tank/tank/1" },
+      { "predicate": { "amount": 0.1875 }, "model": "tcomplement:block/tank/tank/2" },
+      { "predicate": { "amount": 0.3125 }, "model": "tcomplement:block/tank/tank/3" },
+      { "predicate": { "amount": 0.4375 }, "model": "tcomplement:block/tank/tank/4" },
+      { "predicate": { "amount": 0.5625 }, "model": "tcomplement:block/tank/tank/5" },
+      { "predicate": { "amount": 0.6875 }, "model": "tcomplement:block/tank/tank/6" },
+      { "predicate": { "amount": 0.8125 }, "model": "tcomplement:block/tank/tank/7" },
+      { "predicate": { "amount": 0.9375 }, "model": "tcomplement:block/tank/tank/8" }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+    "parent": "tconstruct:block/tank/base/4",
+    "textures": {
+        "side": "tcomplement:blocks/melter/alloy_tank_side",
+        "top": "tcomplement:blocks/melter/alloy_tank_top"
+    }
+}
