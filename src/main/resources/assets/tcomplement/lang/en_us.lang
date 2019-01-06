@@ -68,3 +68,5 @@ gui.tcomplement.melter.solid_fuel=Heater
 gui.tcomplement.melter.solid_fuel.amount=%s units
 
 gui.tcomplement.heater.name=Heater
+
+gui.jei.melter.title=Melter

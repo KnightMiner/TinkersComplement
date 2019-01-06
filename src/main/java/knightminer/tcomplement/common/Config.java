@@ -18,6 +18,7 @@ public class Config {
 
 	public static float oreToIngotRatio = 1.0f;
 	public static boolean blacklistMelterStone = true;
+	public static boolean separateMelterTab = true;
 
 
 	static Configuration configFile;
@@ -30,6 +31,10 @@ public class Config {
 				"Disallows creating seared stone in the melter using cobblestone or tool parts");
 		oreToIngotRatio = configFile.getFloat("oreToIngotRatio", "melter", 1.0f, 0f, 16.0f,
 				"Ratio of ore to material produced in the melter.");
+
+		// jei
+		separateMelterTab = configFile.getBoolean("separateMelterTab", "jei", true,
+				"If true, puts the melter in its own recipe tab in JEI to make the blacklist and overrides more clear. If false, the melter is just added to the normal Tinkers tab.");
 
 		if(configFile.hasChanged()) {
 			configFile.save();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import knightminer.tcomplement.library.events.TCompRegisterEvent;
@@ -32,6 +33,10 @@ public class TCompRegistry {
 
 	private static List<IBlacklist> meltingBlacklist = Lists.newLinkedList();
 
+	/**
+	 * Registers a melter override recipe. This is a recipe that exists only in the melter, typically used to replace a smeltery recipe
+	 * @param recipe  Recipe to register
+	 */
 	public static void registerMelterOverride(MeltingRecipe recipe) {
 		if(new TCompRegisterEvent.MelterOverrideRegisterEvent(recipe).fire()) {
 			meltingOverrides.add(recipe);
@@ -46,6 +51,18 @@ public class TCompRegistry {
 		}
 	}
 
+	/**
+	 * Gets all melter overrides
+	 * @return  Immutable list of all melter overrides
+	 */
+	public static List<MeltingRecipe> getAllMeltingOverrides() {
+		return ImmutableList.copyOf(meltingOverrides);
+	}
+
+	/**
+	 * Blacklists an input from being used for a normal smeltery recipe. This is not needed if an override is added with that input
+	 * @param blacklist  Blacklist entry
+	 */
 	public static void registerMelterBlacklist(IBlacklist blacklist) {
 		if(new TCompRegisterEvent.MelterBlackListRegisterEvent(blacklist).fire()) {
 			meltingBlacklist.add(blacklist);
@@ -59,10 +76,46 @@ public class TCompRegistry {
 		}
 	}
 
+	/**
+	 * Registers a blacklist entry using a RecipeMatch entry
+	 * @param blacklist  RecipeMatch to blacklist
+	 */
 	public static void registerMelterBlacklist(RecipeMatch blacklist) {
 		registerMelterBlacklist(new RecipeMatchBlacklist(blacklist));
 	}
 
+	/**
+	 * Checks if a melting recipe is hidden by the melter overrides or blacklist
+	 * @param recipe  Recipe to check
+	 * @return  true if the recipe would be hidden, false otherwise
+	 */
+	public static boolean isSmeltingHidden(MeltingRecipe recipe) {
+		List<ItemStack> inputs = recipe.input.getInputs();
+
+		// TODO: should probably validate that all inputs match for cases of list inputs, but probably not an issue
+		// check blacklist first, its probably quicker
+		for(IBlacklist blacklist : meltingBlacklist) {
+			if(inputs.stream().anyMatch(blacklist::matches)) {
+				return true;
+			}
+		}
+
+		// next try overrides
+		for(MeltingRecipe override : meltingOverrides) {
+			if(inputs.stream().anyMatch(override::matches)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Gets the melting recipe for a given item stack.
+	 * This checks the overrides first, then runs though the blacklist before checking the smeltery registry
+	 * @param stack  Input stack
+	 * @return  recipe instance
+	 */
 	public static MeltingRecipe getMelting(ItemStack stack) {
 		// check if the recipe exists in our overrides
 		for(MeltingRecipe recipe : meltingOverrides) {
