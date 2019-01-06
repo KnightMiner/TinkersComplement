@@ -39,7 +39,7 @@ public class JEIPlugin implements IModPlugin {
 		final IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
 
 		// Melter
-		if(Config.separateMelterTab && TinkersComplement.pulseManager.isPulseLoaded(ModuleFeature.pulseID)) {
+		if(Config.jei.separateMelterTab && TinkersComplement.pulseManager.isPulseLoaded(ModuleFeature.pulseID)) {
 			registry.addRecipeCategories(meltingCategory = new MeltingRecipeCategory(guiHelper));
 		}
 	}
@@ -48,7 +48,7 @@ public class JEIPlugin implements IModPlugin {
 	public void register(IModRegistry registry) {
 		if(TinkersComplement.pulseManager.isPulseLoaded(ModuleFeature.pulseID)) {
 			String melterCategory = TINKERS_SMELTERY;
-			if(Config.separateMelterTab) {
+			if(Config.jei.separateMelterTab) {
 				melterCategory = MeltingRecipeCategory.CATEGORY;
 				registry.handleRecipes(MeltingRecipe.class, MeltingRecipeWrapper::new, MeltingRecipeCategory.CATEGORY);
 				registry.addRecipes(MeltingRecipeChecker.getMeltingRecipes(), MeltingRecipeCategory.CATEGORY);

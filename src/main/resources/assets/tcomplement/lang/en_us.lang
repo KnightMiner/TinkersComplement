@@ -70,3 +70,14 @@ gui.tcomplement.melter.solid_fuel.amount=%s units
 gui.tcomplement.heater.name=Heater
 
 gui.jei.melter.title=Melter
+
+
+################
+#    Config    #
+################
+
+tcomplement.config.melter=Melter
+tcomplement.config.melter.oreToIngotRatio=Ore to Ingot Ratio
+tcomplement.config.melter.blacklistStone=Blacklist Stone
+tcomplement.config.jei=JEI Integration
+tcomplement.config.jei.separateMelterTab=Separate Melter Tab

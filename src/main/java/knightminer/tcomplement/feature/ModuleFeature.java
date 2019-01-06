@@ -185,7 +185,7 @@ public class ModuleFeature extends PulseBase {
 		}
 
 		// don't allow seared stone from cobblestone or stone
-		if(Config.blacklistMelterStone) {
+		if(Config.melter.blacklistStone) {
 			TCompRegistry.registerMelterBlacklist(RecipeMatch.of("cobblestone"));
 			TCompRegistry.registerMelterBlacklist(RecipeMatch.of("stone"));
 			TCompRegistry.registerMelterBlacklist(new PartMaterialBlacklist(TinkerMaterials.stone));
@@ -194,11 +194,11 @@ public class ModuleFeature extends PulseBase {
 
 	private static void registerOredictMeltingCasting(Fluid fluid, String ore) {
 		ImmutableSet.Builder<Pair<String, Integer>> builder = ImmutableSet.builder();
-		builder.add(Pair.of("ore" + ore, (int) (Material.VALUE_Ingot * Config.oreToIngotRatio)));
-		builder.add(Pair.of("oreNether" + ore, (int) (2 * Material.VALUE_Ingot * Config.oreToIngotRatio)));
-		builder.add(Pair.of("denseore" + ore, (int) (3 * Material.VALUE_Ingot * Config.oreToIngotRatio)));
-		builder.add(Pair.of("orePoor" + ore, (int) (Material.VALUE_Nugget * 3 * Config.oreToIngotRatio)));
-		builder.add(Pair.of("oreNugget" + ore, (int) (Material.VALUE_Nugget * Config.oreToIngotRatio)));
+		builder.add(Pair.of("ore" + ore, (int) (Material.VALUE_Ingot * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("oreNether" + ore, (int) (2 * Material.VALUE_Ingot * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("denseore" + ore, (int) (3 * Material.VALUE_Ingot * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("orePoor" + ore, (int) (Material.VALUE_Nugget * 3 * Config.melter.oreToIngotRatio)));
+		builder.add(Pair.of("oreNugget" + ore, (int) (Material.VALUE_Nugget * Config.melter.oreToIngotRatio)));
 
 		Set<Pair<String, Integer>> knownOres = builder.build();
 

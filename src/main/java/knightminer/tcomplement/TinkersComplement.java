@@ -12,10 +12,15 @@ import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import knightminer.tcomplement.shared.ModuleCommons;
 import knightminer.tcomplement.shared.legacy.TileEntityRenamer;
 import net.minecraft.util.datafix.FixTypes;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.util.ModFixs;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import slimeknights.mantle.common.GuiHandler;
 import slimeknights.mantle.pulsar.control.PulseManager;
@@ -53,12 +58,20 @@ public class TinkersComplement {
 
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		Config.load(event);
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, guiHandler);
+		// config syncing
+		MinecraftForge.EVENT_BUS.register(this);
 
+		NetworkRegistry.INSTANCE.registerGuiHandler(instance, guiHandler);
 		TCompNetwork.instance.setup();
 
 		ModFixs fixer = FMLCommonHandler.instance().getDataFixer().init(modID, 1);
 		fixer.registerFix(FixTypes.BLOCK_ENTITY, new TileEntityRenamer());
+	}
+
+	@SubscribeEvent
+	public void onConfigChangedEvent(OnConfigChangedEvent event) {
+		if (event.getModID().equals(modID)) {
+			ConfigManager.sync(modID, Type.INSTANCE);
+		}
 	}
 }
