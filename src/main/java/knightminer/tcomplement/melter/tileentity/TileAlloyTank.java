@@ -44,6 +44,7 @@ public class TileAlloyTank extends TileTank implements ITickable, IHeaterConsume
 	private List<BlockPos> tanks;
 	private AlloyTank alloyTank;
 	private IFluidHandler tankWrapper;
+	private AlloyRecipe currentRecipe;
 	public TileAlloyTank() {
 		super();
 		tanks = Lists.newLinkedList();
@@ -76,63 +77,28 @@ public class TileAlloyTank extends TileTank implements ITickable, IHeaterConsume
 			// alloy time!
 
 			// tank must not be full
-			int amount = tank.getFluidAmount();
-			if(amount != CAPACITY) {
+			if(tank.getFluidAmount() != CAPACITY) {
 				// must have side tanks, though if we got this far we should
 				AlloyTank alloyTank = getAlloyTank();
 				if(alloyTank != null) {
-					// must have fluids in those side tanks
-					List<FluidStack> fluids = alloyTank.getFluids();
-					if(!fluids.isEmpty()) {
+					// must have fluids in those side tanks, we also know no alloy recipe takes just one fluid
+					List<FluidStack> inputs = alloyTank.getFluids();
+					if(inputs.size() >= 2) {
 						// finally, time to try recipes
 						FluidStack current = tank.getFluid();
-						for(AlloyRecipe recipe : TinkerRegistry.getAlloys()) {
-							// first, ensure the recipe works with our current fluid, if we have one
-							FluidStack result = FluidUtil.getValidFluidStackOrNull(recipe.getResult());
-							if(result == null || (current != null && !result.isFluidEqual(current))) {
-								continue;
-							}
 
-							// find out how often we can apply the recipe
-							int matched = recipe.matches(fluids);
-							// if we matched at all, run further checks
-							if(matched > 0) {
-								// if we matched, ensure we have fuel
-								if(!hasFuel()) {
-									needsFuel = true;
+						// if we have a cached recipe, use that
+						if(currentRecipe == null || !tryRecipe(currentRecipe, current, inputs, alloyTank)) {
+							// recipe failed, so its no longer our current
+							currentRecipe = null;
+
+							// try and find a new one
+							for(AlloyRecipe recipe : TinkerRegistry.getAlloys()) {
+								if(tryRecipe(recipe, current, inputs, alloyTank)) {
+									// store that recipe to save time later
+									currentRecipe = recipe;
 									break;
 								}
-
-								matched = matched * result.amount;
-								if(matched > ALLOYING_PER_TICK) {
-									matched = ALLOYING_PER_TICK;
-								}
-								// ensure we do not alloy above what we can store total
-								matched = Math.min(matched, CAPACITY - amount);
-								do {
-									// remove all liquids from the tank
-									for(FluidStack liquid : recipe.getFluids()) {
-										FluidStack toDrain = liquid.copy();
-										FluidStack drained = alloyTank.drain(toDrain, true);
-										// error logging
-										assert drained != null;
-										if(!drained.isFluidEqual(toDrain) || drained.amount != toDrain.amount) {
-											TinkersComplement.log.error("Smeltery alloy creation drained incorrect amount: was {}:{}, should be {}:{}", drained
-													.getUnlocalizedName(), drained.amount, toDrain.getUnlocalizedName(), toDrain.amount);
-										}
-									}
-
-									// and insert the alloy
-									FluidStack toFill = result.copy();
-									int filled = tank.fill(toFill, true);
-									if(filled != result.amount) {
-										TinkersComplement.log.error("Smeltery alloy creation filled incorrect amount: was {}, should be {} ({})", filled,
-												recipe.getResult().amount * matched, result.getUnlocalizedName());
-									}
-									matched -= filled;
-								} while(matched > 0);
-								fuel--;
-								break;
 							}
 						}
 					}
@@ -141,6 +107,73 @@ public class TileAlloyTank extends TileTank implements ITickable, IHeaterConsume
 		}
 
 		tick = (tick + 1) % 20;
+	}
+
+	/**
+	 * Attempts a recipe with the current inputs
+	 * @param recipe    Recipe to try
+	 * @param current   Current output contents
+	 * @param inputs    List of inputs
+	 * @param alloyTank Alloy tank instance for inputs
+	 * @return
+	 */
+	private boolean tryRecipe(AlloyRecipe recipe, @Nullable FluidStack current, @Nonnull List<FluidStack> inputs, @Nonnull AlloyTank alloyTank) {
+		// bad recipe
+		if(!recipe.isValid()) {
+			return false;
+		}
+
+		// fluid does not match or is somehow invalid
+		FluidStack result = FluidUtil.getValidFluidStackOrNull(recipe.getResult());
+		if(result == null || (current != null && !result.isFluidEqual(current))) {
+			return false;
+		}
+
+		// check if the recipe matches
+		int matched = recipe.matches(inputs);
+		if(matched <= 0) {
+			return false;
+		}
+
+		// matches, but no space
+		int remaining = current == null ? CAPACITY : CAPACITY - current.amount;
+		if (remaining < result.amount) {
+			return true;
+		}
+
+		// matches, but no fuel
+		if(!hasFuel()) {
+			needsFuel = true;
+			return true;
+		}
+
+		// finally apply the recipe
+		// recipe is limited in times per tick and cannot beyond a full tank
+		matched = Math.min(matched * result.amount, Math.min(ALLOYING_PER_TICK, remaining));
+		do {
+			// remove all liquids from the tank
+			for(FluidStack liquid : recipe.getFluids()) {
+				FluidStack toDrain = liquid.copy();
+				FluidStack drained = alloyTank.drain(toDrain, true);
+				// error logging
+				assert drained != null;
+				if(!drained.isFluidEqual(toDrain) || drained.amount != toDrain.amount) {
+					TinkersComplement.log.error("Melter alloy creation drained incorrect amount: was {}:{}, should be {}:{}", drained
+							.getUnlocalizedName(), drained.amount, toDrain.getUnlocalizedName(), toDrain.amount);
+				}
+			}
+
+			// and insert the alloy
+			FluidStack toFill = result.copy();
+			int filled = tank.fill(toFill, true);
+			if(filled != result.amount) {
+				TinkersComplement.log.error("Melter alloy creation filled incorrect amount: was {}, should be {} ({})", filled,
+						recipe.getResult().amount * matched, result.getUnlocalizedName());
+			}
+			matched -= filled;
+		} while(matched > 0);
+		fuel--;
+		return true;
 	}
 
 	private void consumeFuel() {
