@@ -1,0 +1,15 @@
+{
+  "conditions": [{ "type": "pulse_loaded", "pulse": "ModuleMelter" }],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "FTF"
+  ],
+  "key": {
+    "F": { "item": "tconstruct:faucet", "data": 0 },
+    "T": { "item": "#ANY_SEARED_TANK" }
+  },
+  "result": {
+    "item": "tcomplement:alloy_tank",
+    "data": 0
+  }
+}

@@ -77,6 +77,8 @@ gui.jei.melter.title=Melter
 #    Config    #
 ################
 
+tcomplement.config.general=General
+tcomplement.config.general.bucketCast=Bucket Cast
 tcomplement.config.melter=Melter
 tcomplement.config.melter.oreToIngotRatio=Ore to Ingot Ratio
 tcomplement.config.melter.blacklistStone=Blacklist Stone

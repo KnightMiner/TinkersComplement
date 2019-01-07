@@ -3,6 +3,7 @@ package knightminer.tcomplement.common;
 import java.util.function.BooleanSupplier;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 import knightminer.tcomplement.TinkersComplement;
 import net.minecraft.util.JsonUtils;
@@ -20,6 +21,10 @@ public class Config {
 	@Ignore
 	public static ForgeCFG pulseConfig = new ForgeCFG("TComplementModules", "Modules");
 
+	@Comment("General configuration options")
+	@LangKey("tcomplement.config.general")
+	public static General general = new General();
+
 	@Comment("Options to configure the melter")
 	@LangKey("tcomplement.config.melter")
 	public static Melter melter = new Melter();
@@ -27,6 +32,13 @@ public class Config {
 	@Comment("Options to configure JEI integration")
 	@LangKey("tcomplement.config.jei")
 	public static JEI jei = new JEI();
+
+	public static class General {
+		@RequiresMcRestart
+		@Comment("Enables the bucket cast: allows casting buckets using a casting table.")
+		@LangKey("tcomplement.config.general.bucketCast")
+		public boolean bucketCast = true;
+	}
 
 	public static class Melter {
 		@RequiresMcRestart
@@ -49,6 +61,19 @@ public class Config {
 		})
 		@LangKey("tcomplement.config.jei.separateMelterTab")
 		public boolean separateMelterTab = true;
+	}
+
+	public static class ConfigProperty implements IConditionFactory {
+		@Override
+		public BooleanSupplier parse(JsonContext context, JsonObject json) {
+			String option = JsonUtils.getString(json, "option");
+			return () -> {
+				switch(option) {
+					case "bucket_cast": return general.bucketCast;
+				}
+				throw new JsonSyntaxException("Config option '" + option + "' does not exist");
+			};
+		}
 	}
 
 	public static class PulseLoaded implements IConditionFactory {

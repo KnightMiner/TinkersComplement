@@ -3,8 +3,8 @@ package knightminer.tcomplement.common;
 import java.util.Locale;
 
 import knightminer.tcomplement.TinkersComplement;
-import knightminer.tcomplement.feature.ModuleFeature;
 import knightminer.tcomplement.library.Util;
+import knightminer.tcomplement.melter.ModuleMelter;
 import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -39,8 +39,8 @@ public class PulseBase {
 		return TConstruct.pulseManager.isPulseLoaded(TinkerSmeltery.PulseId);
 	}
 
-	protected boolean isFeaturesLoaded() {
-		return TinkersComplement.pulseManager.isPulseLoaded(ModuleFeature.pulseID);
+	protected boolean isMelterLoaded() {
+		return TinkersComplement.pulseManager.isPulseLoaded(ModuleMelter.pulseID);
 	}
 
 	protected boolean isCeramicsPluginLoaded() {

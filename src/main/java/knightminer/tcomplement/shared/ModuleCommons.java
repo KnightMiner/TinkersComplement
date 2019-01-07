@@ -3,6 +3,7 @@ package knightminer.tcomplement.shared;
 import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
 import net.minecraft.item.Item;
@@ -51,7 +52,7 @@ public class ModuleCommons extends PulseBase {
 		castClay = registerItem(r, new CastCustom(), "cast_clay");
 		castClay.setCreativeTab(TCompRegistry.tabGeneral);
 
-		if(isFeaturesLoaded()) {
+		if(Config.general.bucketCast) {
 			stoneBucket = materials.addMeta(0, "stone_bucket");
 			castBucket = cast.addMeta(0, "bucket", Material.VALUE_Ingot);
 			castBucketClay = castClay.addMeta(0, "bucket", Material.VALUE_Ingot);

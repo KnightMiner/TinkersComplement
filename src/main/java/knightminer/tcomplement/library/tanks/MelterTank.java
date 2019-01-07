@@ -1,8 +1,8 @@
 package knightminer.tcomplement.library.tanks;
 
 import knightminer.tcomplement.common.TCompNetwork;
-import knightminer.tcomplement.feature.network.FluidUpdatePacket;
-import knightminer.tcomplement.feature.tileentity.TileMelter;
+import knightminer.tcomplement.melter.network.FluidUpdatePacket;
+import knightminer.tcomplement.melter.tileentity.TileMelter;
 import slimeknights.tconstruct.library.fluid.FluidTankAnimated;
 
 public class MelterTank extends FluidTankAnimated {

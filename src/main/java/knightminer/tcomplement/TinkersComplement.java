@@ -3,9 +3,10 @@ package knightminer.tcomplement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import knightminer.tcomplement.armor.ModuleArmor;
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.TCompNetwork;
-import knightminer.tcomplement.feature.ModuleFeature;
+import knightminer.tcomplement.melter.ModuleMelter;
 import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
@@ -50,7 +51,8 @@ public class TinkersComplement {
 
 	static {
 		pulseManager.registerPulse(new ModuleCommons());
-		pulseManager.registerPulse(new ModuleFeature());
+		pulseManager.registerPulse(new ModuleMelter());
+		pulseManager.registerPulse(new ModuleArmor());
 		pulseManager.registerPulse(new CeramicsPlugin());
 		pulseManager.registerPulse(new ChiselPlugin());
 		pulseManager.registerPulse(new ExNihiloPlugin());

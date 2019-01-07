@@ -7,8 +7,8 @@ import com.google.common.collect.ImmutableList;
 
 import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.common.Config;
-import knightminer.tcomplement.feature.ModuleFeature;
-import knightminer.tcomplement.feature.client.GuiMelter;
+import knightminer.tcomplement.melter.ModuleMelter;
+import knightminer.tcomplement.melter.client.GuiMelter;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import knightminer.tcomplement.plugin.jei.melter.MeltingRecipeCategory;
@@ -40,14 +40,14 @@ public class JEIPlugin implements IModPlugin {
 		final IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
 
 		// Melter
-		if(Config.jei.separateMelterTab && TinkersComplement.pulseManager.isPulseLoaded(ModuleFeature.pulseID)) {
+		if(Config.jei.separateMelterTab && TinkersComplement.pulseManager.isPulseLoaded(ModuleMelter.pulseID)) {
 			registry.addRecipeCategories(meltingCategory = new MeltingRecipeCategory(guiHelper));
 		}
 	}
 
 	@Override
 	public void register(IModRegistry registry) {
-		if(TinkersComplement.pulseManager.isPulseLoaded(ModuleFeature.pulseID)) {
+		if(TinkersComplement.pulseManager.isPulseLoaded(ModuleMelter.pulseID)) {
 			String melterCategory = TINKERS_SMELTERY;
 			if(Config.jei.separateMelterTab) {
 				melterCategory = MeltingRecipeCategory.CATEGORY;
@@ -55,19 +55,19 @@ public class JEIPlugin implements IModPlugin {
 				registry.addRecipes(MeltingRecipeChecker.getMeltingRecipes(), MeltingRecipeCategory.CATEGORY);
 			}
 			// smeltery alternatives
-			if(ModuleFeature.melter != null) {
-				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.melter), melterCategory);
-				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.melter, 1, 8), FURNACE_FUEL);
+			if(ModuleMelter.melter != null) {
+				registry.addRecipeCatalyst(new ItemStack(ModuleMelter.melter), melterCategory);
+				registry.addRecipeCatalyst(new ItemStack(ModuleMelter.melter, 1, 8), FURNACE_FUEL);
 			}
-			if(ModuleFeature.porcelainMelter != null) {
-				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.porcelainMelter), melterCategory);
-				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.porcelainMelter, 1, 8), FURNACE_FUEL);
+			if(ModuleMelter.porcelainMelter != null) {
+				registry.addRecipeCatalyst(new ItemStack(ModuleMelter.porcelainMelter), melterCategory);
+				registry.addRecipeCatalyst(new ItemStack(ModuleMelter.porcelainMelter, 1, 8), FURNACE_FUEL);
 			}
-			if(ModuleFeature.alloyTank != null) {
-				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.alloyTank), TINKERS_ALLOYING);
+			if(ModuleMelter.alloyTank != null) {
+				registry.addRecipeCatalyst(new ItemStack(ModuleMelter.alloyTank), TINKERS_ALLOYING);
 			}
-			if(ModuleFeature.porcelainAlloyTank != null) {
-				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.porcelainAlloyTank), TINKERS_ALLOYING);
+			if(ModuleMelter.porcelainAlloyTank != null) {
+				registry.addRecipeCatalyst(new ItemStack(ModuleMelter.porcelainAlloyTank), TINKERS_ALLOYING);
 			}
 
 			// liquid recipe lookup

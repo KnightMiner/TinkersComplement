@@ -24,7 +24,7 @@
       },
       {
         "type": "pulse_loaded",
-        "pulse": "ModuleFeature"
+        "pulse": "ModuleMelter"
       }
     ],
     "name": "ANY_PORCELAIN_TANK",

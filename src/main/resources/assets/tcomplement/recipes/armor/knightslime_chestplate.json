@@ -1,10 +1,5 @@
 {
-  "conditions": [
-    {
-      "type": "pulse_loaded",
-      "pulse": "ModuleFeature"
-    }
-  ],
+  "conditions": [{ "type": "pulse_loaded", "pulse": "ModuleArmor" }],
   "result": {
     "item": "tcomplement:knightslime_chestplate"
   },

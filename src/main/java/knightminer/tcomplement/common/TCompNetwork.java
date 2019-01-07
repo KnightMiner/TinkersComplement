@@ -1,8 +1,8 @@
 package knightminer.tcomplement.common;
 
 import knightminer.tcomplement.TinkersComplement;
-import knightminer.tcomplement.feature.network.FluidUpdatePacket;
-import knightminer.tcomplement.feature.network.MelterFuelUpdatePacket;
+import knightminer.tcomplement.melter.network.FluidUpdatePacket;
+import knightminer.tcomplement.melter.network.MelterFuelUpdatePacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;

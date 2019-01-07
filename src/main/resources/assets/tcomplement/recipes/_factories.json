@@ -1,5 +1,6 @@
 {
   "conditions": {
+    "config": "knightminer.tcomplement.common.Config$ConfigProperty",
     "pulse_loaded": "knightminer.tcomplement.common.Config$PulseLoaded"
   }
 }
