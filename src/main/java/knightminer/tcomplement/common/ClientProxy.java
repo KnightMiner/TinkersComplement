@@ -52,6 +52,14 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
+	protected static void registerItemColors(ItemColors colors, IItemColor handler, Item... items) {
+		for (Item item : items) {
+			if (item != null) {
+				colors.registerItemColorHandler(handler, item);
+			}
+		}
+	}
+
 	protected static void registerItemColors(ItemColors colors, IItemColor handler, Block... blocks) {
 		for (Block block : blocks) {
 			if (block != null) {

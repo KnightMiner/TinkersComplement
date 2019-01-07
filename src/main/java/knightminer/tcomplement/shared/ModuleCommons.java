@@ -27,9 +27,9 @@ public class ModuleCommons extends PulseBase {
 
 	public static ItemMetaDynamic materials;
 
-	public static CastCustom castCustom;
+	public static CastCustom cast, castClay;
 	public static ItemStack stoneBucket;
-	public static ItemStack castBucket;
+	public static ItemStack castBucket, castBucketClay;
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
@@ -45,12 +45,16 @@ public class ModuleCommons extends PulseBase {
 		materials.setCreativeTab(TCompRegistry.tabGeneral);
 
 		// custom casts
-		castCustom = registerItem(r, new CastCustom(), "cast");
-		castCustom.setCreativeTab(TCompRegistry.tabGeneral);
+		cast = registerItem(r, new CastCustom(), "cast");
+		cast.setCreativeTab(TCompRegistry.tabGeneral);
+
+		castClay = registerItem(r, new CastCustom(), "cast_clay");
+		castClay.setCreativeTab(TCompRegistry.tabGeneral);
 
 		if(isFeaturesLoaded()) {
 			stoneBucket = materials.addMeta(0, "stone_bucket");
-			castBucket = castCustom.addMeta(0, "bucket", Material.VALUE_Ingot);
+			castBucket = cast.addMeta(0, "bucket", Material.VALUE_Ingot);
+			castBucketClay = castClay.addMeta(0, "bucket", Material.VALUE_Ingot);
 		}
 	}
 

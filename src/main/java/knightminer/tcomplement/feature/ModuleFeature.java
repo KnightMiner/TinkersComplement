@@ -171,10 +171,18 @@ public class ModuleFeature extends PulseBase {
 	private void registerMeltingCasting() {
 		// cast iron buckets, because it sounds cool and opens an option for bucket gating with Ceramics
 		TinkerRegistry.registerTableCasting(new ItemStack(Items.BUCKET), ModuleCommons.castBucket, TinkerFluids.iron, Material.VALUE_Ingot * 3);
-
 		// add cast recipes for bucket cast
 		for(FluidStack fs : TinkerSmeltery.castCreationFluids) {
 			TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucket, new RecipeMatch.Item(ModuleCommons.stoneBucket, 1), fs, true, true));
+		}
+
+		// use clay cast to make iron buckets, so you don't need gold
+		if (ModuleCommons.castBucketClay != null) {
+			TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BUCKET), RecipeMatch.of(ModuleCommons.castBucketClay), TinkerFluids.iron, Material.VALUE_Ingot * 3, true, false));
+			// add cast recipes for bucket cast
+			for(FluidStack fs : TinkerSmeltery.clayCreationFluids) {
+				TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucketClay, new RecipeMatch.Item(ModuleCommons.stoneBucket, 1), fs, true, true));
+			}
 		}
 
 		// override ore recipes to prevent ore doubling

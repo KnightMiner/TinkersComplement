@@ -19,8 +19,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.mantle.pulsar.pulse.Pulse;
+import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.smeltery.block.BlockCasting;
 
@@ -64,6 +66,9 @@ public class CeramicsPlugin extends PulseBase {
 			ItemStack bucket = GameRegistry.makeItemStack(ModIds.Ceramics.bucket, 0, 1, null);
 			if(!bucket.isEmpty()) {
 				TinkerRegistry.registerTableCasting(bucket, ModuleCommons.castBucket, TinkerFluids.clay, Material.VALUE_Ingot * 3);
+				if (ModuleCommons.castBucketClay != null) {
+					TinkerRegistry.registerTableCasting(new CastingRecipe(bucket.copy(), RecipeMatch.of(ModuleCommons.castBucketClay), TinkerFluids.clay, Material.VALUE_Ingot * 3, true, false));
+				}
 			}
 		}
 	}

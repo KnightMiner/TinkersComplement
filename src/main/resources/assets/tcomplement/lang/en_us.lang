@@ -37,6 +37,7 @@ item.tcomplement.materials.stone_bucket.name=Stone Bucket
 item.tcomplement.materials.stone_bucket.tooltip=Will not work as a bucket, but good to cast one
 
 item.tcomplement.cast.bucket.name=Bucket Cast
+item.tcomplement.cast_clay.bucket.name=Clay Bucket Cast
 
 item.tcomplement.sledge_head.name=Sledge Hammer Head
 item.tcomplement.sledge_hammer.name=Sledge Hammer
