@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.feature.tileentity.TileHeater;
 import knightminer.tcomplement.feature.tileentity.TileMelter;
+import knightminer.tcomplement.library.IHeaterConsumer;
 import knightminer.tcomplement.library.TCompRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -119,12 +120,10 @@ public class BlockMelter extends BlockMultiblockController {
 
 	@Override
 	public boolean isActive(IBlockAccess world, BlockPos pos) {
-		// if a heater, use its active property
+		// if a heater, the block above must be a heater consumer
 		if(world.getBlockState(pos).getValue(TYPE) == MelterType.HEATER) {
-			TileEntity te = world.getTileEntity(pos);
-			if(te instanceof TileHeater) {
-				return ((TileHeater) te).isActive();
-			}
+			TileEntity te = world.getTileEntity(pos.up());
+			return te instanceof IHeaterConsumer;
 		}
 
 		// otherwise use the default for the controller

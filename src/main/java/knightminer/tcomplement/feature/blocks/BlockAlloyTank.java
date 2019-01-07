@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.google.common.collect.Lists;
 
+import knightminer.tcomplement.feature.blocks.BlockMelter.MelterType;
 import knightminer.tcomplement.feature.tileentity.TileAlloyTank;
 import knightminer.tcomplement.library.TCompRegistry;
 import net.minecraft.block.Block;
@@ -41,8 +42,9 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 
 	public static final PropertyBool POWERED = PropertyBool.create("powered");
 
-	private Block[] tanks;
-	public BlockAlloyTank(Block... tanks) {
+	private BlockMelter melter;
+	private Block tank;
+	public BlockAlloyTank(BlockMelter melter, Block tank) {
 		super(Material.ROCK);
 		this.setCreativeTab(TCompRegistry.tabGeneral);
 		this.setHardness(3F);
@@ -50,11 +52,21 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 		this.setSoundType(SoundType.METAL);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, false));
 
-		this.tanks = tanks;
+		this.melter = melter;
+		this.tank = tank;
 	}
 
 
 	/* Tank logic */
+
+	/**
+	 * Checks if the passed block is a valid heater for the melter
+	 * @param state  Block state to check
+	 * @return  True if the block state is a valid heater
+	 */
+	public boolean isHeater(IBlockState state) {
+		return state.getBlock() == melter && state.getValue(BlockMelter.TYPE) == MelterType.HEATER;
+	}
 
 	/**
 	 * Checks if the passed block is a valid side tank for this alloy tank
@@ -63,12 +75,7 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 	 */
 	public boolean isTank(IBlockState state) {
 		Block block = state.getBlock();
-		for(Block tank : tanks) {
-			if(tank == block) {
-				return true;
-			}
-		}
-		return false;
+		return block == tank || (block == melter && state.getValue(BlockMelter.TYPE) == MelterType.MELTER);
 	}
 
 	@Nonnull
@@ -84,12 +91,12 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+		updatePower(state, world, pos);
 		// check structure
 		TileEntity te = world.getTileEntity(pos);
 		if(te instanceof TileAlloyTank) {
 			((TileAlloyTank)te).checkTanks();
 		}
-		updatePower(state, world, pos);
 	}
 
 	private static void updatePower(IBlockState state, World world, BlockPos pos) {

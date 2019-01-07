@@ -30,6 +30,7 @@ import slimeknights.tconstruct.tools.TinkerMaterials;
 public class JEIPlugin implements IModPlugin {
 	private static final String FURNACE_FUEL = VanillaRecipeCategoryUid.FUEL;
 	private static final String TINKERS_SMELTERY = "tconstruct.smeltery";
+	private static final String TINKERS_ALLOYING = "tconstruct.alloy";
 	private static final String EXNIHILO_HAMMER = "exnihilocreatio:hammer";
 	private static final String CHISEL_CHISELING = "chisel.chiseling";
 	public static MeltingRecipeCategory meltingCategory;
@@ -61,6 +62,12 @@ public class JEIPlugin implements IModPlugin {
 			if(ModuleFeature.porcelainMelter != null) {
 				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.porcelainMelter), melterCategory);
 				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.porcelainMelter, 1, 8), FURNACE_FUEL);
+			}
+			if(ModuleFeature.alloyTank != null) {
+				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.alloyTank), TINKERS_ALLOYING);
+			}
+			if(ModuleFeature.porcelainAlloyTank != null) {
+				registry.addRecipeCatalyst(new ItemStack(ModuleFeature.porcelainAlloyTank), TINKERS_ALLOYING);
 			}
 
 			// liquid recipe lookup

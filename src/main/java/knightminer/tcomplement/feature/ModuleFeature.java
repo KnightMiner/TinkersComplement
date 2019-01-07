@@ -60,9 +60,9 @@ public class ModuleFeature extends PulseBase {
 	@SidedProxy(clientSide = "knightminer.tcomplement.feature.FeatureClientProxy", serverSide = "knightminer.tcomplement.common.CommonProxy")
 	public static CommonProxy proxy;
 
-	public static Block melter;
+	public static BlockMelter melter;
 	public static Block alloyTank;
-	public static Block porcelainMelter;
+	public static BlockMelter porcelainMelter;
 	public static Block porcelainAlloyTank;
 	public static BlockTank porcelainTank;
 

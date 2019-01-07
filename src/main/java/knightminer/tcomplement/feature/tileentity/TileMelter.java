@@ -8,6 +8,7 @@ import knightminer.tcomplement.feature.client.GuiMelter;
 import knightminer.tcomplement.feature.inventory.ContainerMelter;
 import knightminer.tcomplement.feature.multiblock.MultiblockMelter;
 import knightminer.tcomplement.feature.network.MelterFuelUpdatePacket;
+import knightminer.tcomplement.library.IHeaterConsumer;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.library.tanks.FluidHandlerDrainOnlyWrapper;
 import knightminer.tcomplement.library.tanks.MelterTank;
@@ -17,7 +18,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -41,7 +41,7 @@ import slimeknights.tconstruct.smeltery.network.HeatingStructureFuelUpdatePacket
 import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructureFuelTank;
 import slimeknights.tconstruct.smeltery.tileentity.TileTank;
 
-public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> implements ITickable, IInventoryGui {
+public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> implements ITickable, IInventoryGui, IHeaterConsumer {
 
 	private int tick;
 
@@ -142,38 +142,23 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 
 			fuelQuality = 0;
 		} else if (te instanceof TileHeater) {
-			TileHeater heater = (TileHeater) te;
+			int time = ((TileHeater)te).consumeFuel();
+			if (time > 0) {
+				time /= 2;
+				currentFuel = null;
+				fuelQuality = time;
 
-			ItemStack stack = heater.getStackInSlot(0);
-			if(!stack.isEmpty()) {
-				ItemStack fuel = stack.copy();
-				int time = TileEntityFurnace.getItemBurnTime(fuel) / 2;
-				if(time > 0) {
-					currentFuel = null;
-					fuelQuality = time;
-					// just about enough to melt clay or most metals, but not iron
-					// also, about the temperature of a conventional oven I guess
-					addFuel(time, 200);
+				// just about enough to melt clay or most metals, but not iron
+				// also, about the temperature of a conventional oven I guess
+				addFuel(time, 200);
 
-					fuel.shrink(1);
-					// if the stack is now empty, return the container
-					if(fuel.isEmpty()) {
-						fuel = stack.getItem().getContainerItem(fuel);
-					}
-
-					// set the heater fuel
-					heater.setInventorySlotContents(0, fuel);
-
-					// notify client of fuel/temperature changes
-					if(isServerWorld()) {
-						TCompNetwork.sendToAll(new MelterFuelUpdatePacket(pos, temperature));
-					}
-
-					return;
+				// notify client of fuel/temperature changes
+				if(isServerWorld()) {
+					TCompNetwork.sendToAll(new MelterFuelUpdatePacket(pos, temperature));
 				}
+			} else {
+				fuelQuality = 0;
 			}
-
-			fuelQuality = 0;
 		}
 	}
 
@@ -331,6 +316,11 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 		}
 
 		return info;
+	}
+
+	@Override
+	public int getFuelQuality() {
+		return fuelQuality;
 	}
 
 	/**

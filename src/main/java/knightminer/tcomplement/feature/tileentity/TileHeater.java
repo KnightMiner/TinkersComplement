@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,6 +23,32 @@ public class TileHeater extends TileInventory implements IInventoryGui {
 
 	public TileHeater() {
 		super("gui.tcomplement.heater.name", 1, 64);
+	}
+
+	/**
+	 * Consumes a single piece of fuel in the heater
+	 * @return  item burn time
+	 */
+	public int consumeFuel() {
+		ItemStack stack = getStackInSlot(0);
+		if(stack.isEmpty()) {
+			return 0;
+		}
+
+		ItemStack fuel = stack.copy();
+		int time = TileEntityFurnace.getItemBurnTime(fuel);
+		if(time > 0) {
+			fuel.shrink(1);
+			// if the stack is now empty, return the container
+			if(fuel.isEmpty()) {
+				fuel = stack.getItem().getContainerItem(fuel);
+			}
+
+			// set the heater fuel
+			this.setInventorySlotContents(0, fuel);
+		}
+
+		return time;
 	}
 
 	/* GUI */
