@@ -16,14 +16,11 @@ import knightminer.tcomplement.melter.blocks.BlockMelter;
 import knightminer.tcomplement.melter.tileentity.TileAlloyTank;
 import knightminer.tcomplement.melter.tileentity.TileHeater;
 import knightminer.tcomplement.melter.tileentity.TileMelter;
-import knightminer.tcomplement.shared.ModuleCommons;
 import net.minecraft.block.Block;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -35,9 +32,7 @@ import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.tconstruct.library.MaterialIntegration;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
-import slimeknights.tconstruct.library.smeltery.CastingRecipe;
 import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
-import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.block.BlockTank;
 import slimeknights.tconstruct.smeltery.item.ItemTank;
@@ -113,22 +108,6 @@ public class ModuleMelter extends PulseBase {
 	}
 
 	private void registerMeltingCasting() {
-		// cast iron buckets, because it sounds cool and opens an option for bucket gating with Ceramics
-		TinkerRegistry.registerTableCasting(new ItemStack(Items.BUCKET), ModuleCommons.castBucket, TinkerFluids.iron, Material.VALUE_Ingot * 3);
-		// add cast recipes for bucket cast
-		for(FluidStack fs : TinkerSmeltery.castCreationFluids) {
-			TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucket, new RecipeMatch.Item(ModuleCommons.stoneBucket, 1), fs, true, true));
-		}
-
-		// use clay cast to make iron buckets, so you don't need gold
-		if (ModuleCommons.castBucketClay != null) {
-			TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BUCKET), RecipeMatch.of(ModuleCommons.castBucketClay), TinkerFluids.iron, Material.VALUE_Ingot * 3, true, false));
-			// add cast recipes for bucket cast
-			for(FluidStack fs : TinkerSmeltery.clayCreationFluids) {
-				TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucketClay, new RecipeMatch.Item(ModuleCommons.stoneBucket, 1), fs, true, true));
-			}
-		}
-
 		// override ore recipes to prevent ore doubling
 		for(MaterialIntegration integration : TinkerRegistry.getMaterialIntegrations()) {
 			if(integration.fluid != null) {

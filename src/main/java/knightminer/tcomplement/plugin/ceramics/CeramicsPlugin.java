@@ -3,6 +3,7 @@ package knightminer.tcomplement.plugin.ceramics;
 import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.ModIds;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
@@ -62,13 +63,11 @@ public class CeramicsPlugin extends PulseBase {
 
 	@Subscribe
 	public void postInit(FMLPostInitializationEvent event) {
-		if(ModuleCommons.castBucket != null && isSmelteryLoaded()) {
+		if(Config.general.bucketCast && isSmelteryLoaded()) {
 			ItemStack bucket = GameRegistry.makeItemStack(ModIds.Ceramics.bucket, 0, 1, null);
 			if(!bucket.isEmpty()) {
 				TinkerRegistry.registerTableCasting(bucket, ModuleCommons.castBucket, TinkerFluids.clay, Material.VALUE_Ingot * 3);
-				if (ModuleCommons.castBucketClay != null) {
-					TinkerRegistry.registerTableCasting(new CastingRecipe(bucket.copy(), RecipeMatch.of(ModuleCommons.castBucketClay), TinkerFluids.clay, Material.VALUE_Ingot * 3, true, false));
-				}
+				TinkerRegistry.registerTableCasting(new CastingRecipe(bucket.copy(), RecipeMatch.of(ModuleCommons.castBucketClay), TinkerFluids.clay, Material.VALUE_Ingot * 3, true, false));
 			}
 		}
 	}
