@@ -9,14 +9,14 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class CommonsClientProxy extends ClientProxy {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event) {
-		ModuleCommons.materials.registerItemModels();
-		ModuleCommons.cast.registerItemModels();
-		ModuleCommons.castClay.registerItemModels();
+		CommonsModule.materials.registerItemModels();
+		CommonsModule.cast.registerItemModels();
+		CommonsModule.castClay.registerItemModels();
 	}
 
 	@SubscribeEvent
 	public void registerItemColors(ColorHandlerEvent.Item event) {
 		ItemColors colors = event.getItemColors();
-		registerItemColors(colors, (stack, tintIndex) -> tintIndex == 0 ? 0xA77498 : 0xFFFFFF, ModuleCommons.castClay);
+		registerItemColors(colors, (stack, tintIndex) -> tintIndex == 0 ? 0xA77498 : 0xFFFFFF, CommonsModule.castClay);
 	}
 }

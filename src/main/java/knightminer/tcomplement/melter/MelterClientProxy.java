@@ -1,5 +1,10 @@
 package knightminer.tcomplement.melter;
 
+import static knightminer.tcomplement.melter.MelterModule.alloyTank;
+import static knightminer.tcomplement.melter.MelterModule.melter;
+import static knightminer.tcomplement.melter.MelterModule.porcelainAlloyTank;
+import static knightminer.tcomplement.melter.MelterModule.porcelainMelter;
+import static knightminer.tcomplement.melter.MelterModule.porcelainTank;
 import static slimeknights.tconstruct.common.ModelRegisterUtil.registerItemModel;
 
 import knightminer.tcomplement.common.ClientProxy;
@@ -32,16 +37,16 @@ public class MelterClientProxy extends ClientProxy {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event) {
 		StateMap alloyTankMap = new StateMap.Builder().ignore(BlockAlloyTank.POWERED).build();
-		setModelStateMapper(ModuleMelter.alloyTank, alloyTankMap);
-		setModelStateMapper(ModuleMelter.porcelainAlloyTank, alloyTankMap);
+		setModelStateMapper(alloyTank, alloyTankMap);
+		setModelStateMapper(porcelainAlloyTank, alloyTankMap);
 
-		registerMelterModel(ModuleMelter.melter);
-		registerItemModel(ModuleMelter.alloyTank);
-		registerMelterModel(ModuleMelter.porcelainMelter);
-		registerItemModel(ModuleMelter.porcelainAlloyTank);
+		registerMelterModel(melter);
+		registerItemModel(alloyTank);
+		registerMelterModel(porcelainMelter);
+		registerItemModel(porcelainAlloyTank);
 
 		// porcelain tank items
-		Item tank = Item.getItemFromBlock(ModuleMelter.porcelainTank);
+		Item tank = Item.getItemFromBlock(porcelainTank);
 		if(tank != null && tank != Items.AIR) {
 			for(BlockTank.TankType type : BlockTank.TankType.values()) {
 				ModelLoader.setCustomModelResourceLocation(tank, type.meta, new ModelResourceLocation(tank.getRegistryName(), type.getName()));
@@ -64,16 +69,16 @@ public class MelterClientProxy extends ClientProxy {
 				return fluid.getFluid().getColor(fluid);
 			}
 			return 0xFFFFFF;
-		}, ModuleMelter.porcelainTank, ModuleMelter.alloyTank, ModuleMelter.porcelainAlloyTank);
+		}, porcelainTank, alloyTank, porcelainAlloyTank);
 	}
 
 	@SubscribeEvent
 	public void onModelBake(ModelBakeEvent event) {
 		for (BlockTank.TankType type : BlockTank.TankType.values()) {
-			replaceTankModel(event, ModuleMelter.porcelainTank, type.getName());
+			replaceTankModel(event, porcelainTank, type.getName());
 		}
-		replaceTankModel(event, ModuleMelter.alloyTank, "inventory");
-		replaceTankModel(event, ModuleMelter.porcelainAlloyTank, "inventory");
+		replaceTankModel(event, alloyTank, "inventory");
+		replaceTankModel(event, porcelainAlloyTank, "inventory");
 	}
 
 	private void registerMelterModel(Block block) {

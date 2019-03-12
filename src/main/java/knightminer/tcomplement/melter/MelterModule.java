@@ -38,8 +38,8 @@ import slimeknights.tconstruct.smeltery.block.BlockTank;
 import slimeknights.tconstruct.smeltery.item.ItemTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 
-@Pulse(id = ModuleMelter.pulseID, description = "Adds the melter and alloyer: smaller components of the smeltery")
-public class ModuleMelter extends PulseBase {
+@Pulse(id = MelterModule.pulseID, description = "Adds the melter and alloyer: smaller components of the smeltery")
+public class MelterModule extends PulseBase {
 	public static final String pulseID = "ModuleMelter";
 
 	@SidedProxy(clientSide = "knightminer.tcomplement.melter.MelterClientProxy", serverSide = "knightminer.tcomplement.common.CommonProxy")

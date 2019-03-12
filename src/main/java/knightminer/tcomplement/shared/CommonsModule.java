@@ -27,8 +27,8 @@ import slimeknights.tconstruct.shared.TinkerFluids;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.item.CastCustom;
 
-@Pulse(id = ModuleCommons.pulseID, description = "Core feature for all the modules", forced = true)
-public class ModuleCommons extends PulseBase {
+@Pulse(id = CommonsModule.pulseID, description = "Core feature for all the modules", forced = true)
+public class CommonsModule extends PulseBase {
 	public static final String pulseID = "ModuleCommons";
 
 	@SidedProxy(clientSide = "knightminer.tcomplement.shared.CommonsClientProxy", serverSide = "knightminer.tcomplement.common.CommonProxy")
@@ -81,17 +81,17 @@ public class ModuleCommons extends PulseBase {
 	private void registerMeltingCasting() {
 		if (Config.general.bucketCast && isSmelteryLoaded()) {
 			// cast iron buckets, because it sounds cool and opens an option for bucket gating with Ceramics
-			TinkerRegistry.registerTableCasting(new ItemStack(Items.BUCKET), ModuleCommons.castBucket, TinkerFluids.iron, Material.VALUE_Ingot * 3);
+			TinkerRegistry.registerTableCasting(new ItemStack(Items.BUCKET), castBucket, TinkerFluids.iron, Material.VALUE_Ingot * 3);
 			// add cast recipes for bucket cast
 			for(FluidStack fs : TinkerSmeltery.castCreationFluids) {
-				TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucket, new RecipeMatch.Item(ModuleCommons.stoneBucket, 1), fs, true, true));
+				TinkerRegistry.registerTableCasting(new CastingRecipe(castBucket, new RecipeMatch.Item(stoneBucket, 1), fs, true, true));
 			}
 
 			// use clay cast to make iron buckets, so you don't need gold
-			TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BUCKET), RecipeMatch.of(ModuleCommons.castBucketClay), TinkerFluids.iron, Material.VALUE_Ingot * 3, true, false));
+			TinkerRegistry.registerTableCasting(new CastingRecipe(new ItemStack(Items.BUCKET), RecipeMatch.of(castBucketClay), TinkerFluids.iron, Material.VALUE_Ingot * 3, true, false));
 			// add cast recipes for bucket cast
 			for(FluidStack fs : TinkerSmeltery.clayCreationFluids) {
-				TinkerRegistry.registerTableCasting(new CastingRecipe(ModuleCommons.castBucketClay, new RecipeMatch.Item(ModuleCommons.stoneBucket, 1), fs, true, true));
+				TinkerRegistry.registerTableCasting(new CastingRecipe(castBucketClay, new RecipeMatch.Item(stoneBucket, 1), fs, true, true));
 			}
 		}
 	}

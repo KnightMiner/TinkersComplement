@@ -25,8 +25,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 
-@Pulse(id = ModuleArmor.pulseID, description = "Adds KnightSlime and Manyullyn vanilla style armors")
-public class ModuleArmor extends PulseBase {
+@Pulse(id = ArmorModule.pulseID, description = "Adds KnightSlime and Manyullyn vanilla style armors")
+public class ArmorModule extends PulseBase {
 	public static final String pulseID = "ModuleArmor";
 
 	@SidedProxy(clientSide = "knightminer.tcomplement.armor.ArmorClientProxy", serverSide = "knightminer.tcomplement.common.CommonProxy")

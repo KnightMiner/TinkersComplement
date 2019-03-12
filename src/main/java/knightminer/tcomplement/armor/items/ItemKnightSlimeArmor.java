@@ -1,6 +1,6 @@
 package knightminer.tcomplement.armor.items;
 
-import knightminer.tcomplement.armor.ModuleArmor;
+import knightminer.tcomplement.armor.ArmorModule;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -15,7 +15,7 @@ import slimeknights.tconstruct.tools.common.network.BouncedPacket;
 public class ItemKnightSlimeArmor extends ItemArmorBase {
 
 	public ItemKnightSlimeArmor(EntityEquipmentSlot slot) {
-		super(ModuleArmor.knightSlimeArmor, slot);
+		super(ArmorModule.knightSlimeArmor, slot);
 	}
 
 	// stolen from RUBBERY BOUNCY BOUNCERY WOOOOO
@@ -26,7 +26,7 @@ public class ItemKnightSlimeArmor extends ItemArmorBase {
 			return;
 		}
 		ItemStack feet = entity.getItemStackFromSlot(EntityEquipmentSlot.FEET);
-		if(feet.getItem() != ModuleArmor.knightSlimeBoots) {
+		if(feet.getItem() != ArmorModule.knightSlimeBoots) {
 			return;
 		}
 

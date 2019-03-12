@@ -3,14 +3,14 @@ package knightminer.tcomplement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import knightminer.tcomplement.armor.ModuleArmor;
+import knightminer.tcomplement.armor.ArmorModule;
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.TCompNetwork;
-import knightminer.tcomplement.melter.ModuleMelter;
+import knightminer.tcomplement.melter.MelterModule;
 import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
-import knightminer.tcomplement.shared.ModuleCommons;
+import knightminer.tcomplement.shared.CommonsModule;
 import knightminer.tcomplement.shared.legacy.TileEntityRenamer;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,9 +50,9 @@ public class TinkersComplement {
 	public static GuiHandler guiHandler = new GuiHandler();
 
 	static {
-		pulseManager.registerPulse(new ModuleCommons());
-		pulseManager.registerPulse(new ModuleMelter());
-		pulseManager.registerPulse(new ModuleArmor());
+		pulseManager.registerPulse(new CommonsModule());
+		pulseManager.registerPulse(new MelterModule());
+		pulseManager.registerPulse(new ArmorModule());
 		pulseManager.registerPulse(new CeramicsPlugin());
 		pulseManager.registerPulse(new ChiselPlugin());
 		pulseManager.registerPulse(new ExNihiloPlugin());

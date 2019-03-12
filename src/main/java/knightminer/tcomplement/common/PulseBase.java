@@ -4,7 +4,7 @@ import java.util.Locale;
 
 import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.library.Util;
-import knightminer.tcomplement.melter.ModuleMelter;
+import knightminer.tcomplement.melter.MelterModule;
 import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -40,7 +40,7 @@ public class PulseBase {
 	}
 
 	protected boolean isMelterLoaded() {
-		return TinkersComplement.pulseManager.isPulseLoaded(ModuleMelter.pulseID);
+		return TinkersComplement.pulseManager.isPulseLoaded(MelterModule.pulseID);
 	}
 
 	protected boolean isCeramicsPluginLoaded() {
