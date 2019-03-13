@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "model": "cube_all"
+  },
+	"variants": {
+    "type": {
+      "charcoal": {"textures": {"all": "tcomplement:blocks/charcoal_block"}},
+      "steel":    {"textures": {"all": "tcomplement:blocks/steel_block"}}
+    }
+  }
+}

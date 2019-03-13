@@ -39,6 +39,7 @@ public class CommonsModule extends PulseBase {
 	public static CastCustom cast, castClay;
 	public static ItemStack stoneBucket;
 	public static ItemStack castBucket, castBucketClay;
+	public static ItemStack steelIngot, steelNugget;
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
@@ -64,6 +65,11 @@ public class CommonsModule extends PulseBase {
 			stoneBucket = materials.addMeta(0, "stone_bucket");
 			castBucket = cast.addMeta(0, "bucket", Material.VALUE_Ingot);
 			castBucketClay = castClay.addMeta(0, "bucket", Material.VALUE_Ingot);
+		}
+
+		if(isSteelworksLoaded()) {
+			steelIngot = materials.addMeta(10, "steel_ingot");
+			steelNugget = materials.addMeta(20, "steel_nugget");
 		}
 	}
 

@@ -8,7 +8,7 @@
 		"url": "https://minecraft.curseforge.com/projects/tinkers-complement",
 		"updateUrl": "",
 		"authorList": ["KnightMiner"],
-		"credits": "",
+		"credits": "Design of the steelworks module and some high oven code based off Tinkers' Steelworks by Toops and ephys",
 		"logoFile": "",
 		"screenshots": [],
 		"dependencies": []

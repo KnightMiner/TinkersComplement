@@ -1,0 +1,13 @@
+{
+  "conditions": [{ "type": "pulse_loaded", "pulse": "ModuleSteelworks" }],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "III",
+    "III",
+    "III"
+  ],
+  "key": {
+    "I": {"type": "forge:ore_dict", "ore": "ingotSteel"}
+  },
+  "result": {"item": "tcomplement:storage", "data": 1}
+}

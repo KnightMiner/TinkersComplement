@@ -14,6 +14,7 @@ import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import knightminer.tcomplement.plugin.jei.melter.MeltingRecipeCategory;
 import knightminer.tcomplement.plugin.jei.melter.MeltingRecipeChecker;
 import knightminer.tcomplement.plugin.jei.melter.MeltingRecipeWrapper;
+import knightminer.tcomplement.steelworks.client.GuiHighOven;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -72,6 +73,7 @@ public class JEIPlugin implements IModPlugin {
 
 			// liquid recipe lookup
 			registry.addAdvancedGuiHandlers(new TinkerGuiTankHandler<>(GuiMelter.class));
+			registry.addAdvancedGuiHandlers(new TinkerGuiTankHandler<>(GuiHighOven.class));
 		}
 		// add our chisel to the chisel chisel group
 		if(ChiselPlugin.chisel != null) {

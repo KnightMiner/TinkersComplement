@@ -11,7 +11,9 @@ import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import knightminer.tcomplement.shared.CommonsModule;
+import knightminer.tcomplement.shared.OredictModule;
 import knightminer.tcomplement.shared.legacy.TileEntityRenamer;
+import knightminer.tcomplement.steelworks.SteelworksModule;
 import net.minecraft.util.datafix.FixTypes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Config.Type;
@@ -53,9 +55,11 @@ public class TinkersComplement {
 		pulseManager.registerPulse(new CommonsModule());
 		pulseManager.registerPulse(new MelterModule());
 		pulseManager.registerPulse(new ArmorModule());
+		pulseManager.registerPulse(new SteelworksModule());
 		pulseManager.registerPulse(new CeramicsPlugin());
 		pulseManager.registerPulse(new ChiselPlugin());
 		pulseManager.registerPulse(new ExNihiloPlugin());
+		pulseManager.registerPulse(new OredictModule());
 	}
 
 	@Mod.EventHandler

@@ -25,9 +25,13 @@ public class Config {
 	@LangKey("tcomplement.config.general")
 	public static General general = new General();
 
-	@Comment("Options to configure the melter")
+	@Comment("Options to configure the melter from the melter module")
 	@LangKey("tcomplement.config.melter")
 	public static Melter melter = new Melter();
+
+	@Comment("Options to configure the high oven from the steelworks module")
+	@LangKey("tcomplement.config.highOven")
+	public static HighOven highOven = new HighOven();
 
 	@Comment("Options to configure JEI integration")
 	@LangKey("tcomplement.config.jei")
@@ -44,13 +48,21 @@ public class Config {
 		@RequiresMcRestart
 		@Comment("Ratio of ore to material produced in the melter.")
 		@RangeDouble(min = 0, max = 16)
-		@LangKey("tcomplement.config.melter.oreToIngotRatio")
+		@LangKey("tcomplement.config.oreToIngotRatio")
 		public double oreToIngotRatio = 1.0f;
 
 		@RequiresMcRestart
 		@Comment("Disallows creating seared stone in the melter using cobblestone or tool parts.")
 		@LangKey("tcomplement.config.melter.blacklistStone")
 		public boolean blacklistStone = true;
+	}
+
+	public static class HighOven {
+		@RequiresMcRestart
+		@Comment("Ratio of ore to material produced in the high oven.")
+		@RangeDouble(min = 0, max = 16)
+		@LangKey("tcomplement.config.oreToIngotRatio")
+		public double oreToIngotRatio = 2.5f;
 	}
 
 	public static class JEI {

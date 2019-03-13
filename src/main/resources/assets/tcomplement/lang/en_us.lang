@@ -49,6 +49,23 @@ item.tcomplement.knightslime_boots.name=Knightslime Boots
 
 
 ################
+#  Steelworks  #
+################
+
+item.tcomplement.materials.steel_ingot.name=Steel Ingot
+item.tcomplement.materials.steel_nugget.name=Steel Nugget
+
+tile.tcomplement.storage.charcoal.name=Block of Charcoal
+tile.tcomplement.storage.steel.name=Block of Steel
+
+tile.tcomplement.high_oven_controller.name=High Oven Controller
+
+gui.tcomplement.high_oven.name=High Oven
+gui.tcomplement.high_oven.progress.no_space=Not enough free space in the high oven
+gui.tcomplement.high_oven.progress.wrong_fluid=Resulting fluid is different than fluid in high oven
+
+
+################
 #    Tools     #
 ################
 
@@ -90,8 +107,12 @@ tile.tcomplement.porcelain_tank.tooltip=Heart of the Melter\nRetains liquid when
 
 tcomplement.config.general=General
 tcomplement.config.general.bucketCast=Bucket Cast
+tcomplement.config.oreToIngotRatio=Ore to Ingot Ratio
+
 tcomplement.config.melter=Melter
-tcomplement.config.melter.oreToIngotRatio=Ore to Ingot Ratio
 tcomplement.config.melter.blacklistStone=Blacklist Stone
+
+tcomplement.config.highOven=High Oven
+
 tcomplement.config.jei=JEI Integration
 tcomplement.config.jei.separateMelterTab=Separate Melter Tab

@@ -5,6 +5,9 @@
         "model": "forge:item-layer"
     },
     "variants": {
-        "stone_bucket": [{ "textures": { "layer0": "tcomplement:items/materials/stone_bucket" }}]
+        "stone_bucket": [{ "textures": { "layer0": "tcomplement:items/materials/stone_bucket" }}],
+
+        "steel_ingot": [{ "textures": { "layer0": "tcomplement:items/materials/steel_ingot" }}],
+        "steel_nugget": [{ "textures": { "layer0": "tcomplement:items/materials/steel_nugget" }}]
     }
 }

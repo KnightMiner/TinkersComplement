@@ -1,0 +1,5 @@
+{
+  "type": "forge:ore_shapeless",
+  "ingredients": [{"type": "forge:ore_dict", "ore": "ingotSteel"}],
+  "result": {"item": "tcomplement:materials", "data": 20, "count": 9}
+}

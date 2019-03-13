@@ -1,0 +1,13 @@
+{
+  "conditions": [{ "type": "pulse_loaded", "pulse": "ModuleSteelworks" }],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "CCC",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {"item": "minecraft:coal", "data": 1}
+  },
+  "result": {"item": "tcomplement:storage", "data": 0}
+}
