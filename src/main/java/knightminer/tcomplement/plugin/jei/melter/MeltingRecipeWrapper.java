@@ -28,7 +28,7 @@ public class MeltingRecipeWrapper extends SmeltingRecipeWrapper {
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		// if solid fuel is available, draw the flame icon, otherwise cover the slot
 		if(isSolid) {
-			JEIPlugin.meltingCategory.flame.draw(minecraft, 8, 7);
+			JEIPlugin.meltingCategory.flame.draw(minecraft, 7, 6);
 		} else {
 			JEIPlugin.meltingCategory.solidCover.draw(minecraft, 6, 7);
 		}

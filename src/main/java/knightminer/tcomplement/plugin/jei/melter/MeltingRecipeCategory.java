@@ -32,6 +32,7 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipeWrapp
 	private static List<ItemStack> furnaceFuels;
 
 	private final IDrawable background;
+	private final IDrawable scala;
 	protected final IDrawable solidCover;
 	protected final IDrawableAnimated flame;
 	private final IDrawableAnimated progress;
@@ -39,6 +40,7 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipeWrapp
 	public MeltingRecipeCategory(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BACKGROUND, 0, 0, 160, 46, 0, 0, 0, 0);
 		solidCover = guiHelper.createDrawable(BACKGROUND, 174, 0, 18, 33);
+		scala = guiHelper.createDrawable(BACKGROUND, 192, 0, 32, 32);
 
 		IDrawableStatic flameDrawable = guiHelper.createDrawable(BACKGROUND, 160, 0, 14, 14);
 		flame = guiHelper.createAnimatedDrawable(flameDrawable, 200, IDrawableAnimated.StartDirection.TOP, true);
@@ -84,7 +86,7 @@ public class MeltingRecipeCategory implements IRecipeCategory<MeltingRecipeWrapp
 		IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
 		fluids.addTooltipCallback(GuiUtil::onFluidTooltip);
 
-		fluids.init(0, false, 121, 7, 32, 32, Material.VALUE_Block, false, null);
+		fluids.init(0, false, 121, 7, 32, 32, Material.VALUE_Block, false, scala);
 		fluids.set(ingredients);
 
 		fluids.init(1, true, 29, 7, 12, 32, 1000, false, null);
