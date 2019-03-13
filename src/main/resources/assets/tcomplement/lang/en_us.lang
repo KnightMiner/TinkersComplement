@@ -64,6 +64,13 @@ gui.tcomplement.high_oven.name=High Oven
 gui.tcomplement.high_oven.progress.no_space=Not enough free space in the high oven
 gui.tcomplement.high_oven.progress.wrong_fluid=Resulting fluid is different than fluid in high oven
 
+gui.jei.high_oven.melting.title=High Oven Melting
+gui.jei.high_oven.mix.title=High Oven Mixing
+gui.jei.high_oven.mix.consume=%s%% chance to consume
+gui.jei.high_oven.fuel.title=High Oven Fuel
+gui.jei.high_oven.fuel.rate=+%s°c/s
+gui.jei.high_oven.fuel.time=Burn time: %ss
+
 
 ################
 #    Tools     #
@@ -116,3 +123,4 @@ tcomplement.config.highOven=High Oven
 
 tcomplement.config.jei=JEI Integration
 tcomplement.config.jei.separateMelterTab=Separate Melter Tab
+tcomplement.config.jei.separateHighOvenTab=Separate High Oven Tab

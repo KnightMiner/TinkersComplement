@@ -49,4 +49,18 @@ public class Util {
 
 		return LogManager.getLogger(log + "-" + type);
 	}
+
+	/** Calculates the temperature text color based on temperature, based on code from Tinkers' Steelworks */
+	public static int getHighOvenTempColor(int temp) {
+		if (temp > 2000) return 0xFF0000;
+
+		// shift the temperature to have a gradient from 0 -> 1980 (which will visually give 20 -> 2000)
+		float percent = (temp - 20) / 1980F;
+
+		// 0xFF0000 <- 0x404040
+		int r = (int) ((0xFF - 0x40) * percent) + 0x40;
+		int gb = (int) ((0x00 - 0x40) * percent) + 0x40;
+
+		return r << 16 | gb << 8 | gb;
+	}
 }

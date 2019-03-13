@@ -243,6 +243,14 @@ public class TCompRegistry {
 		return mixAdditives.get(type).matches(stack).isPresent();
 	}
 
+	/**
+	 * Gets all high oven mix recipes
+	 * @return  Immutable list of all mix recipes
+	 */
+	public static List<IMixRecipe> getAllMixRecipes() {
+		return ImmutableList.copyOf(mixRegistry);
+	}
+
 	/*-------------------------------------------------------------------------*\
 	| High Oven Fuels                                                           |
 	\*-------------------------------------------------------------------------*/
@@ -311,6 +319,14 @@ public class TCompRegistry {
 	 */
 	public static boolean isHighOvenFuel(ItemStack input) {
 		return getHighOvenFuel(input) != null;
+	}
+
+	/**
+	 * Gets a list of all high oven fuels for display in JEI
+	 * @return  ImmutableList of all high oven fuels
+	 */
+	public static List<HighOvenFuel> getAllHighOvenFuels() {
+		return ImmutableList.copyOf(highOvenFuels);
 	}
 
 	/*-------------------------------------------------------------------------*\

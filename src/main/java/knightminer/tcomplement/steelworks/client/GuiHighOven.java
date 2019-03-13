@@ -88,23 +88,9 @@ public class GuiHighOven extends GuiMultiModule implements IGuiLiquidTank {
 		}
 
 		// temperature
-		String temp = (highOven.getTemperature() - 300) + "\u00B0c";
-		fontRenderer.drawString(temp, guiLeft + 88 - ((fontRenderer.getStringWidth(temp) / 2)), guiTop + 20, getTempColor());
-	}
-
-	/** Calculates the temperature text color based on temperature, pulled from Tinkers' Steelworks */
-	protected int getTempColor() {
-		int tempHex = highOven.getTemperature() - 300;
-		if (tempHex > 2000) return 0xFF0000;
-
-		// shift the temperature to have a gradient from 0 -> 1980 (which will visually give 20 -> 2000)
-		float percent = (tempHex - 20) / 1980F;
-
-		// 0xFF0000 <- 0x404040
-		int r = (int) ((0xFF - 0x40) * percent) + 0x40;
-		int gb = (int) ((0x00 - 0x40) * percent) + 0x40;
-
-		return r << 16 | gb << 8 | gb;
+		int temp = highOven.getTemperature() - 300;
+		String tempStr = temp + "\u00B0c";
+		fontRenderer.drawString(tempStr, guiLeft + 88 - (fontRenderer.getStringWidth(tempStr) / 2), guiTop + 20, Util.getHighOvenTempColor(temp));
 	}
 
 	@Override

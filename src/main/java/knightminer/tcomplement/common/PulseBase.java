@@ -32,23 +32,29 @@ import slimeknights.tconstruct.tools.TinkerTools;
 
 public class PulseBase {
 	/* Loaded */
-	protected boolean isToolsLoaded() {
+
+	/** Returns true if the Tinkers Construct tools pulse is loaded */
+	protected static boolean isToolsLoaded() {
 		return TConstruct.pulseManager.isPulseLoaded(TinkerTools.PulseId);
 	}
 
-	protected boolean isSmelteryLoaded() {
+	/** Returns true if the Tinkers Construct smeltery pulse is loaded */
+	protected static boolean isSmelteryLoaded() {
 		return TConstruct.pulseManager.isPulseLoaded(TinkerSmeltery.PulseId);
 	}
 
-	protected boolean isMelterLoaded() {
+	/** Returns true if the Tinkers Complement melter pulse is loaded */
+	public static boolean isMelterLoaded() {
 		return TinkersComplement.pulseManager.isPulseLoaded(MelterModule.pulseID);
 	}
 
-	protected boolean isSteelworksLoaded() {
+	/** Returns true if the Tinkers Complement steelworks pulse is loaded */
+	public static boolean isSteelworksLoaded() {
 		return TinkersComplement.pulseManager.isPulseLoaded(SteelworksModule.pulseID);
 	}
 
-	protected boolean isCeramicsPluginLoaded() {
+	/** Returns true if the Tinkers Complement Ceramics plugin is loaded */
+	protected static boolean isCeramicsPluginLoaded() {
 		return TinkersComplement.pulseManager.isPulseLoaded(CeramicsPlugin.pulseID);
 	}
 

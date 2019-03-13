@@ -1,6 +1,9 @@
 package knightminer.tcomplement.library.steelworks;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -14,7 +17,7 @@ import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.mantle.util.RecipeMatchRegistry;
 
 public class MixRecipe implements IMixRecipe {
-	private Map<MixAdditive,RecipeMatchRegistry> additives;
+	private Map<MixAdditive,MixAdditiveList> additives;
 	private FluidStack input, output;
 	private static final Random RANDOM = new Random();
 
@@ -93,7 +96,7 @@ public class MixRecipe implements IMixRecipe {
 					additives = new EnumMap<>(MixAdditive.class);
 				}
 				// insert the ingredient
-				additives.computeIfAbsent(type, (t) -> new RecipeMatchRegistry()).addRecipeMatch(additive);
+				additives.computeIfAbsent(type, (t) -> new MixAdditiveList()).addRecipeMatch(additive);
 				TCompRegistry.registerMixAdditive(additive, type);
 			} else try {
 				String input = additive.getInputs().stream().findFirst().map(ItemStack::getUnlocalizedName).orElse("?");
@@ -120,8 +123,77 @@ public class MixRecipe implements IMixRecipe {
 		return this;
 	}
 
+	/** JEI */
+
+	/**
+	 * Checks if a recipe has nonnull inputs and outputs and either undefined or not empty additives
+	 * @return  True if the recipe is valid
+	 */
+	public boolean isValid() {
+		// ensure fluids are valid
+		if (input == null || input.getFluid() == null || output == null || output.getFluid() == null) {
+			return false;
+		}
+		// ensure additives are valid
+		if (additives != null) {
+			for(MixAdditive type : MixAdditive.values()) {
+				// if the additive is set, it must have items
+				if(additives.containsKey(type) && additives.get(type).getInputs().isEmpty()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	@Override
 	public FluidStack getOutput() {
 		return output;
+	}
+
+	/** Gets the input fluid stack */
+	public FluidStack getInput() {
+		return input;
+	}
+
+	/**
+	 * Gets all additives of a type
+	 * @param type  Additive type
+	 * @return  List of additives of that type, or an empty list if unused. Note this does not distinguish unused from empty
+	 */
+	public List<ItemStack> getAdditives(MixAdditive type) {
+		if(additives == null || !additives.containsKey(type)) {
+			return Collections.emptyList();
+		}
+		return additives.get(type).getInputs();
+	}
+
+	/**
+	 * Gets the consumption chance of an additive
+	 * @param type   Additive type
+	 * @param input  Stack to check
+	 * @return  Chance from 0 to 100, or null if stack is not an additive of that type for this recipe
+	 */
+	public Integer getAdditiveConsumeChance(MixAdditive type, ItemStack input) {
+		// additive type not present
+		if (additives == null || !additives.containsKey(type)) {
+			return null;
+		}
+		// find it in the list, returning null if missing
+		return additives.get(type).matches(input).map((m)->m.amount).orElse(null);
+	}
+
+	/** Internal copy of RecipeMatchRegistry to gain access to the internal items list */
+	private static class MixAdditiveList extends RecipeMatchRegistry {
+		private List<ItemStack> displayItems;
+		public List<ItemStack> getInputs() {
+			if (displayItems != null) {
+				return displayItems;
+			}
+			return displayItems = items.stream().map(RecipeMatch::getInputs).reduce(new ArrayList<>(), (list, items) -> {
+				list.addAll(items);
+				return list;
+			});
+		}
 	}
 }

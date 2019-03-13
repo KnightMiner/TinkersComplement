@@ -69,10 +69,18 @@ public class Config {
 		@RequiresMcRestart
 		@Comment({
 			"If true, puts the melter in its own recipe tab in JEI to make the blacklist and overrides more clear.",
-			"If false, the melter is just added to the normal Tinkers tab."
+			"If false, the melter is just added to the normal smeltery tab."
 		})
 		@LangKey("tcomplement.config.jei.separateMelterTab")
 		public boolean separateMelterTab = true;
+
+		@RequiresMcRestart
+		@Comment({
+			"If true, puts high oven melting recipes in their own tab in JEI to make the overrides more clear.",
+			"If false, the high oven is just added to the normal smeltery tab."
+		})
+		@LangKey("tcomplement.config.jei.separateHighOvenTab")
+		public boolean separateHighOvenTab = true;
 	}
 
 	public static class ConfigProperty implements IConditionFactory {
