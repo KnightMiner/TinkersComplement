@@ -12,6 +12,7 @@ import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.steelworks.HighOvenFuel;
 import knightminer.tcomplement.melter.MelterModule;
 import knightminer.tcomplement.melter.client.GuiMelter;
+import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import knightminer.tcomplement.plugin.jei.highoven.fuel.HighOvenFuelCategory;
@@ -35,7 +36,9 @@ import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
 import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
+import slimeknights.tconstruct.plugin.jei.casting.CastingRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.smelting.SmeltingRecipeChecker;
+import slimeknights.tconstruct.smeltery.block.BlockCasting.CastingType;
 import slimeknights.tconstruct.smeltery.client.IGuiLiquidTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 
@@ -126,9 +129,20 @@ public class JEIPlugin implements IModPlugin {
 			// catalysts
 			registry.addRecipeCatalyst(new ItemStack(SteelworksModule.highOvenController),
 					highOvenMelting, HighOvenMixCategory.CATEGORY, HighOvenFuelCategory.CATEGORY);
+			// add scorched casting blocks to casting category
+			for(CastingType type : CastingType.values()) {
+				registry.addRecipeCatalyst(new ItemStack(SteelworksModule.scorchedCasting, 1, type.getMeta()), CastingRecipeCategory.CATEGORY);
+			}
 
 			// liquid recipe lookup
 			registry.addAdvancedGuiHandlers(new TinkerGuiTankHandler<>(GuiHighOven.class));
+		}
+
+		if(PulseBase.isCeramicsPluginLoaded()) {
+			// add porcelain casting blocks to casting category
+			for(CastingType type : CastingType.values()) {
+				registry.addRecipeCatalyst(new ItemStack(CeramicsPlugin.porcelainCasting, 1, type.getMeta()), CastingRecipeCategory.CATEGORY);
+			}
 		}
 
 		// add our chisel to the chisel chisel group

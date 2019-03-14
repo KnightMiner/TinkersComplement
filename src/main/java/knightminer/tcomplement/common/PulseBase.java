@@ -54,7 +54,7 @@ public class PulseBase {
 	}
 
 	/** Returns true if the Tinkers Complement Ceramics plugin is loaded */
-	protected static boolean isCeramicsPluginLoaded() {
+	public static boolean isCeramicsPluginLoaded() {
 		return TinkersComplement.pulseManager.isPulseLoaded(CeramicsPlugin.pulseID);
 	}
 
