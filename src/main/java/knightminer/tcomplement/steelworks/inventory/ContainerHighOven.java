@@ -10,7 +10,6 @@ import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.items.SlotItemHandler;
 import slimeknights.mantle.inventory.ContainerMultiModule;
 
@@ -108,15 +107,7 @@ public class ContainerHighOven extends ContainerMultiModule<TileHighOven> {
 		}
 		@Override
 		public boolean isItemValid(@Nonnull ItemStack stack) {
-			if (stack.isEmpty()) {
-				return false;
-			}
-			// this check is a bit easier than the additive check
-			ItemStack currentStack = this.getStack();
-			if (!currentStack.isEmpty() && !ItemHandlerHelper.canItemStacksStack(stack, currentStack)) {
-				return false;
-			}
-			return TCompRegistry.isHighOvenFuel(stack);
+			return !stack.isEmpty() && TCompRegistry.isHighOvenFuel(stack);
 		}
 	}
 
@@ -129,15 +120,7 @@ public class ContainerHighOven extends ContainerMultiModule<TileHighOven> {
 
 		@Override
 		public boolean isItemValid(@Nonnull ItemStack stack) {
-			if (stack.isEmpty()) {
-				return false;
-			}
-			// this check is a bit easier than the additive check
-			ItemStack currentStack = this.getStack();
-			if (!currentStack.isEmpty() && !ItemHandlerHelper.canItemStacksStack(stack, currentStack)) {
-				return false;
-			}
-			return TCompRegistry.isValidMixAdditive(stack, type);
+			return !stack.isEmpty() && TCompRegistry.isValidMixAdditive(stack, type);
 		}
 	}
 }
