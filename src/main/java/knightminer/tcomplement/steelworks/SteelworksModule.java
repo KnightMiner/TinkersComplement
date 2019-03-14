@@ -198,8 +198,8 @@ public class SteelworksModule extends PulseBase {
 		IMixRecipe mix; // because Eclipse formatter is dumb
 
 		// steel
-		mix = TCompRegistry.registerMix(new FluidStack(TinkerFluids.steel, Material.VALUE_Ingot),
-				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot))
+		mix = TCompRegistry.registerMix(new FluidStack(TinkerFluids.steel, (int)(Material.VALUE_Ingot*Config.highOven.oreToIngotRatio)),
+				new FluidStack(TinkerFluids.iron, (int)(Material.VALUE_Ingot*Config.highOven.oreToIngotRatio)))
 				// oxidizers
 				.addOxidizer("gunpowder", 33)
 				.addOxidizer("dustSulfur", 29)
