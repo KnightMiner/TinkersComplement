@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 
 import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.Config;
+import knightminer.tcomplement.common.ModIds;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.library.steelworks.IMixRecipe;
@@ -220,11 +221,16 @@ public class SteelworksModule extends PulseBase {
 				.addReducer(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage()), 20)
 				.addPurifier(new ItemStack(Items.PORKCHOP), 80);
 
+		ItemStack bacon = GameRegistry.makeItemStack(ModIds.TConstruct.edibles, ModIds.TConstruct.baconMeta, 1, null);
+		if(!bacon.isEmpty()) {
+			mix.addPurifier(bacon, 70);
+		}
+
 		// knightslime
 		mix = TCompRegistry.registerMix(new FluidStack(TinkerFluids.knightslime, Material.VALUE_Ingot/2),
 				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot/2))
+				// no oxidizer
 				.addReducer("slimeballPurple", 75)
-				// reducers
 				.addPurifier("gravel", 80);
 	}
 
