@@ -47,6 +47,11 @@ item.tcomplement.knightslime_chestplate.name=Knightslime Chestplate
 item.tcomplement.knightslime_leggings.name=Knightslime Leggings
 item.tcomplement.knightslime_boots.name=Knightslime Boots
 
+item.tcomplement.steel_helmet.name=Steel Helmet
+item.tcomplement.steel_chestplate.name=Steel Chestplate
+item.tcomplement.steel_leggings.name=Steel Leggings
+item.tcomplement.steel_boots.name=Steel Boots
+
 
 ################
 #  Steelworks  #

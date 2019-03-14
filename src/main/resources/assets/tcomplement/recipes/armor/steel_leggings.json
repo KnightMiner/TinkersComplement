@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    { "type": "pulse_loaded", "pulse": "ModuleArmor" },
+    { "type": "pulse_loaded", "pulse": "ModuleSteelworks" }
+  ],
+  "result": {
+    "item": "tcomplement:steel_leggings"
+  },
+  "pattern": [
+    "ccc",
+    "c c",
+    "c c"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {"type": "forge:ore_dict", "ore": "ingotSteel"}
+  }
+}

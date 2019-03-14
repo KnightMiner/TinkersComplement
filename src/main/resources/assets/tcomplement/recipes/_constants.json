@@ -59,20 +59,6 @@
       "data": 1
     }
   },
-  {
-    "name": "MANYULLYN_INGOT",
-    "ingredient": {
-      "item": "tconstruct:ingots",
-      "data": 2
-    }
-  },
-  {
-    "name": "KNIGHTSLIME_INGOT",
-    "ingredient": {
-      "item": "tconstruct:ingots",
-      "data": 3
-    }
-  },
   
   {
     "conditions": [

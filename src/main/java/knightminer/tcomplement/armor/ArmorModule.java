@@ -8,6 +8,7 @@ import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.ModIds;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.Util;
+import knightminer.tcomplement.shared.CommonsModule;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -45,12 +46,23 @@ public class ArmorModule extends PulseBase {
 	public static Item knightSlimeLeggings;
 	public static Item knightSlimeBoots;
 
+	public static ArmorMaterial steelArmor;
+	public static Item steelHelmet;
+	public static Item steelChestplate;
+	public static Item steelLeggings;
+	public static Item steelBoots;
+
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		manyullynArmor = EnumHelper.addArmorMaterial(Util.prefix("manyullyn"), Util.resource("manyullyn"),
-				15, new int[]{3, 6, 8, 3}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F);
+				21, new int[]{3, 6, 8, 3}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F);
 		knightSlimeArmor = EnumHelper.addArmorMaterial(Util.prefix("knightslime"), Util.resource("knightslime"),
-				12, new int[]{2, 5, 6, 2}, 4, SoundEvents.BLOCK_SLIME_PLACE, 1.0F);
+				15, new int[]{2, 4, 5, 1}, 6, SoundEvents.BLOCK_SLIME_PLACE, 1.0F);
+
+		if(isSteelworksLoaded()) {
+			steelArmor = EnumHelper.addArmorMaterial(Util.prefix("steel"), Util.resource("steel"),
+					20, new int[]{2, 5, 7, 2}, 7, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 1.5F);
+		}
 
 		proxy.preInit();
 	}
@@ -60,23 +72,32 @@ public class ArmorModule extends PulseBase {
 		IForgeRegistry<Item> r = event.getRegistry();
 
 		// manyullyn armor
-		manyullynHelmet = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.HEAD), "manyullyn_helmet");
+		manyullynHelmet     = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.HEAD),  "manyullyn_helmet");
 		manyullynChestplate = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.CHEST), "manyullyn_chestplate");
-		manyullynLeggings = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.LEGS), "manyullyn_leggings");
-		manyullynBoots = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.FEET), "manyullyn_boots");
+		manyullynLeggings   = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.LEGS),  "manyullyn_leggings");
+		manyullynBoots      = registerItem(r, new ItemArmorBase(manyullynArmor, EntityEquipmentSlot.FEET),  "manyullyn_boots");
 		ItemStack manyullyn = GameRegistry.makeItemStack(ModIds.TConstruct.ingots, ModIds.TConstruct.manyullynMeta, 1, null);
 		if(!manyullyn.isEmpty()) {
 			manyullynArmor.setRepairItem(manyullyn);
 		}
 
 		// knight slime armor
-		knightSlimeHelmet = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.HEAD), "knightslime_helmet");
+		knightSlimeHelmet     = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.HEAD),  "knightslime_helmet");
 		knightSlimeChestplate = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.CHEST), "knightslime_chestplate");
-		knightSlimeLeggings = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.LEGS), "knightslime_leggings");
-		knightSlimeBoots = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.FEET), "knightslime_boots");
+		knightSlimeLeggings   = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.LEGS),  "knightslime_leggings");
+		knightSlimeBoots      = registerItem(r, new ItemKnightSlimeArmor(EntityEquipmentSlot.FEET),  "knightslime_boots");
 		ItemStack knightSlime = GameRegistry.makeItemStack(ModIds.TConstruct.ingots, ModIds.TConstruct.knightSlimeMeta, 1, null);
 		if(!knightSlime.isEmpty()) {
 			knightSlimeArmor.setRepairItem(knightSlime);
+		}
+
+		// steel armor
+		if(isSteelworksLoaded()) {
+			steelHelmet     = registerItem(r, new ItemArmorBase(steelArmor, EntityEquipmentSlot.HEAD),  "steel_helmet");
+			steelChestplate = registerItem(r, new ItemArmorBase(steelArmor, EntityEquipmentSlot.CHEST), "steel_chestplate");
+			steelLeggings   = registerItem(r, new ItemArmorBase(steelArmor, EntityEquipmentSlot.LEGS),  "steel_leggings");
+			steelBoots      = registerItem(r, new ItemArmorBase(steelArmor, EntityEquipmentSlot.FEET),  "steel_boots");
+			steelArmor.setRepairItem(CommonsModule.steelIngot);
 		}
 	}
 

@@ -9,8 +9,6 @@
   ],
   "type": "forge:ore_shaped",
   "key": {
-    "c": {
-      "item": "#MANYULLYN_INGOT"
-    }
+    "c": {"type": "forge:ore_dict", "ore": "ingotManyullyn"}
   }
 }

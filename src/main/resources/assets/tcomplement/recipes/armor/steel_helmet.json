@@ -1,0 +1,17 @@
+{
+  "conditions": [
+    { "type": "pulse_loaded", "pulse": "ModuleArmor" },
+    { "type": "pulse_loaded", "pulse": "ModuleSteelworks" }
+  ],
+  "result": {
+    "item": "tcomplement:steel_helmet"
+  },
+  "pattern": [
+    "ccc",
+    "c c"
+  ],
+  "type": "forge:ore_shaped",
+  "key": {
+    "c": {"type": "forge:ore_dict", "ore": "ingotSteel"}
+  }
+}
