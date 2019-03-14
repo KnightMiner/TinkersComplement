@@ -1,0 +1,14 @@
+{
+  "conditions": [{ "type": "pulse_loaded", "pulse": "ModuleSteelworks" }],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "BSB",
+    "   ",
+    "BSB"
+  ],
+  "key": {
+    "B": {"item": "#SCORCHED_BRICK"},
+    "S": {"type": "forge:ore_dict", "ore": "ingotSteel"}
+  },
+  "result": {"item": "tcomplement:high_oven_io", "data": 2}
+}

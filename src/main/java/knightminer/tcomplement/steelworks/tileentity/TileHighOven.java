@@ -46,8 +46,7 @@ import slimeknights.tconstruct.smeltery.multiblock.MultiblockDetection;
 import slimeknights.tconstruct.smeltery.network.SmelteryFluidUpdatePacket;
 import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructure;
 
-public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> implements ITickable, IInventoryGui,
-ISmelteryTankHandler {
+public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> implements ITickable, IInventoryGui, ISmelteryTankHandler {
 
 	/** Temperature of the high oven when not heated */
 	private static final int ROOM_TEMPERATURE = 320; // 20 degrees C
@@ -290,13 +289,20 @@ ISmelteryTankHandler {
 
 	/* Extra inventory logic */
 
-	public IItemHandlerModifiable getIngredients() {
+	public IItemHandlerModifiable getAdditives() {
 		return additives;
 	}
 
 	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, EnumFacing facing) {
+		// return false for sides so hoppers cannot interact
+		// null (internal) is returned for the sake of the contailer
+		return (facing == null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing);
+	}
+
+	@Override
 	public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing) {
-		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+		if(facing == null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(combinedItemHandler);
 		}
 		return super.getCapability(capability, facing);

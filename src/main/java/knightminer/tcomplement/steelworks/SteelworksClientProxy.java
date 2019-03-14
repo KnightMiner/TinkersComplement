@@ -26,6 +26,7 @@ import static slimeknights.tconstruct.common.ModelRegisterUtil.registerItemModel
 
 import knightminer.tcomplement.common.ClientProxy;
 import knightminer.tcomplement.library.Util;
+import knightminer.tcomplement.steelworks.blocks.BlockHighOvenIO;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -33,7 +34,6 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import slimeknights.tconstruct.smeltery.block.BlockSmelteryIO;
 
 public class SteelworksClientProxy extends ClientProxy {
 	@SubscribeEvent
@@ -65,9 +65,8 @@ public class SteelworksClientProxy extends ClientProxy {
 		registerItemModel(scorchedStairsCreeper);
 
 		// High Oven IO
-		// TODO: ducts
 		Item io = Item.getItemFromBlock(highOvenIO);
-		for(BlockSmelteryIO.IOType type : BlockSmelteryIO.IOType.values()) {
+		for(BlockHighOvenIO.IOType type : BlockHighOvenIO.IOType.values()) {
 			String variant = String.format("facing=south,type=%s", type.getName());
 			ModelLoader.setCustomModelResourceLocation(io, type.meta, new ModelResourceLocation(io.getRegistryName(), variant));
 		}

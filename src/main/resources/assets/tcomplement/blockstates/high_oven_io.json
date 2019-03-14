@@ -5,9 +5,8 @@
     "model": "cube",
     "textures": {
       "particle": "#up",
-      "up":    "tcomplement:blocks/high_oven/drain_front",
-      "south": "tcomplement:blocks/high_oven/drain_front",
-      "north": "tcomplement:blocks/high_oven/drain_back",
+      "up":    "#south",
+      "north": "tcomplement:blocks/high_oven/high_oven_io_back",
       "down": "#up",
       "east": "#up",
       "west": "#up"
@@ -16,7 +15,9 @@
   },
   "variants": {
     "type": {
-      "drain": {}
+      "drain": {"textures": {"south": "tcomplement:blocks/high_oven/drain_front"}},
+      "chute": {"textures": {"south": "tcomplement:blocks/high_oven/chute_front"}},
+      "duct":  {"textures": {"south": "tcomplement:blocks/high_oven/duct_front" }}
     },
     "facing": {
       "south": {},

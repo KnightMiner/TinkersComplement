@@ -14,12 +14,15 @@ import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.library.steelworks.IMixRecipe;
 import knightminer.tcomplement.shared.CommonsModule;
 import knightminer.tcomplement.steelworks.blocks.BlockHighOvenController;
+import knightminer.tcomplement.steelworks.blocks.BlockHighOvenIO;
 import knightminer.tcomplement.steelworks.blocks.BlockScorchedSlab;
 import knightminer.tcomplement.steelworks.blocks.BlockScorchedSlab2;
 import knightminer.tcomplement.steelworks.blocks.BlockStorage;
 import knightminer.tcomplement.steelworks.blocks.BlockStorage.StorageType;
 import knightminer.tcomplement.steelworks.items.ItemBlockStorage;
 import knightminer.tcomplement.steelworks.tileentity.TileHighOven;
+import knightminer.tcomplement.steelworks.tileentity.TileHighOvenItemProxy.TileChute;
+import knightminer.tcomplement.steelworks.tileentity.TileHighOvenItemProxy.TileDuct;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStoneSlab;
 import net.minecraft.init.Blocks;
@@ -54,7 +57,6 @@ import slimeknights.tconstruct.smeltery.block.BlockFaucet;
 import slimeknights.tconstruct.smeltery.block.BlockSeared;
 import slimeknights.tconstruct.smeltery.block.BlockSeared.SearedType;
 import slimeknights.tconstruct.smeltery.block.BlockSearedSlab2;
-import slimeknights.tconstruct.smeltery.block.BlockSmelteryIO;
 import slimeknights.tconstruct.smeltery.item.ItemChannel;
 
 @Pulse(id = SteelworksModule.pulseID, description = "Adds the high oven: a new multiblock for making steel")
@@ -71,7 +73,7 @@ public class SteelworksModule extends PulseBase {
 	public static BlockFaucet scorchedFaucet;
 	public static BlockChannel scorchedChannel;
 	public static BlockCasting scorchedCasting;
-	public static BlockSmelteryIO highOvenIO;
+	public static BlockHighOvenIO highOvenIO;
 	// Scorched
 	public static BlockSeared scorchedBlock;
 	public static BlockScorchedSlab scorchedSlab;
@@ -108,13 +110,15 @@ public class SteelworksModule extends PulseBase {
 		scorchedFaucet = registerBlock(r, new BlockFaucet(), "scorched_faucet");
 		scorchedChannel = registerBlock(r, new BlockChannel(), "scorched_channel");
 		scorchedCasting = registerBlock(r, new BlockCasting(), "scorched_casting");
-		highOvenIO = registerBlock(r, new BlockSmelteryIO(), "high_oven_io"); // TODO: ducts
+		highOvenIO = registerBlock(r, new BlockHighOvenIO(), "high_oven_io");
 
 		scorchedFaucet.setCreativeTab(TCompRegistry.tabGeneral);
 		scorchedChannel.setCreativeTab(TCompRegistry.tabGeneral);
 		scorchedCasting.setCreativeTab(TCompRegistry.tabGeneral);
 		highOvenIO.setCreativeTab(TCompRegistry.tabGeneral);
 		registerTE(TileHighOven.class, "high_oven");
+		registerTE(TileChute.class, "chute");
+		registerTE(TileDuct.class, "duct");
 
 		// Scorched
 		scorchedBlock = registerBlock(r, new BlockSeared(),        "scorched_block");
