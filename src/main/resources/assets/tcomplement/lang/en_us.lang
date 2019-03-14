@@ -58,8 +58,63 @@ item.tcomplement.materials.steel_nugget.name=Steel Nugget
 tile.tcomplement.storage.charcoal.name=Block of Charcoal
 tile.tcomplement.storage.steel.name=Block of Steel
 
+# High Oven Blocks
 tile.tcomplement.high_oven_controller.name=High Oven Controller
+tile.tcomplement.high_oven_io.drain.name=Scorched Drain
+tile.tcomplement.high_oven_io.drain.tooltip=Fluid input and output for the high oven
+tile.tcomplement.scorched_casting.table.name=Scorched Casting Table
+tile.tcomplement.scorched_casting.basin.name=Scorched Casting Basin
+tile.tcomplement.scorched_casting.tooltip=Cast items using molten metals from a high oven
+tile.tcomplement.scorched_faucet.name=Scorched Faucet
+tile.tcomplement.scorched_faucet.tooltip=Drains liquids from high ovens and other things
+tile.tcomplement.scorched_channel.name=Scorched Channel
+tile.tcomplement.scorched_channel.tooltip=Filled with faucets to move liquids for casting
 
+# Scorched
+item.tcomplement.materials.scorched_brick.name=Scorched Brick
+tile.tcomplement.scorched_block.stone.name=Scorched Stone
+tile.tcomplement.scorched_block.cobble.name=Scorched Cobblestone
+tile.tcomplement.scorched_block.paver.name=Scorched Paver
+tile.tcomplement.scorched_block.brick.name=Scorched Bricks
+tile.tcomplement.scorched_block.brick_cracked.name=Cracked Scorched Bricks
+tile.tcomplement.scorched_block.brick_fancy.name=Fancy Scorched Bricks
+tile.tcomplement.scorched_block.brick_square.name=Square Scorched Bricks
+tile.tcomplement.scorched_block.brick_triangle.name=Triangle Scorched Bricks
+tile.tcomplement.scorched_block.brick_small.name=Small Scorched Bricks
+tile.tcomplement.scorched_block.road.name=Scorched Road
+tile.tcomplement.scorched_block.tile.name=Scorched Tiles
+tile.tcomplement.scorched_block.creeper.name=Scorched Creeperface
+tile.tcomplement.scorched_block.tooltip=Part of the high oven, safe for decoration
+
+# Scorched Slabs
+tile.tcomplement.scorched_slab.stone.name=Scorched Stone Slab
+tile.tcomplement.scorched_slab.cobble.name=Scorched Cobblestone Slab
+tile.tcomplement.scorched_slab.paver.name=Scorched Paver Slab
+tile.tcomplement.scorched_slab.brick.name=Scorched Bricks Slab
+tile.tcomplement.scorched_slab.brick_cracked.name=Cracked Scorched Bricks Slab
+tile.tcomplement.scorched_slab.brick_fancy.name=Fancy Scorched Bricks Slab
+tile.tcomplement.scorched_slab.brick_square.name=Square Scorched Bricks Slab
+tile.tcomplement.scorched_slab.road.name=Scorched Road Slab
+tile.tcomplement.scorched_slab2.creeper.name=Scorched Creeperface Slab
+tile.tcomplement.scorched_slab2.brick_triangle.name=Triangle Scorched Bricks Slab
+tile.tcomplement.scorched_slab2.brick_small.name=Small Scorched Bricks Slab
+tile.tcomplement.scorched_slab2.tile.name=Scorched Tile Slab
+
+# Scorched Stairs
+tile.tcomplement.scorched_stairs_stone.name=Scorched Stone Stairs
+tile.tcomplement.scorched_stairs_cobble.name=Scorched Cobblestone Stairs
+tile.tcomplement.scorched_stairs_paver.name=Scorched Paver Stairs
+tile.tcomplement.scorched_stairs_brick.name=Scorched Bricks Stairs
+tile.tcomplement.scorched_stairs_brick_cracked.name=Cracked Scorched Bricks Stairs
+tile.tcomplement.scorched_stairs_brick_fancy.name=Fancy Scorched Bricks Stairs
+tile.tcomplement.scorched_stairs_brick_square.name=Square Scorched Bricks Stairs
+tile.tcomplement.scorched_stairs_brick_triangle.name=Triangle Scorched Bricks Stairs
+tile.tcomplement.scorched_stairs_brick_small.name=Small Scorched Bricks Stairs
+tile.tcomplement.scorched_stairs_road.name=Scorched Road Stairs
+tile.tcomplement.scorched_stairs_tile.name=Scorched Tile Stairs
+tile.tcomplement.scorched_stairs_creeper.name=Scorched Creeperface Stairs
+
+# GUI
 gui.tcomplement.high_oven.name=High Oven
 gui.tcomplement.high_oven.progress.no_space=Not enough free space in the high oven
 gui.tcomplement.high_oven.progress.wrong_fluid=Resulting fluid is different than fluid in high oven

@@ -1,0 +1,6 @@
+{
+  "parent": "tcomplement:block/scorched_channel/side_in",
+  "textures": {
+    "top": "tcomplement:blocks/high_oven/channel_out"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "conditions": [{
+    "type": "pulse_loaded",
+    "pulse": "ModuleSteelworks"
+  }],
+  "type": "minecraft:crafting_shaped",
+  "group": "tcomplement:scorched_slab",
+  "pattern": [
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "item": "tcomplement:scorched_block",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "tcomplement:scorched_slab",
+    "count": 6,
+    "data": 0
+  }
+}

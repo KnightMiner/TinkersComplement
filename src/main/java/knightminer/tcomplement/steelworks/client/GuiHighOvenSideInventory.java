@@ -66,7 +66,6 @@ public class GuiHighOvenSideInventory extends GuiSideInventory {
 		String tooltipText = null;
 
 		// draw the "heat" bars for each slot
-		// TODO: need any updating?
 		for(Slot slot : inventorySlots.inventorySlots) {
 			if(slot.getHasStack() && shouldDrawSlot(slot)) {
 				float progress = highOven.getHeatingProgress(slot.getSlotIndex());

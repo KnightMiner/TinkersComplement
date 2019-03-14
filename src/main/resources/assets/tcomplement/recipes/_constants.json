@@ -52,6 +52,14 @@
     }
   },
   {
+    "conditions": [{"type": "pulse_loaded", "pulse": "ModuleSteelworks"}],
+    "name": "SCORCHED_BRICK",
+    "ingredient": {
+      "item": "tcomplement:materials",
+      "data": 1
+    }
+  },
+  {
     "name": "MANYULLYN_INGOT",
     "ingredient": {
       "item": "tconstruct:ingots",

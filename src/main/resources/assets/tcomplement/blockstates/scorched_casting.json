@@ -1,0 +1,32 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block"
+  },
+  "variants": {
+    "type": {
+      "table": {
+        "model": "tconstruct:casting_table",
+        "textures": {
+          "top":       "tcomplement:blocks/high_oven/casting_table_top",
+          "side":      "tcomplement:blocks/high_oven/casting_table_side",
+          "leg":       "tcomplement:blocks/high_oven/casting_table_side",
+          "legBottom": "tcomplement:blocks/high_oven/casting_table_bottom",
+          "bottom":    "tcomplement:blocks/high_oven/casting_table_bottom",
+          "particle":  "tcomplement:blocks/high_oven/casting_table_top"
+        }
+      },
+      "basin": {
+        "model": "tconstruct:casting_basin",
+        "textures": {
+          "top":       "tcomplement:blocks/high_oven/casting_basin_top",
+          "side":      "tcomplement:blocks/high_oven/casting_basin_side",
+          "leg":       "tcomplement:blocks/high_oven/casting_basin_side",
+          "bottom":    "tcomplement:blocks/high_oven/casting_basin_bottom",
+          "legBottom": "tcomplement:blocks/high_oven/casting_basin_bottom",
+          "particle":  "tcomplement:blocks/high_oven/casting_basin_top"
+        }
+      }
+    }
+  }
+}

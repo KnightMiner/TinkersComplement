@@ -1,0 +1,7 @@
+{
+  "parent": "tconstruct:block/channel/center_out",
+  "textures": {
+    "particle": "tcomplement:blocks/high_oven/scorched_stone",
+    "texture":  "tcomplement:blocks/high_oven/scorched_stone"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "conditions": [{ "type": "pulse_loaded", "pulse": "ModuleSteelworks" }],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "key": {
+    "B": {"item": "#SCORCHED_BRICK"}
+  },
+  "result": {"item": "tcomplement:scorched_block", "data": 3}
+}

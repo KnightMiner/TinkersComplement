@@ -1,0 +1,8 @@
+{
+  "parent": "tconstruct:block/channel/side_in",
+  "textures": {
+    "particle": "tcomplement:blocks/high_oven/scorched_stone",
+    "texture":  "tcomplement:blocks/high_oven/scorched_stone",
+    "top":      "tcomplement:blocks/high_oven/channel_in"
+  }
+}

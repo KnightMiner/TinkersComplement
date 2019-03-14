@@ -1,0 +1,6 @@
+{
+  "parent": "tconstruct:item/channel",
+  "textures": {
+    "texture":  "tcomplement:blocks/high_oven/scorched_stone"
+  }
+}

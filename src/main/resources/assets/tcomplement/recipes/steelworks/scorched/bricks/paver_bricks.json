@@ -1,0 +1,27 @@
+{
+  "conditions": [
+    {
+      "type": "pulse_loaded",
+      "pulse": "ModuleSteelworks"
+    },
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "pulse_loaded",
+        "pulse": "ChiselPlugin"
+      }
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "group": "tcomplement:scorched_brick",
+  "ingredients": [
+    {
+      "item": "tcomplement:scorched_block",
+      "data": 7
+    }
+  ],
+  "result": {
+    "item": "tcomplement:scorched_block",
+    "data": 2
+  }
+}

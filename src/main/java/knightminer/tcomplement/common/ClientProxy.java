@@ -6,17 +6,21 @@ import knightminer.tcomplement.library.Util;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
+import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
+import slimeknights.tconstruct.shared.client.BakedTableModel;
 
 public class ClientProxy extends CommonProxy {
 	@Override
@@ -68,14 +72,16 @@ public class ClientProxy extends CommonProxy {
 		}
 	}
 
+	protected static void wrapTableModel(ModelBakeEvent event, ModelResourceLocation loc) {
+		IBakedModel model = event.getModelRegistry().getObject(loc);
+		if(model != null) {
+			event.getModelRegistry().putObject(loc, new BakedTableModel(model, null, DefaultVertexFormats.BLOCK));
+		}
+	}
+
 	private static class FluidStateMapper extends StateMapperBase implements ItemMeshDefinition {
-
-		public final Fluid fluid;
 		public final ModelResourceLocation location;
-
 		public FluidStateMapper(Fluid fluid) {
-			this.fluid = fluid;
-
 			// have each block hold its fluid per nbt? hm
 			this.location = new ModelResourceLocation(Util.getResource("fluid_block"), fluid.getName());
 		}

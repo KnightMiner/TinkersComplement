@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": { "model": "cube_all" },
+  "variants": {
+    "type": {
+      "stone":          { "textures": { "all": "tcomplement:blocks/high_oven/scorched_stone"          }},
+      "cobble":         { "textures": { "all": "tcomplement:blocks/high_oven/scorched_cobble"         }},
+      "paver":          { "textures": { "all": "tcomplement:blocks/high_oven/scorched_paver"          }},
+      "brick":          { "textures": { "all": "tcomplement:blocks/high_oven/scorched_brick"          }},
+      "brick_cracked":  { "textures": { "all": "tcomplement:blocks/high_oven/scorched_brick_cracked"  }},
+      "brick_fancy":    { "textures": { "all": "tcomplement:blocks/high_oven/scorched_brick_fancy"    }},
+      "brick_square":   { "textures": { "all": "tcomplement:blocks/high_oven/scorched_brick_square"   }},
+      "brick_triangle": { "textures": { "all": "tcomplement:blocks/high_oven/scorched_brick_triangle" }},
+      "brick_small":    { "textures": { "all": "tcomplement:blocks/high_oven/scorched_brick_small"    }},
+      "road":           { "textures": { "all": "tcomplement:blocks/high_oven/scorched_road"           }},
+      "tile":           { "textures": { "all": "tcomplement:blocks/high_oven/scorched_tile"           }},
+      "creeper": {
+        "model": "cube_bottom_top",
+        "textures": {
+          "side": "tcomplement:blocks/high_oven/scorched_creeper",
+          "top":  "tcomplement:blocks/high_oven/scorched_paver",
+          "particle": "#side",
+          "bottom": "#top"
+        }
+      }
+    }
+  }
+}

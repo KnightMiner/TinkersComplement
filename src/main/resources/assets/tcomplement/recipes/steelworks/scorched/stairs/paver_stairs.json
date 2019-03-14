@@ -1,0 +1,21 @@
+{
+  "conditions": [{
+    "type": "pulse_loaded",
+    "pulse": "ModuleSteelworks"
+  }],
+  "type": "minecraft:crafting_shaped",
+  "group": "tcomplement:scorched_stairs",
+  "pattern": [
+    "B  ",
+    "BB ",
+    "BBB"
+  ],
+  "key": {
+    "B": {"item": "tcomplement:scorched_block", "data": 2}
+  },
+  "result": {
+    "item": "tcomplement:scorched_stairs_paver",
+    "count": 4,
+    "data": 0
+  }
+}

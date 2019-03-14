@@ -1,10 +1,10 @@
 package knightminer.tcomplement.steelworks.multiblock;
 
+import knightminer.tcomplement.steelworks.SteelworksModule;
 import knightminer.tcomplement.steelworks.tileentity.TileHighOven;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import slimeknights.tconstruct.smeltery.TinkerSmeltery;
 import slimeknights.tconstruct.smeltery.multiblock.MultiblockTinker;
 
 public class MultiblockHighOven extends MultiblockTinker {
@@ -28,6 +28,7 @@ public class MultiblockHighOven extends MultiblockTinker {
 
 		// seared blocks or drains
 		Block block = world.getBlockState(pos).getBlock();
-		return (block == TinkerSmeltery.searedBlock || block == TinkerSmeltery.smelteryIO) && isValidSlave(world, pos);
+		boolean result = (block == SteelworksModule.scorchedBlock || block == SteelworksModule.highOvenIO) && isValidSlave(world, pos);
+		return result;
 	}
 }
