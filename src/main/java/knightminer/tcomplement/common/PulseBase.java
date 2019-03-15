@@ -163,7 +163,7 @@ public class PulseBase {
 					String.format("Unlocalized names need to be all lowercase! TE: %s", name));
 		}
 
-		GameRegistry.registerTileEntity(teClazz, Util.resource(name));
+		GameRegistry.registerTileEntity(teClazz, Util.getResource(name));
 	}
 
 	/* Tinkers Registration */
