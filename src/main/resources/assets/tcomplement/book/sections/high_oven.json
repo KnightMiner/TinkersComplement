@@ -1,0 +1,20 @@
+[
+  {
+    "name": "intro",
+    "type": "image with text below",
+    "data": "high_oven/intro.json"
+  },
+  {
+    "name": "info",
+    "type": "text",
+    "data": "high_oven/structure.json"
+  },
+  {
+    "name": "structure",
+    "type": "structure",
+    "data": "high_oven/multiblock.json"
+  },
+  {
+    "type": "blank"
+  }
+]

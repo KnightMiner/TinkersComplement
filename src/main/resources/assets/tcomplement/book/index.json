@@ -1,0 +1,32 @@
+[
+  {
+    "name": "melter",
+    "data": "sections/melter.json",
+    "module": "ModuleMelter",
+    "icon": {
+      "item": {
+        "id": "tcomplement:melter"
+      }
+    }
+  },
+  {
+    "name": "alloy_tank",
+    "data": "sections/alloy_tank.json",
+    "module": "ModuleMelter",
+    "icon": {
+      "item": {
+        "id": "tcomplement:alloy_tank"
+      }
+    }
+  },
+  {
+    "name": "high_oven",
+    "data": "sections/high_oven.json",
+    "module": "ModuleSteelworks",
+    "icon": {
+      "item": {
+        "id": "tcomplement:high_oven_controller"
+      }
+    }
+  }
+]

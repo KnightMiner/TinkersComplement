@@ -1,0 +1,17 @@
+[
+  {
+    "name": "intro",
+    "type": "image with text below",
+    "data": "melter/intro.json"
+  },
+  {
+    "name": "info",
+    "type": "text",
+    "data": "melter/structure.json"
+  },
+  {
+    "name": "structure",
+    "type": "structure",
+    "data": "melter/multiblock.json"
+  }
+]

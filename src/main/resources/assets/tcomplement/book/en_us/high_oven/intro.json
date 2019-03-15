@@ -1,0 +1,11 @@
+{
+  "title": "The High Oven",
+  "image": {
+    "file": "tcomplement:textures/gui/book/high_oven.png"
+  },
+  "text": [
+    {
+      "text": "The High Oven smeltes raw materials into liquids and supports doing black magic science to make steel."
+    }
+  ]
+}

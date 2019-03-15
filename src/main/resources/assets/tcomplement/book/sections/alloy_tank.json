@@ -1,0 +1,17 @@
+[
+  {
+    "name": "intro",
+    "type": "image with text below",
+    "data": "alloy_tank/intro.json"
+  },
+  {
+    "name": "info",
+    "type": "text",
+    "data": "alloy_tank/structure.json"
+  },
+  {
+    "name": "structure",
+    "type": "structure",
+    "data": "alloy_tank/multiblock.json"
+  }
+]
