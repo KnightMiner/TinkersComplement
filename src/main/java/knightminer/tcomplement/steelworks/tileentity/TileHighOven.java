@@ -295,15 +295,15 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 
 	@Override
 	public boolean hasCapability(@Nonnull Capability<?> capability, EnumFacing facing) {
-		// return false for sides so hoppers cannot interact
-		// null (internal) is returned for the sake of the contailer
-		return (facing == null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) || super.hasCapability(capability, facing);
+		// return false for sides so hoppers cannot interact, need to block previous hasCapability calls hence the tertiary
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? facing == null : super.hasCapability(capability, facing);
 	}
 
 	@Override
 	public <T> T getCapability(@Nonnull Capability<T> capability, EnumFacing facing) {
-		if(facing == null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(combinedItemHandler);
+		// if item handler, we say no to non-null sides
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			return facing == null ? CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(combinedItemHandler) : null;
 		}
 		return super.getCapability(capability, facing);
 	}
