@@ -1,0 +1,87 @@
+//Translated by Yaroslavik
+itemGroup.TCompGeneral=Tinkers' Complement Основное
+itemGroup.TCompTools=Tinkers' Complement Инструменты
+
+################
+#    Blocks    #
+################
+
+tile.tcomplement.porcelain_casting.basin.name=Фарфоровый литейный резервуар
+tile.tcomplement.porcelain_casting.table.name=Фарфоровый литейный стол
+tile.tcomplement.porcelain_casting.tooltip=Для отлива изделий из расплавленных металлов из плавильни
+
+tile.tcomplement.melter.melter.name=Плавильня
+tile.tcomplement.melter.melter.tooltip=Уменьшенная версия плавильни.\nМожет плавить металлы,\nно не может создавать сплавы.
+tile.tcomplement.melter.heater.name=Ослабленный нагреватель
+tile.tcomplement.melter.heater.tooltip=Может нагревать плавильню с \nиспользованием твердого топлива,\nно имеет более ограниченную температуру.
+tile.tcomplement.alloy_tank.name=Резервуар для расплава
+tile.tcomplement.alloy_tank.tooltip=Жидкий расплав из соседних резервуаров и расплавителей.\nРазместите над нагревателем для снабжения горючим.
+
+tile.tcomplement.porcelain_melter.melter.name=Фарфоровая плавильня
+tile.tcomplement.porcelain_melter.melter.tooltip=tile.tcomplement.melter.melter.tooltip
+tile.tcomplement.porcelain_melter.heater.name=Фарфоровый нагреватель
+tile.tcomplement.porcelain_melter.heater.tooltip=tile.tcomplement.melter.heater.tooltip
+tile.tcomplement.porcelain_alloy_tank.name=Фарфоровый резервуар для сплава
+tile.tcomplement.porcelain_alloy_tank.tooltip=Жидкий расплав из соседних резервуаров и расплавителей.\nРазместите над нагревателем для снабжения горючим.
+
+tile.tcomplement.porcelain_tank.tank.name=Фарфоровый бак
+tile.tcomplement.porcelain_tank.gauge.name=Фарфоровый шаблон
+tile.tcomplement.porcelain_tank.window.name=Фарфоровое окно
+tile.tcomplement.porcelain_tank.tooltip=Центр плавильни\nСохраняет жидкость при разрушении.
+
+
+################
+#    Items     #
+################
+
+item.tcomplement.materials.stone_bucket.name=Каменное ведро
+item.tcomplement.materials.stone_bucket.tooltip=Не будет работать как ведро, но подойдёт для отливки формы
+
+item.tcomplement.cast.bucket.name=Отливка - ведро
+item.tcomplement.cast_clay.bucket.name=Отливка - глиняное ведро
+
+item.tcomplement.sledge_head.name=Наконечник кувалды
+item.tcomplement.sledge_hammer.name=Кувалда
+item.tcomplement.sledge_hammer.desc=Разбивайте блоки на более мелкие кусочки, а затем разбивайте их снова.
+
+item.tcomplement.chisel.name=Стамеска
+item.tcomplement.chisel.desc=Обрабатывает блоки в мире и в руке.\nПримените расширители, чтобы обработать большие области.
+item.tcomplement.chisel_head.name=Наконечник стамески
+
+item.tcomplement.manyullyn_helmet.name=Манулиновый шлем
+item.tcomplement.manyullyn_chestplate.name=Манулиновая криса
+item.tcomplement.manyullyn_leggings.name=Манулиновые поножи
+item.tcomplement.manyullyn_boots.name=Манулиновые ботинки
+
+item.tcomplement.knightslime_helmet.name=Рыцарьский слизневый шлем
+item.tcomplement.knightslime_chestplate.name=Рыцарьская слизневая криса
+item.tcomplement.knightslime_leggings.name=Рыцарьские слизневые поножи
+item.tcomplement.knightslime_boots.name=Рыцарьские слизневые ботинки
+
+
+################
+#     GUI      #
+################
+
+gui.tcomplement.melter.name=Плавильня
+gui.tcomplement.melter.progress.no_space=Недостаточно свободного места в плавильне
+gui.tcomplement.melter.progress.wrong_fluid=Результирующая жидкость отличается от жидкости в плавильне
+gui.tcomplement.melter.solid_fuel=Нагреватель
+gui.tcomplement.melter.solid_fuel.amount=%s едениц
+
+gui.tcomplement.heater.name=Нагреватель
+
+gui.jei.melter.title=Плавильня
+
+
+################
+#    Config    #
+################
+
+tcomplement.config.general=Основное
+tcomplement.config.general.bucketCast=Форма для отливки - ведро
+tcomplement.config.melter=Плавильня
+tcomplement.config.melter.oreToIngotRatio=Соотношение руды к слитку
+tcomplement.config.melter.blacklistStone=Черный список камня
+tcomplement.config.jei=Интеграция с JEI
+tcomplement.config.jei.separateMelterTab=Отдельная вкладка плавильни
