@@ -1,5 +1,7 @@
 package knightminer.tcomplement.library;
 
+import static slimeknights.tconstruct.library.Util.temperatureString;
+
 import java.util.Locale;
 
 import org.apache.logging.log4j.LogManager;
@@ -48,5 +50,14 @@ public class Util {
 		String log = TinkersComplement.modID;
 
 		return LogManager.getLogger(log + "-" + type);
+	}
+
+	/**
+	 * Alias for the TConstruct util method, switching units to celsius
+	 * @param temperature  Temperature in Celsius
+	 * @return  Formatted string
+	 */
+	public static String celsiusString(int temperature) {
+		return temperatureString(temperature+300);
 	}
 }
