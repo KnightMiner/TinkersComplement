@@ -88,8 +88,8 @@ public class GuiHighOven extends GuiMultiModule implements IGuiLiquidTank {
 		}
 
 		// temperature
-		int temp = highOven.getTemperature() - 300;
-		String tempStr = temp + "\u00B0c";
+		int temp = highOven.getTemperature();
+		String tempStr = Util.celsiusString(temp);
 		fontRenderer.drawString(tempStr, guiLeft + 88 - (fontRenderer.getStringWidth(tempStr) / 2), guiTop + 20, Util.getHighOvenTempColor(temp));
 	}
 

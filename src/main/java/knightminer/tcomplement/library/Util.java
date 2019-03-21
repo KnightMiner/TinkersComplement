@@ -1,5 +1,7 @@
 package knightminer.tcomplement.library;
 
+import static slimeknights.tconstruct.library.Util.temperatureString;
+
 import java.util.Locale;
 
 import org.apache.logging.log4j.LogManager;
@@ -50,7 +52,11 @@ public class Util {
 		return LogManager.getLogger(log + "-" + type);
 	}
 
-	/** Calculates the temperature text color based on temperature, based on code from Tinkers' Steelworks */
+	/**
+	 * Calculates the temperature text color based on temperature, based on code from Tinkers' Steelworks
+	 * @param temp Temperature in Celsius
+	 * @return Color integer for temperature
+	 */
 	public static int getHighOvenTempColor(int temp) {
 		if (temp > 2000) return 0xFF0000;
 
@@ -62,5 +68,14 @@ public class Util {
 		int gb = (int) ((0x00 - 0x40) * percent) + 0x40;
 
 		return r << 16 | gb << 8 | gb;
+	}
+
+	/**
+	 * Alias for the TConstruct util method, switching units to celsius
+	 * @param temperature  Temperature in Celsius
+	 * @return  Formatted string
+	 */
+	public static String celsiusString(int temperature) {
+		return temperatureString(temperature+300);
 	}
 }

@@ -287,8 +287,8 @@ public class GuiMelter extends GuiHeatingStructureFuelTank implements IGuiLiquid
 		if(melter.hasFuel()) {
 			text.add(Util.translate("gui.tcomplement.melter.solid_fuel"));
 			text.add(TextFormatting.GRAY + Util.translateFormatted("gui.tcomplement.melter.solid_fuel.amount", melter.getFuel() / 5));
-			// melter stores temperature in Kelvin, but we display in Celsius
-			text.add(Util.translateFormatted("gui.smeltery.fuel.heat", melter.getTemperature() + 300));
+			// melter stores temperature in Celsius, but utils use Kelvin
+			text.add(Util.translateFormatted("gui.smeltery.fuel.heat", Util.celsiusString(melter.getTemperature())));
 		}
 		else {
 			text.add(Util.translate("gui.smeltery.fuel.empty"));

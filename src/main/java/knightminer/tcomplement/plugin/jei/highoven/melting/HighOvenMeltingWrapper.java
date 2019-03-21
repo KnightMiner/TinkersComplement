@@ -1,5 +1,7 @@
 package knightminer.tcomplement.plugin.jei.highoven.melting;
 
+import static slimeknights.tconstruct.library.Util.temperatureString;
+
 import javax.annotation.Nonnull;
 
 import knightminer.tcomplement.library.Util;
@@ -15,9 +17,8 @@ public class HighOvenMeltingWrapper extends SmeltingRecipeWrapper {
 
 	@Override
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		int temp = temperature-300;
-		String tmpStr = String.valueOf(temp) + "\u00B0c";
+		String tmpStr = temperatureString(temperature);
 		int x = 86 - minecraft.fontRenderer.getStringWidth(tmpStr) / 2;
-		minecraft.fontRenderer.drawString(tmpStr, x, 10, Util.getHighOvenTempColor(temp));
+		minecraft.fontRenderer.drawString(tmpStr, x, 10, Util.getHighOvenTempColor(temperature-300));
 	}
 }

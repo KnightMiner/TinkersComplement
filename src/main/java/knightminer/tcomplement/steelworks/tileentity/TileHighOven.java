@@ -48,16 +48,16 @@ import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructure;
 
 public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> implements ITickable, IInventoryGui, ISmelteryTankHandler {
 
-	/** Temperature of the high oven when not heated */
-	private static final int ROOM_TEMPERATURE = 320; // 20 degrees C
+	/** Temperature of the high oven when not heated in celsius */
+	private static final int ROOM_TEMPERATURE = 20;
 	/** Degrees lost per second without fuel */
 	private static final int COOLDOWN_RATE = 10;
 	/** Degrees added to the max temperature per layer */
 	private static final int DEGREES_PER_LAYER = 500;
 	/** Base temperature cap at 0 layers */
-	private static final int BASE_TEMPERATURE_CAP = 1800;
+	private static final int BASE_TEMPERATURE_CAP = 1500;
 	/** Maximum temperature cap for the melter, corresponds to 16 layers */
-	private static final int MAX_TEMPERATURE_CAP = 9800;
+	private static final int MAX_TEMPERATURE_CAP = 9500;
 	/** Maximum number of item slots in the melter */
 	private static final int MAX_SLOTS = 7;
 
@@ -96,8 +96,7 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 			if(tick == 0) {
 				checkMultiblockStructure();
 				// rapidly cool down the structure
-				// adds 150 to account for the base 300 kelvin temperature
-				this.temperature = Math.max((this.temperature / 2) + 150 - COOLDOWN_RATE, ROOM_TEMPERATURE);
+				this.temperature = Math.max((this.temperature / 2) - COOLDOWN_RATE, ROOM_TEMPERATURE);
 			}
 		}
 		else {
@@ -350,6 +349,7 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 
 	/* Networking and NBT */
 
+	@Override
 	public void markDirtyFast() {
 		if (this.world != null) {
 			this.world.markChunkDirty(this.pos, this);
@@ -362,6 +362,7 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 		if(isServerWorld()) {
 			TinkerNetwork.sendToAll(new SmelteryFluidUpdatePacket(pos, fluids));
 		}
+		this.markDirtyFast();
 	}
 
 	/**
