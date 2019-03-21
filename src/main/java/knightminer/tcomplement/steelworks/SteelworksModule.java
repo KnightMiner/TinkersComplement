@@ -57,6 +57,7 @@ import slimeknights.tconstruct.smeltery.block.BlockChannel;
 import slimeknights.tconstruct.smeltery.block.BlockFaucet;
 import slimeknights.tconstruct.smeltery.block.BlockSeared;
 import slimeknights.tconstruct.smeltery.block.BlockSeared.SearedType;
+import slimeknights.tconstruct.smeltery.block.BlockSearedSlab;
 import slimeknights.tconstruct.smeltery.block.BlockSearedSlab2;
 import slimeknights.tconstruct.smeltery.item.ItemChannel;
 
@@ -182,6 +183,7 @@ public class SteelworksModule extends PulseBase {
 
 	@Subscribe
 	public void init(FMLInitializationEvent event) {
+		registerFurnaceRecipes();
 		proxy.init();
 	}
 
@@ -194,8 +196,13 @@ public class SteelworksModule extends PulseBase {
 		proxy.postInit();
 	}
 
+	private void registerFurnaceRecipes() {
+		GameRegistry.addSmelting(new ItemStack(scorchedBlock, 1, SearedType.BRICK.getMeta()), new ItemStack(scorchedBlock, 1, SearedType.BRICK_CRACKED.getMeta()), 0.1f);
+		GameRegistry.addSmelting(new ItemStack(scorchedSlab, 1, BlockSearedSlab.SearedType.BRICK.getMeta()), new ItemStack(scorchedSlab, 1, BlockSearedSlab.SearedType.BRICK_CRACKED.getMeta()), 0.1f);
+		GameRegistry.addSmelting(scorchedStairsBrick, new ItemStack(scorchedStairsBrickCracked), 0.1f);
+	}
+
 	private void registerMixes() {
-		@SuppressWarnings("unused")
 		IMixRecipe mix; // because Eclipse formatter is dumb
 
 		// steel
