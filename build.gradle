@@ -1,7 +1,7 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        maven { url = "https://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
@@ -46,15 +46,15 @@ compileJava {
 repositories {
     maven {
         name 'DVS1 Maven FS'
-        url 'http://dvs1.progwml6.com/files/maven'
+        url 'https://dvs1.progwml6.com/files/maven'
     }
 	maven {
 		name 'tterrag'
-		url 'http://maven.tterrag.com/'
+		url 'https://maven.tterrag.com/'
 	}
 	maven {
 		name 'Jared'
-		url 'http://maven.blamejared.com/'
+		url 'https://maven.blamejared.com/'
 	}
 }
 
