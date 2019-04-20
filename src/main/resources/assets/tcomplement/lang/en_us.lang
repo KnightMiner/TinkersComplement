@@ -182,6 +182,7 @@ tcomplement.config.oreToIngotRatio=Ore to Ingot Ratio
 
 tcomplement.config.melter=Melter
 tcomplement.config.melter.blacklistStone=Blacklist Stone
+tcomplement.config.melter.heaterTemp=Heater Temperature
 
 tcomplement.config.highOven=High Oven
 

@@ -11,6 +11,7 @@ import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Ignore;
 import net.minecraftforge.common.config.Config.LangKey;
 import net.minecraftforge.common.config.Config.RangeDouble;
+import net.minecraftforge.common.config.Config.RangeInt;
 import net.minecraftforge.common.config.Config.RequiresMcRestart;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;
@@ -55,6 +56,15 @@ public class Config {
 		@Comment("Disallows creating seared stone in the melter using cobblestone or tool parts.")
 		@LangKey("tcomplement.config.melter.blacklistStone")
 		public boolean blacklistStone = true;
+
+		@RequiresMcRestart
+		@RangeInt(min = 400, max = 3300)
+		@Comment({
+			"Temperature of the heater in kelvin.",
+			"For reference, iron ore takes 534K to melt and lava has a temperature of 1300K."
+		})
+		@LangKey("tcomplement.config.melter.heaterTemp")
+		public int heaterTemp = 500;
 	}
 
 	public static class HighOven {

@@ -3,6 +3,7 @@ package knightminer.tcomplement.melter.tileentity;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.TCompNetwork;
 import knightminer.tcomplement.library.IHeaterConsumer;
 import knightminer.tcomplement.library.TCompRegistry;
@@ -144,13 +145,13 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 		} else if (te instanceof TileHeater) {
 			int time = ((TileHeater)te).consumeFuel();
 			if (time > 0) {
-				time /= 2;
+				// lava in a tank has a burn time of 100 ticks per 50mb, making 1 bucket of lava give 2000 fuel units in a tank
+				// to make this even, lava buckets with a burn time of 20000 ticks need to give 2000 fuel units as well, hence dividing by 10
+				time /= 10;
 				currentFuel = null;
 				fuelQuality = time;
 
-				// just about enough to melt clay or most metals, but not iron
-				// also, about the temperature of a conventional oven I guess
-				addFuel(time, 200);
+				addFuel(time, Config.melter.heaterTemp - 300);
 
 				// notify client of fuel/temperature changes
 				if(isServerWorld()) {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.plugin.jei.JEIPlugin;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fluids.FluidStack;
@@ -16,7 +17,7 @@ public class MeltingRecipeWrapper extends SmeltingRecipeWrapper {
 	public MeltingRecipeWrapper(MeltingRecipe recipe) {
 		super(recipe);
 		// if true, we can use solid fuels
-		isSolid = recipe.getTemperature() <= 500;
+		isSolid = recipe.getTemperature() <= Config.melter.heaterTemp;
 	}
 
 	public List<FluidStack> getLiquidFuels() {
