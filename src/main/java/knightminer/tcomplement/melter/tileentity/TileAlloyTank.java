@@ -22,6 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
@@ -190,16 +191,43 @@ public class TileAlloyTank extends TileTank implements ITickable, IHeaterConsume
 
 		// find our heater and extract fuel
 		TileEntity te = world.getTileEntity(this.pos.down());
-		if(te instanceof TileHeater) {
+		if (te instanceof TileTank) {
+			IFluidTank tank = ((TileTank) te).getInternalTank();
+			FluidStack liquid = tank.getFluid();
+			if(liquid != null) {
+				// first, attempt to consume some fuel
+				FluidStack in = liquid.copy();
+				int fuel = TinkerRegistry.consumeSmelteryFuel(in);
+				if(fuel > 0) {
+					// if successful, try draining that from the tank
+					int amount = liquid.amount - in.amount;
+					FluidStack drained = tank.drain(amount, false);
+					if(drained != null && drained.amount == amount) {
+						// boost fuel to match the amount we consume by below
+						// see the comment in TileMelter for more information
+						fuel *= 2.5;
+						this.fuel += fuel;
+						this.fuelQuality = fuel;
+
+						// actually remove the fuel
+						tank.drain(amount, true);
+
+						return;
+					}
+				}
+			}
+		} else if(te instanceof TileHeater) {
 			int time = ((TileHeater)te).consumeFuel();
 			if (time > 0) {
+				// the furnace consumes fuel every tick,  we consume fuel every 4 ticks
+				time /= 4;
 				this.fuel += time;
 				this.fuelQuality = time;
 				this.needsFuel = false;
-			} else {
-				this.fuelQuality = 0;
+				return;
 			}
 		}
+		this.fuelQuality = 0;
 	}
 
 	private AlloyTank getAlloyTank() {

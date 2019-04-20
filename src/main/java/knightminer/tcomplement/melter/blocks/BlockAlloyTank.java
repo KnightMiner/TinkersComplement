@@ -65,7 +65,8 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 	 * @return  True if the block state is a valid heater
 	 */
 	public boolean isHeater(IBlockState state) {
-		return state.getBlock() == melter && state.getValue(BlockMelter.TYPE) == MelterType.HEATER;
+		Block block = state.getBlock();
+		return block == tank || (block == melter && state.getValue(BlockMelter.TYPE) == MelterType.HEATER);
 	}
 
 	/**

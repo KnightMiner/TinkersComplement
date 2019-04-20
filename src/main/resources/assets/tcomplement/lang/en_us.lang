@@ -20,7 +20,7 @@ tile.tcomplement.melter.melter.tooltip=Smaller version of the smeltery.\nPlace a
 tile.tcomplement.melter.heater.name=Seared Heater
 tile.tcomplement.melter.heater.tooltip=Fuels the melter and alloy tank using solid fuels.
 tile.tcomplement.alloy_tank.name=Alloy Tank
-tile.tcomplement.alloy_tank.tooltip=Alloys liquids from adjecent seared tanks and melters.\nPlace above a heater to fuel.
+tile.tcomplement.alloy_tank.tooltip=Alloys liquids from adjecent seared tanks and melters.\nPlace above a seared heater or tank to fuel.
 
 gui.tcomplement.melter.name=Melter
 gui.tcomplement.melter.progress.no_space=Not enough free space in the melter
@@ -164,7 +164,7 @@ tile.tcomplement.porcelain_melter.melter.tooltip=Smaller version of a smeltery.\
 tile.tcomplement.porcelain_melter.heater.name=Porcelain Heater
 tile.tcomplement.porcelain_melter.heater.tooltip=tile.tcomplement.melter.heater.tooltip
 tile.tcomplement.porcelain_alloy_tank.name=Porcelain Alloy Tank
-tile.tcomplement.porcelain_alloy_tank.tooltip=Alloys liquids from adjecent porcelain tanks and melters.\nPlace above a porcelain heater to fuel.
+tile.tcomplement.porcelain_alloy_tank.tooltip=Alloys liquids from adjecent porcelain tanks and melters.\nPlace above a porcelain heater or tank to fuel.
 
 tile.tcomplement.porcelain_tank.tank.name=Porcelain Tank
 tile.tcomplement.porcelain_tank.gauge.name=Porcelain Gauge
