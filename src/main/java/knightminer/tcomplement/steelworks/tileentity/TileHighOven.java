@@ -96,7 +96,9 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 			if(tick == 0) {
 				checkMultiblockStructure();
 				// rapidly cool down the structure
-				this.temperature = Math.max((this.temperature / 2) - COOLDOWN_RATE, ROOM_TEMPERATURE);
+				if(!active) {
+					this.temperature = Math.max((this.temperature / 2) - COOLDOWN_RATE, ROOM_TEMPERATURE);
+				}
 			}
 		}
 		else {
