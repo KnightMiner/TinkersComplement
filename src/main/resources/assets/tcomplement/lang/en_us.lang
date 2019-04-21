@@ -131,6 +131,7 @@ gui.tcomplement.high_oven.progress.wrong_fluid=Resulting fluid is different than
 gui.jei.high_oven.melting.title=High Oven Melting
 gui.jei.high_oven.mix.title=High Oven Mixing
 gui.jei.high_oven.mix.consume=%s%% chance to consume
+gui.jei.high_oven.mix.represenative=Accepts: melts into %s
 gui.jei.high_oven.fuel.title=High Oven Fuel
 gui.jei.high_oven.fuel.rate=+%s°c/s
 gui.jei.high_oven.fuel.time=Burn time: %ss

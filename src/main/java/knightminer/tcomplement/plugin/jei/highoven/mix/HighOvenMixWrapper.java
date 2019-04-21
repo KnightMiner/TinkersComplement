@@ -44,12 +44,15 @@ public class HighOvenMixWrapper implements IRecipeWrapper, ITooltipCallback<Item
 
 	@Override
 	public void onTooltip(int slotIndex, boolean input, ItemStack ingredient, List<String> tooltip) {
-		if(slotIndex > 2) {
+		// representative item slot
+		if(slotIndex == 3) {
+			tooltip.add(Util.translateFormatted("gui.jei.high_oven.mix.represenative", inputFluid.getLocalizedName()));
 			return;
-		}
-		Integer chance = recipe.getAdditiveConsumeChance(MixAdditive.fromIndex(slotIndex), ingredient);
-		if(chance != null) {
-			tooltip.add(String.format("%s%s%s", TextFormatting.GRAY, TextFormatting.ITALIC, Util.translateFormatted("gui.jei.high_oven.mix.consume", chance)));
+		} else if(slotIndex <= 2) {
+			Integer chance = recipe.getAdditiveConsumeChance(MixAdditive.fromIndex(slotIndex), ingredient);
+			if(chance != null) {
+				tooltip.add(String.format("%s%s%s", TextFormatting.GRAY, TextFormatting.ITALIC, Util.translateFormatted("gui.jei.high_oven.mix.consume", chance)));
+			}
 		}
 	}
 }

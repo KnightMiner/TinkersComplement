@@ -84,13 +84,7 @@ public class HighOvenMixCategory implements IRecipeCategory<HighOvenMixWrapper> 
 	}
 
 	@Override
-	public IDrawable getIcon() {
-		// use the default icon
-		return null;
-	}
-
-	@Override
 	public String getModName() {
-		return TConstruct.modName;
+		return TinkersComplement.modName;
 	}
 }
