@@ -74,7 +74,7 @@ public class HighOvenTank extends SmelteryTank {
 
 	@Override
 	public int fill(@Nonnull FluidStack resource, boolean doFill) {
-		if (matchesFilter(resource, doFill) != FilterMatchType.NONE) {
+		if (matchesFilter(resource, doFill) == FilterMatchType.NONE) {
 			return 0;
 		}
 		return fillInternal(resource, doFill);
