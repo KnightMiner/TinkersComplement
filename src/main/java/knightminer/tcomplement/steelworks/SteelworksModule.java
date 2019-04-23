@@ -206,8 +206,9 @@ public class SteelworksModule extends PulseBase {
 		IMixRecipe mix; // because Eclipse formatter is dumb
 
 		// steel
-		mix = TCompRegistry.registerMix(new FluidStack(TinkerFluids.steel, (int)(Material.VALUE_Ingot*Config.highOven.oreToIngotRatio)),
-				new FluidStack(TinkerFluids.iron, (int)(Material.VALUE_Ingot*Config.highOven.oreToIngotRatio)))
+		mix = TCompRegistry.registerMix(
+				new FluidStack(TinkerFluids.iron, (int)(Material.VALUE_Ingot*Config.highOven.oreToIngotRatio)),
+				new FluidStack(TinkerFluids.steel, (int)(Material.VALUE_Ingot*Config.highOven.oreToIngotRatio)))
 				// oxidizers
 				.addOxidizer("gunpowder", 33)
 				.addOxidizer("dustSulfur", 29)
@@ -222,8 +223,10 @@ public class SteelworksModule extends PulseBase {
 				.addPurifier("sand", 100);
 
 		// pig iron
-		mix = TCompRegistry.registerMix(new FluidStack(TinkerFluids.pigIron, Material.VALUE_Ingot),
-				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot))
+		mix = TCompRegistry.registerMix(
+				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot),
+				new FluidStack(TinkerFluids.pigIron, Material.VALUE_Ingot))
+				// additives
 				.addOxidizer(new ItemStack(Items.SUGAR), 60)
 				.addReducer(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage()), 20)
 				.addPurifier(new ItemStack(Items.PORKCHOP), 80);
@@ -234,9 +237,10 @@ public class SteelworksModule extends PulseBase {
 		}
 
 		// knightslime
-		mix = TCompRegistry.registerMix(new FluidStack(TinkerFluids.knightslime, Material.VALUE_Ingot/2),
-				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot/2))
-				// no oxidizer
+		mix = TCompRegistry.registerMix(
+				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot/2),
+				new FluidStack(TinkerFluids.knightslime, Material.VALUE_Ingot/2))
+				// additives, no oxidizer for this recipe
 				.addReducer("slimeballPurple", 75)
 				.addPurifier("gravel", 80);
 	}

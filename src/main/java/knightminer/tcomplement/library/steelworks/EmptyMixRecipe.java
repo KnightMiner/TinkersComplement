@@ -16,7 +16,7 @@ public enum EmptyMixRecipe implements IMixRecipe {
 	}
 
 	@Override
-	public boolean matches(FluidStack output, FluidStack input) {
+	public boolean matches(FluidStack input, FluidStack output) {
 		return false;
 	}
 

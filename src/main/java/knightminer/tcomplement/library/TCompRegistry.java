@@ -157,7 +157,6 @@ public class TCompRegistry {
 		}
 	}
 
-	// TODO: probably want a resource location for this, to make CT support easier
 	/**
 	 * Registers a new high oven mix recipe
 	 * @param recipe  Recipe to register
@@ -183,13 +182,13 @@ public class TCompRegistry {
 
 	/**
 	 * Registers a new mix from the given input and output
-	 * @param output  Recipe fluid output
 	 * @param input   Recipe fluid input
+	 * @param output  Recipe fluid output
 	 * @return  IMixRecipe instance
 	 */
 	@Nonnull
-	public static IMixRecipe registerMix(FluidStack output, FluidStack input) {
-		return registerMix(new MixRecipe(output, input));
+	public static IMixRecipe registerMix(FluidStack input, FluidStack output) {
+		return registerMix(new MixRecipe(input, output));
 	}
 
 	/**
@@ -211,13 +210,13 @@ public class TCompRegistry {
 
 	/**
 	 * Gets a mix recipe based on its input and output
-	 * @param output  Fluid result
 	 * @param input   Fluid input
+	 * @param output  Fluid result
 	 * @return  First mix recipe found, null if nothing found
 	 */
-	public static IMixRecipe getMixRecipe(FluidStack output, FluidStack input) {
+	public static IMixRecipe getMixRecipe(FluidStack input, FluidStack output) {
 		for(IMixRecipe recipe : mixRegistry) {
-			if (recipe.matches(output, input)) {
+			if (recipe.matches(input, output)) {
 				return recipe;
 			}
 		}

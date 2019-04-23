@@ -21,7 +21,7 @@ public class MixRecipe implements IMixRecipe {
 	private FluidStack input, output;
 	private static final Random RANDOM = new Random();
 
-	public MixRecipe(@Nonnull FluidStack output, @Nonnull FluidStack input) {
+	public MixRecipe(@Nonnull FluidStack input, @Nonnull FluidStack output) {
 		this.output = output;
 		this.input = input;
 	}
@@ -39,7 +39,7 @@ public class MixRecipe implements IMixRecipe {
 	}
 
 	@Override
-	public boolean matches(FluidStack output, FluidStack input) {
+	public boolean matches(FluidStack input, FluidStack output) {
 		return this.output.isFluidEqual(output) && this.input.isFluidEqual(input);
 	}
 

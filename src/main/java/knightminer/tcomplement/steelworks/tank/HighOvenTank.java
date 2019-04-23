@@ -48,12 +48,12 @@ public class HighOvenTank extends SmelteryTank {
 			return FilterMatchType.INPUT;
 		} else if(filter.isFluidEqual(resource)) {
 			return FilterMatchType.INPUT;
-		} else if(cache != null && cache.matches(resource, filter)) {
+		} else if(cache != null && cache.matches(filter, resource)) {
 			return FilterMatchType.OUTPUT;
 		}
 
 		// so the fluid is not the input, and does not match our cache, so try another recipe from the registry
-		IMixRecipe recipe = TCompRegistry.getMixRecipe(resource, filter);
+		IMixRecipe recipe = TCompRegistry.getMixRecipe(filter, resource);
 		if(recipe != null) {
 			// found a match? cache it
 			this.cache = recipe;

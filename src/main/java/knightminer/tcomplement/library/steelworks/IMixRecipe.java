@@ -17,11 +17,11 @@ public interface IMixRecipe {
 
 	/**
 	 * Checks if this recipe matches a given input and output pair, for the sake of the tank filters
-	 * @param output  FluidStack output
 	 * @param input   FluidStack input
+	 * @param output  FluidStack output
 	 * @return  True if it matches, false otherwise
 	 */
-	boolean matches(FluidStack output, FluidStack input);
+	boolean matches(FluidStack input, FluidStack output);
 
 	/**
 	 * Applies the recipe to the inputs
