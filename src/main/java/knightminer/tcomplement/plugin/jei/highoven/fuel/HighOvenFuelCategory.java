@@ -20,7 +20,7 @@ public class HighOvenFuelCategory implements IRecipeCategory<HighOvenFuelWrapper
 
 	protected final IDrawable background;
 	public HighOvenFuelCategory(IGuiHelper guiHelper) {
-		background = guiHelper.createDrawable(BACKGROUND, 77, 86, 18, 34, 0, 0, 0, 88);
+		background = guiHelper.createDrawable(BACKGROUND, 77, 22, 18, 34, 0, 0, 0, 88);
 	}
 
 	@Override

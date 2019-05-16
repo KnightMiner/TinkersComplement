@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.PulseBase;
+import knightminer.tcomplement.library.steelworks.HeatRecipe;
 import knightminer.tcomplement.library.steelworks.HighOvenFuel;
 import knightminer.tcomplement.melter.MelterModule;
 import knightminer.tcomplement.melter.client.GuiMelter;
@@ -18,6 +19,9 @@ import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
 import knightminer.tcomplement.plugin.jei.highoven.fuel.HighOvenFuelCategory;
 import knightminer.tcomplement.plugin.jei.highoven.fuel.HighOvenFuelGetter;
 import knightminer.tcomplement.plugin.jei.highoven.fuel.HighOvenFuelWrapper;
+import knightminer.tcomplement.plugin.jei.highoven.heat.HighOvenHeatCategory;
+import knightminer.tcomplement.plugin.jei.highoven.heat.HighOvenHeatGetter;
+import knightminer.tcomplement.plugin.jei.highoven.heat.HighOvenHeatWrapper;
 import knightminer.tcomplement.plugin.jei.highoven.melting.HighOvenMeltingCategory;
 import knightminer.tcomplement.plugin.jei.highoven.melting.HighOvenMeltingWrapper;
 import knightminer.tcomplement.plugin.jei.highoven.mix.HighOvenMixCategory;
@@ -64,6 +68,7 @@ public class JEIPlugin implements IModPlugin {
 		if(PulseBase.isSteelworksLoaded()) {
 			registry.addRecipeCategories(new HighOvenMixCategory(guiHelper));
 			registry.addRecipeCategories(new HighOvenFuelCategory(guiHelper));
+			registry.addRecipeCategories(new HighOvenHeatCategory(guiHelper));
 			if(Config.jei.separateHighOvenTab) {
 				registry.addRecipeCategories(new HighOvenMeltingCategory(guiHelper));
 			}
@@ -122,13 +127,17 @@ public class JEIPlugin implements IModPlugin {
 			registry.handleRecipes(HighOvenMixWrapper.class, (r)->r, HighOvenMixCategory.CATEGORY);
 			registry.addRecipes(HighOvenMixGetter.getMixRecipes(highOvenMeltingRecipes), HighOvenMixCategory.CATEGORY);
 
+			// Heat category
+			registry.handleRecipes(HeatRecipe.class, HighOvenHeatWrapper::new, HighOvenHeatCategory.CATEGORY);
+			registry.addRecipes(HighOvenHeatGetter.getHeatRecipes(), HighOvenHeatCategory.CATEGORY);
+
 			// fuel category
 			registry.handleRecipes(HighOvenFuel.class, (fuel)->new HighOvenFuelWrapper(fuel, guiHelper), HighOvenFuelCategory.CATEGORY);
 			registry.addRecipes(HighOvenFuelGetter.getHighOvenFuels(), HighOvenFuelCategory.CATEGORY);
 
 			// catalysts
 			registry.addRecipeCatalyst(new ItemStack(SteelworksModule.highOvenController),
-					highOvenMelting, HighOvenMixCategory.CATEGORY, HighOvenFuelCategory.CATEGORY);
+					highOvenMelting, HighOvenMixCategory.CATEGORY, HighOvenFuelCategory.CATEGORY, HighOvenHeatCategory.CATEGORY);
 			// add scorched casting blocks to casting category
 			for(CastingType type : CastingType.values()) {
 				registry.addRecipeCatalyst(new ItemStack(SteelworksModule.scorchedCasting, 1, type.getMeta()), CastingRecipeCategory.CATEGORY);

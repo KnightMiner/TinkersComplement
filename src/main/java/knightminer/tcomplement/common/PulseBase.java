@@ -15,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
@@ -28,6 +30,7 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.tools.Pattern;
 import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.smeltery.TinkerSmeltery;
+import slimeknights.tconstruct.smeltery.block.BlockMolten;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 public class PulseBase {
@@ -142,6 +145,18 @@ public class PulseBase {
 		item.setRegistryName(Util.getResource(name));
 		registry.register(item);
 		return item;
+	}
+
+	protected static <T extends Fluid> T registerFluid(T fluid) {
+		fluid.setUnlocalizedName(Util.prefix(fluid.getName()));
+		FluidRegistry.registerFluid(fluid);
+
+		return fluid;
+	}
+
+	/** Registers a hot lava-based block for the fluid, prefix with molten_ */
+	public static BlockMolten registerFluidBlock(IForgeRegistry<Block> registry, Fluid fluid) {
+		return registerBlock(registry, new BlockMolten(fluid), "liquid_" + fluid.getName()); // molten_foobar prefix
 	}
 
 	protected static <T extends IForgeRegistryEntry<T>> T register(IForgeRegistry<T> registry, T thing, String name) {

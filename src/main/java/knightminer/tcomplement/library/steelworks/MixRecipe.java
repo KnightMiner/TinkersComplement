@@ -16,14 +16,33 @@ import net.minecraftforge.fluids.FluidStack;
 import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.mantle.util.RecipeMatchRegistry;
 
-public class MixRecipe implements IMixRecipe {
+public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 	private Map<MixAdditive,MixAdditiveList> additives;
-	private FluidStack input, output;
 	private static final Random RANDOM = new Random();
 
+	private int minTemp;
+
+	/**
+	 * Recipe to mix a fluid and additives into a result
+	 * @param input   Input fluid, determines rate of additive consumption
+	 * @param output  Output fluid, determines rate of output based on input size
+	 * @param temp    Minimum temperature to perform this recipe
+	 */
+	public MixRecipe(@Nonnull FluidStack input, @Nonnull FluidStack output, int temp) {
+		super(input, output);
+
+		// convert to celsius, we use that everywhere anyways
+		// parameter is only in kelvin for the sake of consistency with the TiC API
+		this.minTemp = temp - 300;
+	}
+
+	/**
+	 * Recipe to mix a fluid and additives into a result
+	 * @param input   Input fluid, size determines rate of additive consumption
+	 * @param output  Output fluid, size determines rate of output based on input size=
+	 */
 	public MixRecipe(@Nonnull FluidStack input, @Nonnull FluidStack output) {
-		this.output = output;
-		this.input = input;
+		this(input, output, output.getFluid().getTemperature(output));
 	}
 
 	private boolean ingredientMatches(MixAdditive type, ItemStack input) {
@@ -32,15 +51,10 @@ public class MixRecipe implements IMixRecipe {
 
 	@Override
 	public boolean matches(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier) {
-		return this.input.isFluidEqual(input) && additives == null || (
+		return this.getInput().isFluidEqual(fluid) && additives == null || (
 				ingredientMatches(MixAdditive.OXIDIZER, oxidizer) &&
 				ingredientMatches(MixAdditive.REDUCER, reducer) &&
 				ingredientMatches(MixAdditive.PURIFIER, purifier));
-	}
-
-	@Override
-	public boolean matches(FluidStack input, FluidStack output) {
-		return this.output.isFluidEqual(output) && this.input.isFluidEqual(input);
 	}
 
 	private void removeMatches(MixAdditive type, ItemStack input, int matched) {
@@ -67,15 +81,25 @@ public class MixRecipe implements IMixRecipe {
 	}
 
 	@Override
-	public FluidStack getOutput(FluidStack fluid) {
-		return new FluidStack(output, fluid.amount * output.amount / input.amount);
+	public FluidStack getOutput(FluidStack fluid, int temp) {
+		// if the temperature is too low, do nothing
+		if (temp < minTemp) {
+			return fluid;
+		}
+		FluidStack output = this.getOutput();
+		return new FluidStack(output, fluid.amount * output.amount / this.getInput().amount);
 	}
 
 	@Override
-	public void updateAdditives(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier) {
+	public void updateAdditives(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temp) {
+		// skip if temperature is too low as the output won't change
+		if(temp < minTemp) {
+			return;
+		}
+
 		// determine how many times we outputed
-		int matches = fluid.amount / input.amount;
-		if (fluid.amount % input.amount > 0) {
+		int matches = fluid.amount / getInput().amount;
+		if (fluid.amount % getInput().amount > 0) {
 			matches++;
 		}
 
@@ -100,7 +124,7 @@ public class MixRecipe implements IMixRecipe {
 				TCompRegistry.registerMixAdditive(additive, type);
 			} else try {
 				String input = additive.getInputs().stream().findFirst().map(ItemStack::getUnlocalizedName).orElse("?");
-				TCompRegistry.log.debug("Addition of {} {} to recipe {} has been cancelled by event", type.getName(), input, output.getUnlocalizedName());
+				TCompRegistry.log.debug("Addition of {} {} to recipe {} has been cancelled by event", type.getName(), input, getOutput().getUnlocalizedName());
 			} catch(Exception e) {
 				TCompRegistry.log.error("Error when logging HighOvenMixAdditiveEvent", e);
 			}
@@ -125,15 +149,12 @@ public class MixRecipe implements IMixRecipe {
 
 	/** JEI */
 
-	/**
-	 * Checks if a recipe has nonnull inputs and outputs and either undefined or not empty additives
-	 * @return  True if the recipe is valid
-	 */
+	@Override
 	public boolean isValid() {
-		// ensure fluids are valid
-		if (input == null || input.getFluid() == null || output == null || output.getFluid() == null) {
+		if (!super.isValid()) {
 			return false;
 		}
+
 		// ensure additives are valid
 		if (additives != null) {
 			for(MixAdditive type : MixAdditive.values()) {
@@ -146,14 +167,12 @@ public class MixRecipe implements IMixRecipe {
 		return true;
 	}
 
-	@Override
-	public FluidStack getOutput() {
-		return output;
-	}
-
-	/** Gets the input fluid stack */
-	public FluidStack getInput() {
-		return input;
+	/**
+	 * Gets the temperature
+	 * @return temperature in Celsius
+	 */
+	public int getTemperature() {
+		return minTemp;
 	}
 
 	/**

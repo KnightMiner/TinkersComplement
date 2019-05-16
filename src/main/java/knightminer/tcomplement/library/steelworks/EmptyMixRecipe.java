@@ -21,12 +21,12 @@ public enum EmptyMixRecipe implements IMixRecipe {
 	}
 
 	@Override
-	public FluidStack getOutput(FluidStack fluid) {
+	public FluidStack getOutput(FluidStack fluid, int temp) {
 		return fluid;
 	}
 
 	@Override
-	public void updateAdditives(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier) {}
+	public void updateAdditives(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temp) {}
 
 	@Override
 	public IMixRecipe addOxidizer(RecipeMatch oxidizer) {

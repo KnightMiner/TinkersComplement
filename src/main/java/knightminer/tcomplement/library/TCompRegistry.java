@@ -13,7 +13,10 @@ import com.google.common.collect.Lists;
 
 import knightminer.tcomplement.library.events.TCompRegisterEvent;
 import knightminer.tcomplement.library.steelworks.EmptyMixRecipe;
+import knightminer.tcomplement.library.steelworks.HeatRecipe;
 import knightminer.tcomplement.library.steelworks.HighOvenFuel;
+import knightminer.tcomplement.library.steelworks.IHeatRecipe;
+import knightminer.tcomplement.library.steelworks.IHighOvenFilter;
 import knightminer.tcomplement.library.steelworks.IMixRecipe;
 import knightminer.tcomplement.library.steelworks.MixAdditive;
 import knightminer.tcomplement.library.steelworks.MixRecipe;
@@ -209,12 +212,17 @@ public class TCompRegistry {
 	}
 
 	/**
-	 * Gets a mix recipe based on its input and output
+	 * Gets a heat recipe or a mix recipe for a filter based on its input and output
 	 * @param input   Fluid input
 	 * @param output  Fluid result
-	 * @return  First mix recipe found, null if nothing found
+	 * @return  First recipe found, null if nothing found
 	 */
-	public static IMixRecipe getMixRecipe(FluidStack input, FluidStack output) {
+	public static IHighOvenFilter getFilter(FluidStack input, FluidStack output) {
+		for(IHeatRecipe recipe : heatRegistry) {
+			if (recipe.matches(input, output)) {
+				return recipe;
+			}
+		}
 		for(IMixRecipe recipe : mixRegistry) {
 			if (recipe.matches(input, output)) {
 				return recipe;
@@ -248,6 +256,56 @@ public class TCompRegistry {
 	 */
 	public static List<IMixRecipe> getAllMixRecipes() {
 		return ImmutableList.copyOf(mixRegistry);
+	}
+
+	/*-------------------------------------------------------------------------*\
+	| High Oven Heat recipes                                                    |
+	\*-------------------------------------------------------------------------*/
+	private static List<IHeatRecipe> heatRegistry = Lists.newLinkedList();
+
+	/**
+	 * Registers a new high oven heat recipe
+	 * @param recipe  Recipe to register
+	 * @return  Registered recipe for chaining
+	 */
+	public static void registerHeatRecipe(IHeatRecipe recipe) {
+		if(new TCompRegisterEvent.HighOvenHeatRegisterEvent(recipe).fire()) {
+			heatRegistry.add(recipe);
+		}
+		else try {
+			FluidStack output = recipe.getOutput();
+			if (output != null) {
+				log.debug("Registration of heat recipe for " + output.getUnlocalizedName() + " has been cancelled by event");
+			}
+		} catch(Exception e) {
+			log.error("Error when logging mix event", e);
+		}
+	}
+
+	public static void registerHeatRecipe(@Nonnull FluidStack input, @Nonnull FluidStack output, int temp) {
+		registerHeatRecipe(new HeatRecipe(input, output, temp));
+	}
+
+	/**
+	 * Gets a heat recipe based on its input
+	 * @param input   Fluid input
+	 * @return  First heat recipe found, null if nothing found
+	 */
+	public static IHeatRecipe getHeatRecipe(FluidStack input) {
+		for(IHeatRecipe recipe : heatRegistry) {
+			if (recipe.matches(input)) {
+				return recipe;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets all high oven heat recipes
+	 * @return  Immutable list of all heat recipes
+	 */
+	public static List<IHeatRecipe> getAllHeatRecipes() {
+		return ImmutableList.copyOf(heatRegistry);
 	}
 
 	/*-------------------------------------------------------------------------*\

@@ -20,6 +20,7 @@ import static knightminer.tcomplement.steelworks.SteelworksModule.scorchedStairs
 import static knightminer.tcomplement.steelworks.SteelworksModule.scorchedStairsRoad;
 import static knightminer.tcomplement.steelworks.SteelworksModule.scorchedStairsStone;
 import static knightminer.tcomplement.steelworks.SteelworksModule.scorchedStairsTile;
+import static knightminer.tcomplement.steelworks.SteelworksModule.steam;
 import static knightminer.tcomplement.steelworks.SteelworksModule.storage;
 import static slimeknights.tconstruct.common.ModelRegisterUtil.registerItemBlockMeta;
 import static slimeknights.tconstruct.common.ModelRegisterUtil.registerItemModel;
@@ -28,10 +29,12 @@ import knightminer.tcomplement.common.ClientProxy;
 import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.steelworks.blocks.BlockHighOvenIO;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -64,11 +67,24 @@ public class SteelworksClientProxy extends ClientProxy {
 		registerItemModel(scorchedStairsTile);
 		registerItemModel(scorchedStairsCreeper);
 
+		// fluids
+		registerFluidModels(steam);
+
 		// High Oven IO
 		Item io = Item.getItemFromBlock(highOvenIO);
 		for(BlockHighOvenIO.IOType type : BlockHighOvenIO.IOType.values()) {
 			String variant = String.format("facing=south,type=%s", type.getName());
 			ModelLoader.setCustomModelResourceLocation(io, type.meta, new ModelResourceLocation(io.getRegistryName(), variant));
+		}
+	}
+
+	@SubscribeEvent
+	public void registerTextures(TextureStitchEvent.Pre event) {
+		// ensures fluid textures are registered even if our fluids are non-default
+		TextureMap map = event.getMap();
+		if(steam != null) {
+			map.registerSprite(steam.getFlowing());
+			map.registerSprite(steam.getStill());
 		}
 	}
 

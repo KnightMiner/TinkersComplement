@@ -12,6 +12,7 @@ import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.ModIds;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
+import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.library.steelworks.IMixRecipe;
 import knightminer.tcomplement.shared.CommonsModule;
 import knightminer.tcomplement.steelworks.blocks.BlockHighOvenController;
@@ -33,6 +34,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -94,11 +96,18 @@ public class SteelworksModule extends PulseBase {
 	public static Block scorchedStairsTile;
 	public static Block scorchedStairsCreeper;
 
+	public static Fluid steam;
+
 	public static ItemStack charcoalBlock, steelBlock;
 
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit();
+
+		if(Config.highOven.steamFuel || Config.highOven.steamRate > 1) {
+			steam = registerFluid(new Fluid("steam", Util.getResource("blocks/fluids/steam"), Util.getResource("blocks/fluids/steam_flow"))
+					.setDensity(-1000).setViscosity(200).setTemperature(750).setGaseous(true));
+		}
 	}
 
 	@SubscribeEvent
@@ -141,6 +150,11 @@ public class SteelworksModule extends PulseBase {
 		scorchedStairsRoad          = registerBlockStairsFrom(r, scorchedBlock, BlockSeared.SearedType.ROAD,           "scorched_stairs_road");
 		scorchedStairsTile          = registerBlockStairsFrom(r, scorchedBlock, BlockSeared.SearedType.TILE,           "scorched_stairs_tile");
 		scorchedStairsCreeper       = registerBlockStairsFrom(r, scorchedBlock, BlockSeared.SearedType.CREEPER,        "scorched_stairs_creeper");
+
+		// fluids
+		if(steam != null) {
+			registerFluidBlock(r, steam);
+		}
 	}
 
 	@SubscribeEvent
@@ -179,6 +193,10 @@ public class SteelworksModule extends PulseBase {
 		registerItemBlock(r, scorchedStairsRoad);
 		registerItemBlock(r, scorchedStairsTile);
 		registerItemBlock(r, scorchedStairsCreeper);
+
+		if(steam != null) {
+			FluidRegistry.addBucketForFluid(steam);
+		}
 	}
 
 	@Subscribe
@@ -203,6 +221,11 @@ public class SteelworksModule extends PulseBase {
 	}
 
 	private void registerMixes() {
+		// steam
+		if(Config.highOven.steamRate > 1) {
+			TCompRegistry.registerHeatRecipe(new FluidStack(FluidRegistry.WATER, Config.highOven.steamRate), new FluidStack(steam, Config.highOven.steamRate), 1300);
+		}
+
 		IMixRecipe mix; // because Eclipse formatter is dumb
 
 		// steel
@@ -246,6 +269,10 @@ public class SteelworksModule extends PulseBase {
 	}
 
 	private void registerFuels() {
+		if(Config.highOven.steamFuel) {
+			TinkerRegistry.registerSmelteryFuel(new FluidStack(steam, 50), 50);
+		}
+
 		// only pure fuels allowed
 		TCompRegistry.registerFuel(new ItemStack(Items.COAL, 1, 1), 140, 4);
 		TCompRegistry.registerFuel("blockCharcoal", 1400, 7);

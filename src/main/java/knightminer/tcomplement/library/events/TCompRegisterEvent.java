@@ -2,6 +2,7 @@ package knightminer.tcomplement.library.events;
 
 import knightminer.tcomplement.library.IBlacklist;
 import knightminer.tcomplement.library.steelworks.HighOvenFuel;
+import knightminer.tcomplement.library.steelworks.IHeatRecipe;
 import knightminer.tcomplement.library.steelworks.IMixRecipe;
 import knightminer.tcomplement.library.steelworks.MixAdditive;
 import knightminer.tcomplement.library.steelworks.MixRecipe;
@@ -48,6 +49,13 @@ public abstract class TCompRegisterEvent<T> extends TinkerRegisterEvent<T> {
 	/** Register a high oven mix recipe */
 	public static class HighOvenMixRegisterEvent extends TCompRegisterEvent<IMixRecipe> {
 		public HighOvenMixRegisterEvent(IMixRecipe recipe) {
+			super(recipe);
+		}
+	}
+
+	/** Register a high oven heat recipe */
+	public static class HighOvenHeatRegisterEvent extends TCompRegisterEvent<IHeatRecipe> {
+		public HighOvenHeatRegisterEvent(IHeatRecipe recipe) {
 			super(recipe);
 		}
 	}

@@ -2,6 +2,8 @@ package knightminer.tcomplement.plugin.jei.highoven.mix;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import com.google.common.collect.ImmutableList;
 
 import knightminer.tcomplement.library.Util;
@@ -10,6 +12,7 @@ import knightminer.tcomplement.library.steelworks.MixRecipe;
 import mezz.jei.api.gui.ITooltipCallback;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
@@ -20,11 +23,13 @@ public class HighOvenMixWrapper implements IRecipeWrapper, ITooltipCallback<Item
 	private List<List<ItemStack>> inputStacks;
 	private FluidStack inputFluid;
 	private FluidStack outputFluid;
+	private int temp;
 	public HighOvenMixWrapper(MixRecipe recipe, List<ItemStack> meltingInputs) {
 		this.recipe = recipe;
 		// fluids
 		this.inputFluid = recipe.getInput();
 		this.outputFluid = recipe.getOutput();
+		this.temp = recipe.getTemperature();
 
 		// additives
 		ImmutableList.Builder<List<ItemStack>> stacks = ImmutableList.builder();
@@ -40,6 +45,13 @@ public class HighOvenMixWrapper implements IRecipeWrapper, ITooltipCallback<Item
 		ingredients.setInputLists(ItemStack.class, inputStacks);
 		ingredients.setInput(FluidStack.class, inputFluid);
 		ingredients.setOutput(FluidStack.class, outputFluid);
+	}
+
+	@Override
+	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
+		String tmpStr = Util.celsiusString(temp);
+		int x = 86 - minecraft.fontRenderer.getStringWidth(tmpStr) / 2;
+		minecraft.fontRenderer.drawString(tmpStr, x, 8, Util.getHighOvenTempColor(temp));
 	}
 
 	@Override

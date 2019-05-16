@@ -73,6 +73,17 @@ public class Config {
 		@RangeDouble(min = 0, max = 16)
 		@LangKey("tcomplement.config.oreToIngotRatio")
 		public double oreToIngotRatio = 2.5f;
+
+		@RequiresMcRestart
+		@Comment("Steam production rate per tick in the high oven. Set to 0 to disable high oven making steam")
+		@RangeInt(min = 0, max = 100)
+		@LangKey("tcomplement.config.highOven.steamRate")
+		public int steamRate = 4;
+
+		@RequiresMcRestart
+		@Comment("If true, steam will be registered as a smeltery fuel, less hot than lava but cheaper")
+		@LangKey("tcomplement.config.highOven.steamFuel")
+		public boolean steamFuel = true;
 	}
 
 	public static class JEI {

@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import knightminer.tcomplement.library.TCompRegistry;
-import knightminer.tcomplement.library.steelworks.IMixRecipe;
+import knightminer.tcomplement.library.steelworks.IHighOvenFilter;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import slimeknights.tconstruct.library.smeltery.ISmelteryTankHandler;
@@ -16,7 +16,7 @@ import slimeknights.tconstruct.library.smeltery.SmelteryTank;
 public class HighOvenTank extends SmelteryTank {
 
 	private FluidStack filter;
-	private IMixRecipe cache;
+	private IHighOvenFilter cache;
 	public HighOvenTank(ISmelteryTankHandler parent) {
 		super(parent);
 	}
@@ -34,12 +34,33 @@ public class HighOvenTank extends SmelteryTank {
 	}
 
 	/**
+	 * Gets the fluid in the tank that matches the current filter
+	 * @return fluid matching current filter or null if no match
+	 */
+	public FluidStack getFilterFluid() {
+		if(filter == null) {
+			return null;
+		}
+		for(FluidStack liquid : liquids) {
+			if(filter.isFluidEqual(liquid)) {
+				return liquid;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Checks if the given fluid matches the filter
 	 * @param resource  Resource to check
 	 * @param update  If true, sets the filter to this fluid if the filter is null
 	 * @return  Method of matching the filter. Input means direct match, output means match through mix recipe
 	 */
 	public FilterMatchType matchesFilter(FluidStack resource, boolean update) {
+		// safety check in case drain failed to update this
+		if(liquids.isEmpty()) {
+			filter = null;
+		}
+
 		// if the filter is null, we need to set the filter
 		if(filter == null) {
 			if (update) {
@@ -53,7 +74,7 @@ public class HighOvenTank extends SmelteryTank {
 		}
 
 		// so the fluid is not the input, and does not match our cache, so try another recipe from the registry
-		IMixRecipe recipe = TCompRegistry.getMixRecipe(filter, resource);
+		IHighOvenFilter recipe = TCompRegistry.getFilter(filter, resource);
 		if(recipe != null) {
 			// found a match? cache it
 			this.cache = recipe;
@@ -72,6 +93,30 @@ public class HighOvenTank extends SmelteryTank {
 		return super.fill(resource, doFill);
 	}
 
+	/**
+	 * Moves the given fluid to the bottom. Same as {@link #moveFluidToBottom(int)}, except moves by type instead of index
+	 * @param fluid  fluid to move to the bottom
+	 */
+	public void moveFluidToBottom(FluidStack fluid) {
+		// find the specified fluid
+		int i;
+		for(i = 0; i < liquids.size(); i++) {
+			if(fluid.isFluidEqual(liquids.get(i))) {
+				break;
+			}
+		}
+		if(i != 0 && i < liquids.size()) {
+			moveFluidToBottom(i);
+		}
+	}
+
+	/**
+	 * Same as {@link #drain(FluidStack, boolean)}, but does not modify the filter
+	 */
+	public FluidStack drainInternal(@Nonnull FluidStack resource, boolean doDrain) {
+		return super.drain(resource, doDrain);
+	}
+
 	@Override
 	public int fill(@Nonnull FluidStack resource, boolean doFill) {
 		if (matchesFilter(resource, doFill) == FilterMatchType.NONE) {
@@ -82,7 +127,7 @@ public class HighOvenTank extends SmelteryTank {
 
 	@Override
 	public FluidStack drain(FluidStack resource, boolean doDrain) {
-		FluidStack drained = super.drain(resource, doDrain);
+		FluidStack drained = drainInternal(resource, doDrain);
 		// if draining and that was the last of it, clear the filter
 		if(doDrain && drained != null && liquids.isEmpty()) {
 			this.setFilter(null);

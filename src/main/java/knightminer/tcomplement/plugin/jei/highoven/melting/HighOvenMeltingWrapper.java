@@ -19,6 +19,6 @@ public class HighOvenMeltingWrapper extends SmeltingRecipeWrapper {
 	public void drawInfo(@Nonnull Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		String tmpStr = temperatureString(temperature);
 		int x = 86 - minecraft.fontRenderer.getStringWidth(tmpStr) / 2;
-		minecraft.fontRenderer.drawString(tmpStr, x, 10, Util.getHighOvenTempColor(temperature-300));
+		minecraft.fontRenderer.drawString(tmpStr, x, 8, Util.getHighOvenTempColor(temperature-300));
 	}
 }

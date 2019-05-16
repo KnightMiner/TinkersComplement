@@ -2,7 +2,9 @@ package knightminer.tcomplement.plugin.jei.highoven.mix;
 
 import javax.annotation.Nonnull;
 
+import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.library.Util;
+import knightminer.tcomplement.plugin.jei.highoven.melting.HighOvenMeltingCategory;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IDrawableAnimated;
@@ -14,7 +16,6 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.library.materials.Material;
 
 public class HighOvenMixCategory implements IRecipeCategory<HighOvenMixWrapper> {
@@ -27,6 +28,7 @@ public class HighOvenMixCategory implements IRecipeCategory<HighOvenMixWrapper> 
 	private final IDrawable scalaInput;
 	private final IDrawable scalaOutput;
 	private final IDrawableAnimated progress;
+	private final IDrawableAnimated flame;
 
 	public HighOvenMixCategory(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BACKGROUND, 0, 0, 160, 62);
@@ -35,6 +37,9 @@ public class HighOvenMixCategory implements IRecipeCategory<HighOvenMixWrapper> 
 
 		IDrawableStatic progressDrawable = guiHelper.createDrawable(BACKGROUND, 160, 0, 3, 16);
 		progress = guiHelper.createAnimatedDrawable(progressDrawable, 200, IDrawableAnimated.StartDirection.BOTTOM, false);
+
+		IDrawableStatic flameDrawable = guiHelper.createDrawable(BACKGROUND, 163, 0, 14, 14);
+		flame = guiHelper.createAnimatedDrawable(flameDrawable, 200, IDrawableAnimated.StartDirection.TOP, true);
 	}
 
 	@Nonnull
@@ -58,7 +63,8 @@ public class HighOvenMixCategory implements IRecipeCategory<HighOvenMixWrapper> 
 	@Override
 	public void drawExtras(@Nonnull Minecraft minecraft) {
 		//arrow.draw(minecraft, 73, 24);
-		progress.draw(minecraft, 5, 23);
+		flame.draw(minecraft, 78, 22);
+		progress.draw(minecraft, 8, 5);
 	}
 
 	@Override
@@ -70,15 +76,19 @@ public class HighOvenMixCategory implements IRecipeCategory<HighOvenMixWrapper> 
 		items.addTooltipCallback(recipe);
 
 		// additives
-		items.init(0, true, 73, 4);
-		items.init(1, true, 73, 22);
-		items.init(2, true, 73, 40);
+		items.init(0, true, 31, 4);
+		items.init(1, true, 31, 22);
+		items.init(2, true, 31, 40);
 		// representative item input
-		items.init(3, true, 8, 22);
+		items.init(3, true, 11, 4);
 		items.set(ingredients);
 
+		// fuels
+		items.init(4, true, 77, 38);
+		items.set(4, HighOvenMeltingCategory.getHighOvenFuels());
+
 		// fluids
-		fluids.init(0, true, 54, 5, 16, 52, Material.VALUE_Block, false, scalaInput);
+		fluids.init(0, true, 12, 41, 16, 16, 1, false, null);
 		fluids.init(1, false, 120, 5, 35, 52, Material.VALUE_Block, false, scalaOutput);
 		fluids.set(ingredients);
 	}

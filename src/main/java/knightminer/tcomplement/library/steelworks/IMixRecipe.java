@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import slimeknights.mantle.util.RecipeMatch;
 
-public interface IMixRecipe {
+public interface IMixRecipe extends IHighOvenFilter {
 	/**
 	 * Checks if this recipe matches the given input
 	 * @param fluid     Input fluid
@@ -16,19 +16,20 @@ public interface IMixRecipe {
 	boolean matches(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier);
 
 	/**
-	 * Checks if this recipe matches a given input and output pair, for the sake of the tank filters
-	 * @param input   FluidStack input
-	 * @param output  FluidStack output
-	 * @return  True if it matches, false otherwise
-	 */
-	boolean matches(FluidStack input, FluidStack output);
-
-	/**
-	 * Applies the recipe to the inputs
-	 * @param fluid     Input fluidstack
+	 * Applies the recipe to the input, returning the maximum amount
+	 * @param fluid  Input fluidstack
+	 * @param temp   Current high oven temperature in Celsius, used for minimum temperature requirements
 	 * @return  FluidStack result
 	 */
-	FluidStack getOutput(FluidStack fluid);
+	FluidStack getOutput(FluidStack fluid, int temp);
+
+	/**
+	 * Gets the normal output of this recipe
+	 * @return  FluidStack output
+	 */
+	default FluidStack getOutput() {
+		return null;
+	}
 
 	/**
 	 * Updates the additives based on the result of the recipe
@@ -36,16 +37,9 @@ public interface IMixRecipe {
 	 * @param oxidizer  Input oxidizer, may be modified
 	 * @param reducer   Input reducer, may be modified
 	 * @param purifier  Input purifier, may be modified
+	 * @param temp      High oven temperature in Celsius, should NO-OP this method if the value makes {@link #getOutput(FluidStack, int)} return the input
 	 */
-	void updateAdditives(FluidStack output, ItemStack oxidizer, ItemStack reducer, ItemStack purifier);
-
-	/**
-	 * Gets the normal output of this mix recipe, ignoring input size
-	 * @return  FluidStack output
-	 */
-	default FluidStack getOutput() {
-		return null;
-	}
+	void updateAdditives(FluidStack output, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temp);
 
 	/**
 	 * Adds an oxidizer to this recipe

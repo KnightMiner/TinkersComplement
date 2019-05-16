@@ -6,6 +6,7 @@ import javax.annotation.Nonnull;
 
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.library.steelworks.HighOvenFuel;
+import knightminer.tcomplement.library.steelworks.IHeatRecipe;
 import knightminer.tcomplement.library.steelworks.IMixRecipe;
 import knightminer.tcomplement.library.steelworks.MixAdditive;
 import knightminer.tcomplement.steelworks.client.GuiHighOven;
@@ -74,6 +75,7 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 
 	// local properties
 	protected IItemHandlerModifiable combinedItemHandler;
+	protected IHeatRecipe heatRecipeCache;
 	protected IMixRecipe mixRecipeCache;
 
 	public TileHighOven() {
@@ -108,6 +110,10 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 				int fuel = this.fuel;
 				heatItems();
 				this.fuel = fuel;
+			}
+
+			if(tick % 5 == 0) {
+				heatFluid();
 			}
 
 			// kill entities inside
@@ -171,6 +177,8 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 			if(mixRecipeCache != null && mixRecipeCache.matches(meltingOutput, oxidizer, reducer, purifier)) {
 				mixRecipe = mixRecipeCache;
 			} else {
+				// note we don't pass in temperature here so the cache is not invalided by wrong temperature
+				// recipes must be unique by input combination, temperature is just an extra parameters
 				mixRecipe = TCompRegistry.getMixRecipe(meltingOutput, oxidizer, reducer, purifier);
 				// found a recipe? cache it
 				if(mixRecipe != null) {
@@ -180,14 +188,16 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 
 			// if we have a recipe, apply it
 			if (mixRecipe != null) {
-				FluidStack mixOutput = mixRecipe.getOutput(meltingOutput);
+				// if the temperature is too small, this will just return the input
+				FluidStack mixOutput = mixRecipe.getOutput(meltingOutput, temperature);
 				int filled = liquids.fillInternal(mixOutput, false);
 				if(filled == mixOutput.amount) {
 					liquids.fillInternal(mixOutput, true);
 
 					// only clear out items n stuff if it was successful
 					setInventorySlotContents(slot, ItemStack.EMPTY);
-					mixRecipe.updateAdditives(meltingOutput, oxidizer, reducer, purifier);
+					// this method does nothing if the temperature is too low
+					mixRecipe.updateAdditives(meltingOutput, oxidizer, reducer, purifier, temperature);
 					// TODO: set back into additives?
 					return true;
 				} else {
@@ -226,6 +236,45 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 			this.fuelQuality = fuel.getTime();
 			this.fuelRate = fuel.getRate();
 			this.needsFuel = false;
+		}
+	}
+
+	protected void heatFluid() {
+		FluidStack current = liquids.getFilterFluid();
+		if(current != null) {
+			IHeatRecipe recipe = heatRecipeCache;
+			if(recipe == null || !recipe.matches(current)) {
+				recipe = TCompRegistry.getHeatRecipe(current);
+			}
+
+			if(recipe == null) {
+				return;
+			}
+
+			// check how many times we match, this also handles temperature checks
+			heatRecipeCache = recipe;
+			int matches = recipe.timesMatched(current, temperature);
+			if(matches <= 0) {
+				return;
+			}
+
+			// ensure we have space if the output is bigger
+			FluidStack input = recipe.getInput();
+			FluidStack output = recipe.getOutput();
+
+			// sizes are different, ensure we have space
+			if(output.amount > input.amount) {
+				int available = liquids.getCapacity() - liquids.getFluidAmount();
+				matches = Math.min(matches, available / (output.amount - input.amount));
+				if(matches == 0) {
+					return;
+				}
+			}
+
+			// update the tank fluids
+			liquids.drainInternal(new FluidStack(input, input.amount * matches), true);
+			liquids.fillInternal(new FluidStack(output, output.amount * matches), true);
+			liquids.moveFluidToBottom(output);
 		}
 	}
 

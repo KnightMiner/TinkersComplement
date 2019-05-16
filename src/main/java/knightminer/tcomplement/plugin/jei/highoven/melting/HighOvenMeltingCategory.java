@@ -32,7 +32,7 @@ public class HighOvenMeltingCategory implements IRecipeCategory<HighOvenMeltingW
 
 	private final IDrawable background;
 	private final IDrawable scala;
-	protected final IDrawableAnimated flame;
+	private final IDrawableAnimated flame;
 
 	public HighOvenMeltingCategory(IGuiHelper guiHelper) {
 		background = guiHelper.createDrawable(BACKGROUND, 0, 62, 160, 62);
@@ -62,7 +62,7 @@ public class HighOvenMeltingCategory implements IRecipeCategory<HighOvenMeltingW
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-		flame.draw(minecraft, 78, 24);
+		flame.draw(minecraft, 78, 22);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class HighOvenMeltingCategory implements IRecipeCategory<HighOvenMeltingW
 		items.set(ingredients);
 
 		// if solid fuels are available, add a standard subset
-		items.init(1, true, 77, 40);
+		items.init(1, true, 77, 38);
 		items.set(1, getHighOvenFuels());
 
 		IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
@@ -87,7 +87,7 @@ public class HighOvenMeltingCategory implements IRecipeCategory<HighOvenMeltingW
 		return TinkersComplement.modName;
 	}
 
-	private static List<ItemStack> getHighOvenFuels() {
+	public static List<ItemStack> getHighOvenFuels() {
 		// get the first of each fuel registered
 		if (highOvenFuels != null) {
 			return highOvenFuels;

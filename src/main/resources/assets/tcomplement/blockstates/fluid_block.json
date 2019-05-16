@@ -4,8 +4,8 @@
         "model": "forge:fluid"
     },
     "variants": {
-        "burnt_stone": [{
-            "custom": { "fluid": "burnt_stone" }
+        "steam": [{
+            "custom": { "fluid": "steam" }
         }]
     }
 }
