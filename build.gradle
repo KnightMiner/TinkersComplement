@@ -36,6 +36,8 @@ minecraft {
     version = config.minecraft_version + "-" + config.forge_version
 	mappings = config.mappings
     runDir = "run"
+	replace '${version}', project.version									 
+	useDepAts = true				
 }
 
 sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
