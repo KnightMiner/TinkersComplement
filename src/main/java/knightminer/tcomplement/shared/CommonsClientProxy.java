@@ -20,8 +20,8 @@ public class CommonsClientProxy extends ClientProxy {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event) {
 		CommonsModule.materials.registerItemModels();
-		CommonsModule.cast.registerItemModels();
-		CommonsModule.castClay.registerItemModels();
+		registerItemModelDynamic(CommonsModule.cast);
+		registerItemModelDynamic(CommonsModule.castClay);
 	}
 
 	@SubscribeEvent

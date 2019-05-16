@@ -38,7 +38,11 @@ import slimeknights.tconstruct.smeltery.block.BlockTank;
 import slimeknights.tconstruct.smeltery.item.ItemTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 
-@Pulse(id = MelterModule.pulseID, description = "Adds the melter and alloyer: smaller components of the smeltery")
+@Pulse(
+		id = MelterModule.pulseID,
+		description = "Adds the melter and alloyer: smaller components of the smeltery",
+		pulsesRequired = "tconstruct:TinkerSmeltery"
+		)
 public class MelterModule extends PulseBase {
 	public static final String pulseID = "ModuleMelter";
 

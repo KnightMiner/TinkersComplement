@@ -55,16 +55,18 @@ public class CommonsModule extends PulseBase {
 		materials.setCreativeTab(TCompRegistry.tabGeneral);
 
 		// custom casts
-		cast = registerItem(r, new CastCustom(), "cast");
-		cast.setCreativeTab(TCompRegistry.tabGeneral);
+		if(isSmelteryLoaded()) {
+			cast = registerItem(r, new CastCustom(), "cast");
+			cast.setCreativeTab(TCompRegistry.tabGeneral);
 
-		castClay = registerItem(r, new CastCustom(), "cast_clay");
-		castClay.setCreativeTab(TCompRegistry.tabGeneral);
+			castClay = registerItem(r, new CastCustom(), "cast_clay");
+			castClay.setCreativeTab(TCompRegistry.tabGeneral);
 
-		if(Config.general.bucketCast && isSmelteryLoaded()) {
-			stoneBucket = materials.addMeta(0, "stone_bucket");
-			castBucket = cast.addMeta(0, "bucket", Material.VALUE_Ingot);
-			castBucketClay = castClay.addMeta(0, "bucket", Material.VALUE_Ingot);
+			if(Config.general.bucketCast) {
+				stoneBucket = materials.addMeta(0, "stone_bucket");
+				castBucket = cast.addMeta(0, "bucket", Material.VALUE_Ingot);
+				castBucketClay = castClay.addMeta(0, "bucket", Material.VALUE_Ingot);
+			}
 		}
 
 		if(isSteelworksLoaded()) {

@@ -63,7 +63,11 @@ import slimeknights.tconstruct.smeltery.block.BlockSearedSlab;
 import slimeknights.tconstruct.smeltery.block.BlockSearedSlab2;
 import slimeknights.tconstruct.smeltery.item.ItemChannel;
 
-@Pulse(id = SteelworksModule.pulseID, description = "Adds the high oven: a new multiblock for making steel")
+@Pulse(
+		id = SteelworksModule.pulseID,
+		description = "Adds the high oven: a new multiblock for making steel",
+		pulsesRequired = "tconstruct:TinkerSmeltery"
+		)
 public class SteelworksModule extends PulseBase {
 	public static final String pulseID = "ModuleSteelworks";
 

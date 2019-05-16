@@ -20,6 +20,7 @@ import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
+import slimeknights.mantle.item.ItemMetaDynamic;
 import slimeknights.tconstruct.shared.client.BakedTableModel;
 
 public class ClientProxy extends CommonProxy {
@@ -28,6 +29,12 @@ public class ClientProxy extends CommonProxy {
 		super.preInit();
 
 		MinecraftForge.EVENT_BUS.register(this);
+	}
+
+	protected void registerItemModelDynamic(ItemMetaDynamic item) {
+		if(item != null) {
+			item.registerItemModels();
+		}
 	}
 
 	public void registerFluidModels(Fluid fluid) {

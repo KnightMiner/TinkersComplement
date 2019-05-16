@@ -1,5 +1,9 @@
 [
   {
+    "conditions": [{
+      "type": "pulse_loaded",
+      "pulse": "tconstruct:TinkerSmeltery"
+    }],
     "name": "ANY_SEARED_TANK",
     "ingredient": [
       {
@@ -45,6 +49,10 @@
   },
   
   {
+    "conditions": [{
+      "type": "pulse_loaded",
+      "pulse": "tconstruct:TinkerSmeltery"
+    }],
     "name": "SEARED_BRICK",
     "ingredient": {
       "item": "tconstruct:materials",
@@ -61,12 +69,10 @@
   },
   
   {
-    "conditions": [
-      {
-        "type": "forge:mod_loaded",
-        "modid": "ceramics"
-      }
-    ],
+    "conditions": [{
+      "type": "forge:mod_loaded",
+      "modid": "ceramics"
+    }],
     "name": "PORCELAIN_BRICK",
     "ingredient": {
       "item": "ceramics:unfired_clay",
