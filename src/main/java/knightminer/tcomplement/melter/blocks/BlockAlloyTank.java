@@ -91,6 +91,7 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 	}
 
 	@Override
+	@Deprecated
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		updatePower(state, world, pos);
 		// check structure
@@ -141,6 +142,7 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 
 	@Nonnull
 	@Override
+	@Deprecated
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, @Nonnull IBlockState state, int fortune) {
 		// standard drop logic
 		List<ItemStack> ret = Lists.newArrayList();
@@ -189,6 +191,7 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 	}
 
 	@Override
+	@Deprecated
 	public IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState().withProperty(POWERED, (meta & 8) > 0);
 	}
@@ -218,21 +221,25 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 	}
 
 	@Override
+	@Deprecated
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
+	@Deprecated
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
 	}
 
 	@Override
+	@Deprecated
 	public boolean hasComparatorInputOverride(IBlockState state) {
 		return true;
 	}
 
 	@Override
+	@Deprecated
 	public int getComparatorInputOverride(IBlockState blockState, World world, BlockPos pos) {
 		TileEntity te = world.getTileEntity(pos);
 		if(!(te instanceof TileTank)) {

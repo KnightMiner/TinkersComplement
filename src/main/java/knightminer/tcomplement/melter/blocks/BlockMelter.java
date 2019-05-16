@@ -81,6 +81,7 @@ public class BlockMelter extends BlockMultiblockController {
 	}
 
 	@Override
+	@Deprecated
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		// check structure
 		TileMultiblock<?> te = getTile(worldIn, pos);
