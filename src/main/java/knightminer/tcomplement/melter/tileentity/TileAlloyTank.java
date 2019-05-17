@@ -57,6 +57,10 @@ public class TileAlloyTank extends TileTank implements ITickable, IHeaterConsume
 		return oldState.getBlock() != newSate.getBlock();
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
 	@Override
 	public void update() {
 		if(world == null || world.isRemote) {
@@ -268,23 +272,30 @@ public class TileAlloyTank extends TileTank implements ITickable, IHeaterConsume
 	 * Validates the alloy tank structure
 	 */
 	public void checkTanks() {
+		// client does not need anything more
 		if(world.isRemote) {
 			return;
 		}
 
-		// if powered, just clear active and exit
-		if((this.getBlockMetadata() & 8) > 0) {
-			active = false;
-			tanks.clear();
-			alloyTank = null;
+		// if powered or not an alloy tank, just clear active and exit
+		if((this.getBlockMetadata() & 8) > 0 || !(this.getBlockType() instanceof BlockAlloyTank)) {
+			makeInactive();
 			return;
 		}
 
-		// needs to be an alloy tank so we have the block check callback
-		if(!(this.getBlockType() instanceof BlockAlloyTank)) {
+		// set active flag if this combo is valid
+		BlockAlloyTank tankBlock = (BlockAlloyTank)this.blockType;
+		if(!tankBlock.isHeater(world.getBlockState(pos.down()))) {
+			makeInactive();
 			return;
 		}
-		BlockAlloyTank tankBlock = (BlockAlloyTank)this.blockType;
+
+		if (!active) {
+			active = true;
+			// mark for update so the block model updates
+			IBlockState state = world.getBlockState(pos);
+			this.getWorld().notifyBlockUpdate(getPos(), state, state, 3);
+		}
 
 		// get a list of adjecent tanks
 		BlockPos offset;
@@ -306,9 +317,18 @@ public class TileAlloyTank extends TileTank implements ITickable, IHeaterConsume
 
 		// remake alloy tank
 		alloyTank = null;
+	}
 
-		// set active flag if this combo is valid
-		active = tankBlock.isHeater(world.getBlockState(pos.down()));
+	private void makeInactive() {
+		// if it was active, make it not so
+		if(active) {
+			// mark for update so the block model updates
+			IBlockState state = world.getBlockState(pos);
+			this.getWorld().notifyBlockUpdate(getPos(), state, state, 3);
+			active = false;
+			tanks.clear();
+			alloyTank = null;
+		}
 	}
 
 	@Override

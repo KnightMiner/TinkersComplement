@@ -27,6 +27,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -116,13 +117,12 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 		}
 
 		IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
-		ItemStack heldItem = playerIn.getHeldItem(hand);
 		if(FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler)) {
 			return true; // return true as we did something
 		}
 
 		// prevent interaction so stuff like buckets and other things don't place the liquid block
-		return FluidUtil.getFluidHandler(heldItem) != null;
+		return FluidUtil.getFluidHandler(playerIn.getHeldItem(hand)) != null;
 	}
 
 
@@ -211,6 +211,47 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 		}
 		TileTank tank = (TileTank) te;
 		return tank.getBrightness();
+	}
+
+	@Override
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random rand) {
+		TileEntity te = world.getTileEntity(pos);
+		if(te instanceof TileAlloyTank && ((TileAlloyTank)te).isActive()) {
+			// offset position to center of block
+			double x = pos.getX() + 0.5D;
+			double y = pos.getY() + 0.5D;
+			double z = pos.getZ() + 0.5D;
+			// just beyond the face
+			double front = 0.52D;
+
+			// normally used for X and Z
+			double side = rand.nextDouble() * 0.8D - 0.4D;
+			// normally used for Y
+			double top = rand.nextDouble() * 0.8D - 0.4D;
+
+			// choose a random side (or the top) to offset
+			switch(rand.nextInt(5)) {
+				case 0:
+					spawnFireParticle(world, x - front, y + top, z + side);
+					break;
+				case 1:
+					spawnFireParticle(world, x + front, y + top, z + side);
+					break;
+				case 2:
+					spawnFireParticle(world, x + side, y + top, z - front);
+					break;
+				case 3:
+					spawnFireParticle(world, x + side, y + top, z + front);
+					break;
+				case 4:
+					spawnFireParticle(world, x + side, y + front, z + top);
+			}
+		}
+	}
+
+	private static void spawnFireParticle(World world, double x, double y, double z) {
+		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y, z, 0.0D, 0.0D, 0.0D);
+		world.spawnParticle(EnumParticleTypes.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
 	}
 
 	@Nonnull
