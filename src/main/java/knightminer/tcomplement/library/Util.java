@@ -1,16 +1,24 @@
 package knightminer.tcomplement.library;
 
-import static slimeknights.tconstruct.library.Util.temperatureString;
-
-import java.util.Locale;
-
+import knightminer.tcomplement.TinkersComplement;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 
-import knightminer.tcomplement.TinkersComplement;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
+import java.util.Locale;
+
+import static slimeknights.tconstruct.library.Util.temperatureString;
 
 @SuppressWarnings("deprecation")
 public class Util {
@@ -77,5 +85,24 @@ public class Util {
 	 */
 	public static String celsiusString(int temperature) {
 		return temperatureString(temperature+300);
+	}
+
+	/**
+	 * Shared logic to interact with a fluid tank on right click
+	 * @param world    World instance
+	 * @param pos      Location of the block
+	 * @param player   Player interacting
+	 * @param hand     Hand used to interact
+	 * @param facing   Side of the block clicked
+	 * @return  True if it interacted, false if we are not holding a fluid container
+	 */
+	public static boolean onFluidTankActivated(World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing) {
+		TileEntity te = world.getTileEntity(pos);
+		if(te == null || !te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
+			return false;
+		}
+
+		IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
+		return FluidUtil.interactWithFluidHandler(player, hand, fluidHandler);
 	}
 }

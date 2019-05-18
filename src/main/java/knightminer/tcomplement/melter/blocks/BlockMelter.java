@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.library.IHeaterConsumer;
 import knightminer.tcomplement.library.TCompRegistry;
+import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.melter.tileentity.TileHeater;
 import knightminer.tcomplement.melter.tileentity.TileMelter;
 import net.minecraft.block.Block;
@@ -53,6 +54,14 @@ public class BlockMelter extends BlockMultiblockController {
 
 	public BlockTank getMelterTank() {
 		return melterTank;
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float clickX, float clickY, float clickZ) {
+		if(state.getValue(TYPE) == MelterType.MELTER && Util.onFluidTankActivated(world, pos, player, hand, facing)) {
+			return true;
+		}
+		return super.onBlockActivated(world, pos, state, player, hand, facing, clickX, clickY, clickZ);
 	}
 
 	/* Multiblock logic */

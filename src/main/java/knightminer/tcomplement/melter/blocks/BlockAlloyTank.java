@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.Lists;
 
 import knightminer.tcomplement.library.TCompRegistry;
+import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.melter.blocks.BlockMelter.MelterType;
 import knightminer.tcomplement.melter.tileentity.TileAlloyTank;
 import net.minecraft.block.Block;
@@ -110,19 +111,11 @@ public class BlockAlloyTank extends Block implements ITileEntityProvider, IFauce
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		TileEntity te = worldIn.getTileEntity(pos);
-		if(te == null || !te.hasCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing)) {
-			return false;
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if(Util.onFluidTankActivated(world, pos, player, hand, facing)) {
+			return true;
 		}
-
-		IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
-		if(FluidUtil.interactWithFluidHandler(playerIn, hand, fluidHandler)) {
-			return true; // return true as we did something
-		}
-
-		// prevent interaction so stuff like buckets and other things don't place the liquid block
-		return FluidUtil.getFluidHandler(playerIn.getHeldItem(hand)) != null;
+		return FluidUtil.getFluidHandler(player.getHeldItem(hand)) != null;
 	}
 
 

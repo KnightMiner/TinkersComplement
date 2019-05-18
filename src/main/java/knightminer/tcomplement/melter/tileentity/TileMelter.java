@@ -7,7 +7,6 @@ import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.TCompNetwork;
 import knightminer.tcomplement.library.IHeaterConsumer;
 import knightminer.tcomplement.library.TCompRegistry;
-import knightminer.tcomplement.library.tanks.FluidHandlerDrainOnlyWrapper;
 import knightminer.tcomplement.library.tanks.MelterTank;
 import knightminer.tcomplement.melter.client.GuiMelter;
 import knightminer.tcomplement.melter.inventory.ContainerMelter;
@@ -27,7 +26,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import slimeknights.mantle.common.IInventoryGui;
@@ -48,7 +46,6 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 
 	// liquid stored inside
 	private FluidTankAnimated tank;
-	private IFluidHandler tankWrapper;
 
 	protected static final int CAPACITY = Material.VALUE_Ingot * 16;
 
@@ -57,7 +54,6 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 
 		setMultiblock(new MultiblockMelter(this));
 		tank = new MelterTank(CAPACITY, this);
-		tankWrapper = new FluidHandlerDrainOnlyWrapper(tank);
 	}
 
 	public FluidTankAnimated getTank() {
@@ -260,7 +256,7 @@ public class TileMelter extends TileHeatingStructureFuelTank<MultiblockMelter> i
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
 		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
 			// only allow extraction
-			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tankWrapper);
+			return CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY.cast(tank);
 		}
 		return super.getCapability(capability, facing);
 	}
