@@ -99,7 +99,7 @@ public class BlockHighOvenIO extends BlockEnumSmeltery<BlockHighOvenIO.IOType> {
 
 		ItemStack heldItem = player.getHeldItem(hand);
 		IItemHandler playerInventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-		FluidActionResult result = FluidUtil.tryEmptyContainerAndStow(heldItem, fluidHandler, playerInventory, Fluid.BUCKET_VOLUME, player, true);
+		FluidActionResult result = FluidUtil.tryEmptyContainerAndStow(heldItem, fluidHandler, playerInventory, Integer.MAX_VALUE, player, true);
 		if(result.isSuccess()) {
 			player.setHeldItem(hand, result.getResult());
 			return true;
