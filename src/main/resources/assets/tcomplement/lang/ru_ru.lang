@@ -59,7 +59,7 @@ item.tcomplement.sledge_hammer.name=Кузнечный молот
 item.tcomplement.sledge_hammer.desc=Разбивает блоки на более мелкие кусочки
 
 item.tcomplement.chisel.name=Стамеска
-item.tcomplement.chisel.desc=Chisel blocks into other blocks, in world and in hand.\nApply expanders to chisel bigger areas.
+item.tcomplement.chisel.desc=Позволяет обрабатывать блоки в мире и руке.\nИспользуйте расширители, чтобы увеличить область обработки.
 item.tcomplement.chisel_head.name=Головка стамески
 
 
@@ -92,6 +92,6 @@ tcomplement.config.general=Основные
 tcomplement.config.general.bucketCast=Отливка ведра
 tcomplement.config.melter=Плавильная печь
 tcomplement.config.melter.oreToIngotRatio=Соотношение руды к слитку
-tcomplement.config.melter.blacklistStone=Blacklist Stone
+tcomplement.config.melter.blacklistStone=Камень в чёрном списке
 tcomplement.config.jei=Интеграция с JEI
 tcomplement.config.jei.separateMelterTab=Отдельная вкладка плавильной печи
