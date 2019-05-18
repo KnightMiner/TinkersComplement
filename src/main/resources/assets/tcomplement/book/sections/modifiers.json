@@ -1,0 +1,7 @@
+[
+  {
+    "type": "modifier",
+    "data": "modifiers/hitech.json",
+    "module": "ChiselPlugin"
+  }
+]

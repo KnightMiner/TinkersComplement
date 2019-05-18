@@ -1,7 +1,6 @@
 package knightminer.tcomplement.shared;
 
 import com.google.common.eventbus.Subscribe;
-
 import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.PulseBase;
@@ -41,6 +40,8 @@ public class CommonsModule extends PulseBase {
 	public static ItemStack castBucket, castBucketClay;
 	public static ItemStack scorchedBrick, steelIngot, steelNugget;
 
+	public static ItemStack iModifier;
+
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit();
@@ -71,8 +72,14 @@ public class CommonsModule extends PulseBase {
 
 		if(isSteelworksLoaded()) {
 			scorchedBrick = materials.addMeta(1, "scorched_brick");
+			// ingots start at 10
 			steelIngot = materials.addMeta(10, "steel_ingot");
+			// nuggets start at 20
 			steelNugget = materials.addMeta(20, "steel_nugget");
+		}
+
+		if (isChiselPluginLoaded()) {
+			iModifier = materials.addMeta(6, "imodifier");
 		}
 	}
 

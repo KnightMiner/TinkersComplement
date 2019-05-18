@@ -154,6 +154,13 @@ item.tcomplement.chisel.name=Chisel
 item.tcomplement.chisel.desc=Chisel blocks into other blocks, in world and in hand.\nApply expanders to chisel bigger areas.
 item.tcomplement.chisel_head.name=Chisel Head
 
+item.tcomplement.materials.imodifier.name=iModifier
+item.tcomplement.materials.imodifier.tooltip=Upgrade to the chisel providing a futuristic UI
+
+modifier.hitech.name=iModifier
+modifier.hitech.desc=§oFuturistic§r\nUpgrades the UI of the chisel. Also gives additional chiseling options when used with expanders.
+gui.tcomplement.error.has_chisel_target=Must remove chisel target stack before adding iModifier
+
 
 ################
 #   Ceramics   #

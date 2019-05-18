@@ -28,5 +28,10 @@
         "id": "tcomplement:high_oven_controller"
       }
     }
+  },
+  {
+    "name": "modifiers",
+    "data": "sections/modifiers.json",
+    "module": "tconstruct:TinkerTools"
   }
 ]

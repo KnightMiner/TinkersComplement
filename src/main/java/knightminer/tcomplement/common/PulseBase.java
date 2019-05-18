@@ -6,6 +6,7 @@ import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.melter.MelterModule;
 import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
+import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.steelworks.SteelworksModule;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.IProperty;
@@ -59,6 +60,11 @@ public class PulseBase {
 	/** Returns true if the Tinkers Complement Ceramics plugin is loaded */
 	public static boolean isCeramicsPluginLoaded() {
 		return TinkersComplement.pulseManager.isPulseLoaded(CeramicsPlugin.pulseID);
+	}
+
+	/** Returns true if the Tinkers Complement Ceramics plugin is loaded */
+	public static boolean isChiselPluginLoaded() {
+		return TinkersComplement.pulseManager.isPulseLoaded(ChiselPlugin.pulseID);
 	}
 
 	/* Normal registration */

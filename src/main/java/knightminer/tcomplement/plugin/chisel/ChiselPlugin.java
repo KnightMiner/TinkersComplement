@@ -7,6 +7,8 @@ import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.plugin.chisel.items.ItemChisel;
+import knightminer.tcomplement.plugin.chisel.modifiers.ModHitech;
+import knightminer.tcomplement.shared.CommonsModule;
 import knightminer.tcomplement.steelworks.SteelworksModule;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -22,6 +24,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.ModifierAspect;
+import slimeknights.tconstruct.library.tinkering.Category;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.smeltery.block.BlockSeared.SearedType;
@@ -38,6 +43,11 @@ public class ChiselPlugin extends PulseBase {
 	public static ToolPart chiselHead;
 	public static ToolCore chisel;
 
+	public static Modifier modHitech;
+
+	public static final Category CHISEL = new Category("chisel");
+	public static final ModifierAspect CHISEL_ONLY = new ModifierAspect.CategoryAspect(CHISEL);
+
 	@Subscribe
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit();
@@ -51,6 +61,8 @@ public class ChiselPlugin extends PulseBase {
 			chiselHead = registerItem(r, new ToolPart(Material.VALUE_Ingot), "chisel_head");
 			chiselHead.setCreativeTab(TCompRegistry.tabTools);
 			chisel = registerItem(r, new ItemChisel(), "chisel");
+			modHitech = new ModHitech();
+			modHitech.addItem(CommonsModule.iModifier, 1, 1);
 		}
 	}
 

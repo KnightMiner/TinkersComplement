@@ -78,5 +78,21 @@
       "item": "ceramics:unfired_clay",
       "data": 5
     }
+  },
+  
+  {
+    "name": "REINFORCEMENT_CENTER",
+    "ingredient": {
+        "type": "forge:ore_dict",
+        "ore": "ingotGold"
+    }
+  },
+  {
+    "name": "REINFORCEMENT_CENTER",
+    "conditions": [{"type": "pulse_loaded", "pulse": "tconstruct:TinkerSmeltery"}],
+    "ingredient": {
+        "type": "forge:ore_dict",
+        "ore": "cast"
+    }
   }
 ]

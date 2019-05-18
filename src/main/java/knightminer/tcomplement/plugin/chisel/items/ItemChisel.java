@@ -1,7 +1,5 @@
 package knightminer.tcomplement.plugin.chisel.items;
 
-import java.util.List;
-
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import net.minecraft.block.state.IBlockState;
@@ -31,6 +29,8 @@ import team.chisel.api.IChiselItem;
 import team.chisel.api.carving.ICarvingVariation;
 import team.chisel.api.carving.IChiselMode;
 
+import java.util.List;
+
 @Optional.Interface(iface="team.chisel.api.IChiselItem", modid="chisel")
 public class ItemChisel extends AoeToolCore implements IChiselItem {
 
@@ -41,7 +41,7 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 				PartMaterialType.head(ChiselPlugin.chiselHead));
 
 		setCreativeTab(TCompRegistry.tabTools);
-		addCategory(Category.WEAPON);
+		addCategory(Category.WEAPON, ChiselPlugin.CHISEL);
 	}
 
 	/* Tool stuffs */
@@ -86,7 +86,8 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 	@Optional.Method(modid="chisel")
 	@Override
 	public IChiselGuiType getGuiType(World world, EntityPlayer player, EnumHand hand) {
-		return ChiselGuiType.NORMAL;
+		NBTTagCompound tags = TagUtil.getTagSafe(player.getHeldItem(hand));
+		return TinkerUtil.hasModifier(tags, ChiselPlugin.modHitech.getIdentifier()) ? ChiselGuiType.HITECH : ChiselGuiType.NORMAL;
 	}
 
 	@Optional.Method(modid="chisel")
@@ -97,11 +98,11 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 			return true;
 		}
 
-		// use expanders to determine ability
+		// use expanders and hitech to determine ability
 		NBTTagCompound tags = TagUtil.getTagSafe(stack);
 		boolean hasWidth = TinkerUtil.hasModifier(tags, TinkerModifiers.modHarvestWidth.getIdentifier());
 		boolean hasHeight = TinkerUtil.hasModifier(tags, TinkerModifiers.modHarvestHeight.getIdentifier());
-
+		boolean hasHitech = TinkerUtil.hasModifier(tags, ChiselPlugin.modHitech.getIdentifier());
 		switch(name) {
 			case "COLUMN":
 				return hasHeight;
@@ -109,6 +110,10 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 				return hasWidth;
 			case "PANEL":
 				return hasWidth && hasHeight;
+			case "CONTIGUOUS":
+				return hasWidth && hasHeight && hasHitech;
+			case "CONTIGUOUS_2D":
+				return (hasWidth || hasHeight) && hasHitech;
 		}
 
 		return false;

@@ -5,10 +5,12 @@
         "model": "forge:item-layer"
     },
     "variants": {
-        "stone_bucket": [{ "textures": { "layer0": "tcomplement:items/materials/stone_bucket" }}],
+        "stone_bucket":   [{ "textures": { "layer0": "tcomplement:items/materials/stone_bucket"   }}],
 
         "scorched_brick": [{ "textures": { "layer0": "tcomplement:items/materials/scorched_brick" }}],
-        "steel_ingot": [{ "textures": { "layer0": "tcomplement:items/materials/steel_ingot" }}],
-        "steel_nugget": [{ "textures": { "layer0": "tcomplement:items/materials/steel_nugget" }}]
+        "steel_ingot":    [{ "textures": { "layer0": "tcomplement:items/materials/steel_ingot"    }}],
+        "steel_nugget":   [{ "textures": { "layer0": "tcomplement:items/materials/steel_nugget"   }}],
+        
+        "imodifier":      [{ "textures": { "layer0": "tcomplement:items/materials/imodifier"      }}]
     }
 }

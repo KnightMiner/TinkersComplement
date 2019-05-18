@@ -1,8 +1,5 @@
 package knightminer.tcomplement;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import knightminer.tcomplement.armor.ArmorModule;
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.TCompNetwork;
@@ -25,6 +22,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import slimeknights.mantle.common.GuiHandler;
 import slimeknights.mantle.pulsar.control.PulseManager;
 
@@ -33,7 +32,7 @@ import slimeknights.mantle.pulsar.control.PulseManager;
 		name = TinkersComplement.modName,
 		version = TinkersComplement.modVersion,
 		dependencies = "required-after:forge@[14.23.4.2705,);"
-				+ "required-after:mantle@[1.12-1.3.3.52,);"
+				+ "required-after:mantle@[1.12-1.3.3.54,);"
 				+ "required-after:tconstruct@[1.12.2-2.12.0.135,);"
 				+ "after:chisel@[MC1.12-0.1.0.22,);"
 				+ "after:exnihilocreatio",

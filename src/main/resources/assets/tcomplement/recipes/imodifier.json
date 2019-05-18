@@ -1,0 +1,20 @@
+{
+  "conditions": [{ "type": "pulse_loaded", "pulse": "ChiselPlugin" }],
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "RCR"
+  ],
+  "key": {
+      "R": {
+          "type": "forge:ore_dict",
+          "ore": "dustRedstone"
+      },
+      "C": {
+          "item": "#REINFORCEMENT_CENTER"
+      }
+  },
+  "result": {
+      "item": "tcomplement:materials",
+      "data": 6
+  }
+}
