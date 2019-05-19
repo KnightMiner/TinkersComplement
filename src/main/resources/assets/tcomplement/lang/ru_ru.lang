@@ -47,6 +47,94 @@ item.tcomplement.knightslime_chestplate.name=Нагрудник из слизе�
 item.tcomplement.knightslime_leggings.name=Поножи из слизестали
 item.tcomplement.knightslime_boots.name=Ботинки из слизестали
 
+item.tcomplement.steel_helmet.name=Стальной шлем
+item.tcomplement.steel_chestplate.name=Стальной нагрудник
+item.tcomplement.steel_leggings.name=Стальные поножи
+item.tcomplement.steel_boots.name=Стальные ботинки
+
+
+################
+#  Steelworks  #
+################
+
+item.tcomplement.materials.steel_ingot.name=Стальной слиток
+item.tcomplement.materials.steel_nugget.name=Стальной самородок
+
+tile.tcomplement.storage.charcoal.name=Блок древесного угля
+tile.tcomplement.storage.steel.name=Блок стали
+
+# High Oven Blocks
+tile.tcomplement.high_oven_controller.name=Контроллер доменной печи
+tile.tcomplement.high_oven_io.drain.name=Горн доменной печи
+tile.tcomplement.high_oven_io.drain.tooltip=Служит для входа и выхода жидкостей в Доменную печь
+tile.tcomplement.high_oven_io.chute.name=Жёлоб доменной печи
+tile.tcomplement.high_oven_io.chute.tooltip=Служит для входа предметов в Доменную печь
+tile.tcomplement.high_oven_io.duct.name=Входной канал доменной печи
+tile.tcomplement.high_oven_io.duct.tooltip=Слушит окислителем, редуктором, очистителем и входом для топлива в Доменную печь
+tile.tcomplement.scorched_casting.table.name=Обожжённый стол для отливки
+tile.tcomplement.scorched_casting.basin.name=Обожжённый стол для отливки
+tile.tcomplement.scorched_casting.tooltip=Отливает предметы, используя жидкие металлы внутри доменной печи
+tile.tcomplement.scorched_faucet.name=Обожжённый кран
+tile.tcomplement.scorched_faucet.tooltip=Сливает жидкости из доменной печи и других резервуаров
+tile.tcomplement.scorched_channel.name=Обожжённый желоб
+tile.tcomplement.scorched_channel.tooltip=Желоба можно использовать для транспортировки жидкостей и литья. Их нужно наполнять при помощи крана.
+
+# Scorched
+item.tcomplement.materials.scorched_brick.name=Обожжённый кирпич
+tile.tcomplement.scorched_block.stone.name=Обожжённый камень
+tile.tcomplement.scorched_block.cobble.name=Обожжённый булыжник
+tile.tcomplement.scorched_block.paver.name=Обожжённое дорожное покрытие
+tile.tcomplement.scorched_block.brick.name=Обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_cracked.name=Потрескавшиеся обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_fancy.name=Причудливые обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_square.name=Резные обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_triangle.name=Треугольные обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_small.name=Малые обожжённые кирпичи
+tile.tcomplement.scorched_block.road.name=Обожжённая брусчатка
+tile.tcomplement.scorched_block.tile.name=Обожжённая черепица
+tile.tcomplement.scorched_block.creeper.name=Обожжённые жуткие кирпичи
+tile.tcomplement.scorched_block.tooltip=Часть Доменной печи, безопасно для украшения
+
+# Scorched Slabs
+tile.tcomplement.scorched_slab.stone.name=Плита из обожжёного камня
+tile.tcomplement.scorched_slab.cobble.name=Плита из обожжённого булыжника
+tile.tcomplement.scorched_slab.paver.name=Плита из обожжённого дорожного покрытия
+tile.tcomplement.scorched_slab.brick.name=Плита из обожжённых кирпичей
+tile.tcomplement.scorched_slab.brick_cracked.name=Плита из потрескавшихся обожжённых кирпичей
+tile.tcomplement.scorched_slab.brick_fancy.name=Плита из причудливых обожжённых кирпичей
+tile.tcomplement.scorched_slab.brick_square.name=Плита из резных обожжённых кирпичей
+tile.tcomplement.scorched_slab.road.name=Плита из обожжённой брусчатки
+tile.tcomplement.scorched_slab2.creeper.name=Плита из обожжённых жутких кирпичей
+tile.tcomplement.scorched_slab2.brick_triangle.name=Плита из треугольных обожжёных кирпичей
+tile.tcomplement.scorched_slab2.brick_small.name=Плита из малых обожжённых кирпичей
+tile.tcomplement.scorched_slab2.tile.name=Плита из обожжённой черепицы
+
+# Scorched Stairs
+tile.tcomplement.scorched_stairs_stone.name=Ступеньки из обожжённого камня
+tile.tcomplement.scorched_stairs_cobble.name=Ступеньки из обожжённого булыжника
+tile.tcomplement.scorched_stairs_paver.name=Ступеньки из обожжённого дорожного покрытия
+tile.tcomplement.scorched_stairs_brick.name=Ступеньки из обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_cracked.name=Ступеньки из потресавшихся обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_fancy.name=Ступеньки из причудливых обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_square.name=Ступеньки из резных обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_triangle.name=Ступеньки из треугольных обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_small.name=Ступеньки из малых обожжённых кирпичей
+tile.tcomplement.scorched_stairs_road.name=Ступеньки из обожжённой брусчатки
+tile.tcomplement.scorched_stairs_tile.name=Ступеньки из обожжённой черепицы
+tile.tcomplement.scorched_stairs_creeper.name=Ступеньки из обожжённых жутких кирпичей
+
+# GUI
+gui.tcomplement.high_oven.name=Доменная Печь
+gui.tcomplement.high_oven.progress.no_space=Недостаточно свободного места в Доменной Печи
+gui.tcomplement.high_oven.progress.wrong_fluid=Получающаяся жидкость отличается от жидкости в Доменной печи
+
+gui.jei.high_oven.melting.title=Плавка в Доменной печи
+gui.jei.high_oven.mix.title=Смешивание в Доменной печи
+gui.jei.high_oven.mix.consume=%s%% шанс уничтожения
+gui.jei.high_oven.fuel.title=Топливо для Доменной печи
+gui.jei.high_oven.fuel.rate=+%s°c/s
+gui.jei.high_oven.fuel.time=Время горения: %ss
+
 
 ################
 #    Tools     #
@@ -90,8 +178,13 @@ tile.tcomplement.porcelain_tank.tooltip=Сердце плавильной печ
 
 tcomplement.config.general=Основные
 tcomplement.config.general.bucketCast=Отливка ведра
+tcomplement.config.oreToIngotRatio=Соотношение руды к слитку
+
 tcomplement.config.melter=Плавильная печь
-tcomplement.config.melter.oreToIngotRatio=Соотношение руды к слитку
-tcomplement.config.melter.blacklistStone=Камень в чёрном списке
-tcomplement.config.jei=Интеграция с JEI
-tcomplement.config.jei.separateMelterTab=Отдельная вкладка плавильной печи
+tcomplement.config.melter.blacklistStone=Blacklist Stone
+
+tcomplement.config.highOven=Доменная печь
+
+tcomplement.config.jei=JEI
+tcomplement.config.jei.separateMelterTab=Выносить "Плавильную печь" отдельной вкладкой
+tcomplement.config.jei.separateHighOvenTab=Выносить "Доменную печь" отдельной вкладкой
