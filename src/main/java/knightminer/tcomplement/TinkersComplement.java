@@ -7,6 +7,7 @@ import knightminer.tcomplement.melter.MelterModule;
 import knightminer.tcomplement.plugin.ceramics.CeramicsPlugin;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
 import knightminer.tcomplement.plugin.exnihilo.ExNihiloPlugin;
+import knightminer.tcomplement.plugin.toolleveling.ToolLevelingPlugin;
 import knightminer.tcomplement.shared.CommonsModule;
 import knightminer.tcomplement.shared.OredictModule;
 import knightminer.tcomplement.shared.legacy.TileEntityRenamer;
@@ -58,6 +59,7 @@ public class TinkersComplement {
 		pulseManager.registerPulse(new CeramicsPlugin());
 		pulseManager.registerPulse(new ChiselPlugin());
 		pulseManager.registerPulse(new ExNihiloPlugin());
+		pulseManager.registerPulse(new ToolLevelingPlugin());
 		pulseManager.registerPulse(new OredictModule());
 	}
 

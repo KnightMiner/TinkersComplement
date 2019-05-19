@@ -2,6 +2,7 @@ package knightminer.tcomplement.plugin.chisel.items;
 
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.plugin.chisel.ChiselPlugin;
+import knightminer.tcomplement.plugin.toolleveling.ToolLevelingPlugin;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -152,6 +153,8 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 		int damageLeft = chisel.getMaxDamage() - chisel.getItemDamage();
 		toCraft = Math.min(toCraft, damageLeft);
 		ToolHelper.damageTool(chisel, toCraft, player);
+		// add XP for chiseling, this will safely do nothing if tool leveling is not loaded
+		ToolLevelingPlugin.xpAdder.addXp(chisel, toCraft, player);
 
 		ItemStack res = target.copy();
 		source.shrink(toCraft);
