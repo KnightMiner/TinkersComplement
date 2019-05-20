@@ -58,6 +58,10 @@ repositories {
 		name 'Jared'
 		url 'https://maven.blamejared.com/'
 	}
+    maven {
+        name = 'CurseForge'
+        url = 'https://minecraft.curseforge.com/api/maven/'
+    }
 }
 
 dependencies {
@@ -70,6 +74,7 @@ dependencies {
     deobfCompile("exnihilocreatio:exnihilocreatio:${config.minecraft_base_version}-${config.exnihilo_version}") {
 		transitive = false
 	}
+    deobfCompile "tinkers-tool-leveling:TinkerToolLeveling:${config.minecraft_base_version}:${config.tool_leveling}"
 }
 
 processResources {
