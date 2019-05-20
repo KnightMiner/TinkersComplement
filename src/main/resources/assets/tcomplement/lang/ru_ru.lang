@@ -1,100 +1,190 @@
-# Translated by Yaroslavik
 ################
 #    Common    #
 ################
 
-itemGroup.TCompGeneral=Tinkers' Complement Основное
+itemGroup.TCompGeneral=Tinkers' Complement: Общее
 
 item.tcomplement.materials.stone_bucket.name=Каменное ведро
-item.tcomplement.materials.stone_bucket.tooltip=Не будет работать как ведро, но подойдёт для отливки формы
+item.tcomplement.materials.stone_bucket.tooltip=Не работает в качестве ведра, но подойдёт для отливки подобной формы
 
-item.tcomplement.cast.bucket.name=Отливка - ведро
-item.tcomplement.cast_clay.bucket.name=Отливка - глиняное ведро
+item.tcomplement.cast.bucket.name=Форма отливки ведра
+item.tcomplement.cast_clay.bucket.name=Форма отливки глиняного ведра
 
 
 ################
 #    Melter    #
 ################
 
-tile.tcomplement.melter.melter.name=Плавильня
-tile.tcomplement.melter.melter.tooltip=Уменьшенная версия плавильни.\nМожет плавить металлы,\nно не может создавать сплавы.
-tile.tcomplement.melter.heater.name=Ослабленный нагреватель
-tile.tcomplement.melter.heater.tooltip=Может нагревать плавильню с \nиспользованием твердого топлива,\nно имеет более ограниченную температуру.
-tile.tcomplement.alloy_tank.name=Резервуар для расплава
-tile.tcomplement.alloy_tank.tooltip=Жидкий расплав из соседних резервуаров и расплавителей.\nРазместите над нагревателем для снабжения горючим.
+tile.tcomplement.melter.melter.name=Плавильная печь
+tile.tcomplement.melter.melter.tooltip=Уменьшенная версия плавильни.\nМожет плавить металлы, но не умеет создавать сплавы.
+tile.tcomplement.melter.heater.name=Нагреватель
+tile.tcomplement.melter.heater.tooltip=Может нагревать плавильную печь при помощи твёрдого топлива, но имеет более ограниченную температуру.
+tile.tcomplement.alloy_tank.name=Резервуар для смешивания
+tile.tcomplement.alloy_tank.tooltip=Смешивает жидкости из соседних сушёных резервуаров и плавильных печей.\nПоместите над нагревателем для функционирования.
 
-gui.tcomplement.melter.name=Плавильня
-gui.tcomplement.melter.progress.no_space=Недостаточно свободного места в плавильне
-gui.tcomplement.melter.progress.wrong_fluid=Результирующая жидкость отличается от жидкости в плавильне
+gui.tcomplement.melter.name=Плавильная печь
+gui.tcomplement.melter.progress.no_space=В плавильной печи недостаточно свободного места
+gui.tcomplement.melter.progress.wrong_fluid=Получающаяся жидкость отличается от жидкости в плавильной печи
 gui.tcomplement.melter.solid_fuel=Нагреватель
-gui.tcomplement.melter.solid_fuel.amount=%s едениц
+gui.tcomplement.melter.solid_fuel.amount=%s единиц
 
 gui.tcomplement.heater.name=Нагреватель
 
-gui.jei.melter.title=Плавильня
+gui.jei.melter.title=Плавильная печь
 
 
 ################
 #    Armor     #
 ################
 
-item.tcomplement.manyullyn_helmet.name=Манулиновый шлем
-item.tcomplement.manyullyn_chestplate.name=Манулиновая криса
-item.tcomplement.manyullyn_leggings.name=Манулиновые поножи
-item.tcomplement.manyullyn_boots.name=Манулиновые ботинки
+item.tcomplement.manyullyn_helmet.name=Маньюлиновый шлем
+item.tcomplement.manyullyn_chestplate.name=Маньюлиновый нагрудник
+item.tcomplement.manyullyn_leggings.name=Маньюлиновые поножи
+item.tcomplement.manyullyn_boots.name=Маньюлиновые ботинки
 
-item.tcomplement.knightslime_helmet.name=Рыцарьский слизневый шлем
-item.tcomplement.knightslime_chestplate.name=Рыцарьская слизневая криса
-item.tcomplement.knightslime_leggings.name=Рыцарьские слизневые поножи
-item.tcomplement.knightslime_boots.name=Рыцарьские слизневые ботинки
+item.tcomplement.knightslime_helmet.name=Шлем из слизестали
+item.tcomplement.knightslime_chestplate.name=Нагрудник из слизестали
+item.tcomplement.knightslime_leggings.name=Поножи из слизестали
+item.tcomplement.knightslime_boots.name=Ботинки из слизестали
+
+item.tcomplement.steel_helmet.name=Стальной шлем
+item.tcomplement.steel_chestplate.name=Стальной нагрудник
+item.tcomplement.steel_leggings.name=Стальные поножи
+item.tcomplement.steel_boots.name=Стальные ботинки
+
+
+################
+#  Steelworks  #
+################
+
+item.tcomplement.materials.steel_ingot.name=Стальной слиток
+item.tcomplement.materials.steel_nugget.name=Стальной самородок
+
+tile.tcomplement.storage.charcoal.name=Блок древесного угля
+tile.tcomplement.storage.steel.name=Блок стали
+
+# High Oven Blocks
+tile.tcomplement.high_oven_controller.name=Контроллер доменной печи
+tile.tcomplement.high_oven_io.drain.name=Горн доменной печи
+tile.tcomplement.high_oven_io.drain.tooltip=Служит для входа и выхода жидкостей в Доменную печь
+tile.tcomplement.high_oven_io.chute.name=Жёлоб доменной печи
+tile.tcomplement.high_oven_io.chute.tooltip=Служит для входа предметов в Доменную печь
+tile.tcomplement.high_oven_io.duct.name=Входной канал доменной печи
+tile.tcomplement.high_oven_io.duct.tooltip=Слушит окислителем, редуктором, очистителем и входом для топлива в Доменную печь
+tile.tcomplement.scorched_casting.table.name=Обожжённый стол для отливки
+tile.tcomplement.scorched_casting.basin.name=Обожжённый стол для отливки
+tile.tcomplement.scorched_casting.tooltip=Отливает предметы, используя жидкие металлы внутри доменной печи
+tile.tcomplement.scorched_faucet.name=Обожжённый кран
+tile.tcomplement.scorched_faucet.tooltip=Сливает жидкости из доменной печи и других резервуаров
+tile.tcomplement.scorched_channel.name=Обожжённый желоб
+tile.tcomplement.scorched_channel.tooltip=Желоба можно использовать для транспортировки жидкостей и литья. Их нужно наполнять при помощи крана.
+
+# Scorched
+item.tcomplement.materials.scorched_brick.name=Обожжённый кирпич
+tile.tcomplement.scorched_block.stone.name=Обожжённый камень
+tile.tcomplement.scorched_block.cobble.name=Обожжённый булыжник
+tile.tcomplement.scorched_block.paver.name=Обожжённое дорожное покрытие
+tile.tcomplement.scorched_block.brick.name=Обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_cracked.name=Потрескавшиеся обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_fancy.name=Причудливые обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_square.name=Резные обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_triangle.name=Треугольные обожжённые кирпичи
+tile.tcomplement.scorched_block.brick_small.name=Малые обожжённые кирпичи
+tile.tcomplement.scorched_block.road.name=Обожжённая брусчатка
+tile.tcomplement.scorched_block.tile.name=Обожжённая черепица
+tile.tcomplement.scorched_block.creeper.name=Обожжённые жуткие кирпичи
+tile.tcomplement.scorched_block.tooltip=Часть Доменной печи, безопасно для украшения
+
+# Scorched Slabs
+tile.tcomplement.scorched_slab.stone.name=Плита из обожжёного камня
+tile.tcomplement.scorched_slab.cobble.name=Плита из обожжённого булыжника
+tile.tcomplement.scorched_slab.paver.name=Плита из обожжённого дорожного покрытия
+tile.tcomplement.scorched_slab.brick.name=Плита из обожжённых кирпичей
+tile.tcomplement.scorched_slab.brick_cracked.name=Плита из потрескавшихся обожжённых кирпичей
+tile.tcomplement.scorched_slab.brick_fancy.name=Плита из причудливых обожжённых кирпичей
+tile.tcomplement.scorched_slab.brick_square.name=Плита из резных обожжённых кирпичей
+tile.tcomplement.scorched_slab.road.name=Плита из обожжённой брусчатки
+tile.tcomplement.scorched_slab2.creeper.name=Плита из обожжённых жутких кирпичей
+tile.tcomplement.scorched_slab2.brick_triangle.name=Плита из треугольных обожжёных кирпичей
+tile.tcomplement.scorched_slab2.brick_small.name=Плита из малых обожжённых кирпичей
+tile.tcomplement.scorched_slab2.tile.name=Плита из обожжённой черепицы
+
+# Scorched Stairs
+tile.tcomplement.scorched_stairs_stone.name=Ступеньки из обожжённого камня
+tile.tcomplement.scorched_stairs_cobble.name=Ступеньки из обожжённого булыжника
+tile.tcomplement.scorched_stairs_paver.name=Ступеньки из обожжённого дорожного покрытия
+tile.tcomplement.scorched_stairs_brick.name=Ступеньки из обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_cracked.name=Ступеньки из потресавшихся обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_fancy.name=Ступеньки из причудливых обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_square.name=Ступеньки из резных обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_triangle.name=Ступеньки из треугольных обожжённых кирпичей
+tile.tcomplement.scorched_stairs_brick_small.name=Ступеньки из малых обожжённых кирпичей
+tile.tcomplement.scorched_stairs_road.name=Ступеньки из обожжённой брусчатки
+tile.tcomplement.scorched_stairs_tile.name=Ступеньки из обожжённой черепицы
+tile.tcomplement.scorched_stairs_creeper.name=Ступеньки из обожжённых жутких кирпичей
+
+# GUI
+gui.tcomplement.high_oven.name=Доменная Печь
+gui.tcomplement.high_oven.progress.no_space=Недостаточно свободного места в Доменной Печи
+gui.tcomplement.high_oven.progress.wrong_fluid=Получающаяся жидкость отличается от жидкости в Доменной печи
+
+gui.jei.high_oven.melting.title=Плавка в Доменной печи
+gui.jei.high_oven.mix.title=Смешивание в Доменной печи
+gui.jei.high_oven.mix.consume=%s%% шанс уничтожения
+gui.jei.high_oven.fuel.title=Топливо для Доменной печи
+gui.jei.high_oven.fuel.rate=+%s°c/s
+gui.jei.high_oven.fuel.time=Время горения: %ss
 
 
 ################
 #    Tools     #
 ################
 
-itemGroup.TCompTools=Tinkers' Complement Инструменты
+itemGroup.TCompTools=Tinkers' Complement: Инструменты
 
-item.tcomplement.sledge_head.name=Наконечник кувалды
-item.tcomplement.sledge_hammer.name=Кувалда
-item.tcomplement.sledge_hammer.desc=Разбивайте блоки на более мелкие кусочки, а затем разбивайте их снова.
+item.tcomplement.sledge_head.name=Головка кузнечного молота
+item.tcomplement.sledge_hammer.name=Кузнечный молот
+item.tcomplement.sledge_hammer.desc=Разбивает блоки на более мелкие кусочки
 
 item.tcomplement.chisel.name=Стамеска
-item.tcomplement.chisel.desc=Обрабатывает блоки в мире и в руке.\nПримените расширители, чтобы обработать большие области.
-item.tcomplement.chisel_head.name=Наконечник стамески
+item.tcomplement.chisel.desc=Позволяет обрабатывать блоки в мире и руке.\nИспользуйте расширители, чтобы увеличить область обработки.
+item.tcomplement.chisel_head.name=Головка стамески
 
 
 ################
 #   Ceramics   #
 ################
 
-tile.tcomplement.porcelain_casting.basin.name=Фарфоровый литейный резервуар
-tile.tcomplement.porcelain_casting.table.name=Фарфоровый литейный стол
-tile.tcomplement.porcelain_casting.tooltip=Для отлива изделий из расплавленных металлов из плавильни
+tile.tcomplement.porcelain_casting.basin.name=Фарфоровый резервуар для отливки
+tile.tcomplement.porcelain_casting.table.name=Фарфоровый стол для отливки
+tile.tcomplement.porcelain_casting.tooltip=Отливает предметы, используя жидкие металлы внутри плавильной печи
 
-tile.tcomplement.porcelain_melter.melter.name=Фарфоровая плавильня
-tile.tcomplement.porcelain_melter.melter.tooltip=tile.tcomplement.melter.melter.tooltip
+tile.tcomplement.porcelain_melter.melter.name=Фарфоровая плавильная печь
+tile.tcomplement.porcelain_melter.melter.tooltip=Уменьшенная версия плавильни.\nМожет плавить металлы, но не умеет создавать сплавы.
 tile.tcomplement.porcelain_melter.heater.name=Фарфоровый нагреватель
 tile.tcomplement.porcelain_melter.heater.tooltip=tile.tcomplement.melter.heater.tooltip
-tile.tcomplement.porcelain_alloy_tank.name=Фарфоровый резервуар для сплава
-tile.tcomplement.porcelain_alloy_tank.tooltip=Жидкий расплав из соседних резервуаров и расплавителей.\nРазместите над нагревателем для снабжения горючим.
+tile.tcomplement.porcelain_alloy_tank.name=Фарфоровый резервуар для смешивания
+tile.tcomplement.porcelain_alloy_tank.tooltip=Смешивает жидкости из соседних фарфоровых резервуаров или плавильных печей.\nПоместите над Фарфоровым нагревателем для функционирования
 
-tile.tcomplement.porcelain_tank.tank.name=Фарфоровый бак
-tile.tcomplement.porcelain_tank.gauge.name=Фарфоровый шаблон
+tile.tcomplement.porcelain_tank.tank.name=Фарфоровый резервуар
+tile.tcomplement.porcelain_tank.gauge.name=Мерный фарфоровый резервуар
 tile.tcomplement.porcelain_tank.window.name=Фарфоровое окно
-tile.tcomplement.porcelain_tank.tooltip=Центр плавильни\nСохраняет жидкость при разрушении.
+tile.tcomplement.porcelain_tank.tooltip=Сердце плавильной печи\nЕсли сломать, сохранит жидкость.
 
 
 ################
 #    Config    #
 ################
 
-tcomplement.config.general=Основное
-tcomplement.config.general.bucketCast=Форма для отливки - ведро
-tcomplement.config.general.oreToIngotRatio=Соотношение руды к слитку
+tcomplement.config.general=Основные
+tcomplement.config.general.bucketCast=Отливка ведра
+tcomplement.config.oreToIngotRatio=Соотношение руды к слитку
 
-tcomplement.config.melter=Плавильня
-tcomplement.config.melter.blacklistStone=Черный список камня
+tcomplement.config.melter=Плавильная печь
+tcomplement.config.melter.blacklistStone=Blacklist Stone
 
-tcomplement.config.jei=Интеграция с JEI
-tcomplement.config.jei.separateMelterTab=Отдельная вкладка плавильни
+tcomplement.config.highOven=Доменная печь
+
+tcomplement.config.jei=JEI
+tcomplement.config.jei.separateMelterTab=Выносить "Плавильную печь" отдельной вкладкой
+tcomplement.config.jei.separateHighOvenTab=Выносить "Доменную печь" отдельной вкладкой
