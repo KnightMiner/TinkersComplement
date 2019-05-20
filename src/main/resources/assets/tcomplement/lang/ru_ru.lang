@@ -181,7 +181,7 @@ tcomplement.config.general.bucketCast=Отливка ведра
 tcomplement.config.oreToIngotRatio=Соотношение руды к слитку
 
 tcomplement.config.melter=Плавильная печь
-tcomplement.config.melter.blacklistStone=Blacklist Stone
+tcomplement.config.melter.blacklistStone=Камень в чёрном списке
 
 tcomplement.config.highOven=Доменная печь
 
