@@ -1,20 +1,19 @@
 package knightminer.tcomplement.library.steelworks;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.library.events.TCompRegisterEvent;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import slimeknights.mantle.util.RecipeMatch;
 import slimeknights.mantle.util.RecipeMatchRegistry;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 	private Map<MixAdditive,MixAdditiveList> additives;
@@ -51,10 +50,10 @@ public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 
 	@Override
 	public boolean matches(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier) {
-		return this.getInput().isFluidEqual(fluid) && additives == null || (
+		return this.getInput().isFluidEqual(fluid) && (additives == null || (
 				ingredientMatches(MixAdditive.OXIDIZER, oxidizer) &&
 				ingredientMatches(MixAdditive.REDUCER, reducer) &&
-				ingredientMatches(MixAdditive.PURIFIER, purifier));
+				ingredientMatches(MixAdditive.PURIFIER, purifier)));
 	}
 
 	private void removeMatches(MixAdditive type, ItemStack input, int matched) {
