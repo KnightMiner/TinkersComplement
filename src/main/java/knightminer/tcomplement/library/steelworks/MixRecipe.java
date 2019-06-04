@@ -1,6 +1,7 @@
 package knightminer.tcomplement.library.steelworks;
 
 import knightminer.tcomplement.library.TCompRegistry;
+import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.library.events.TCompRegisterEvent;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -44,16 +45,36 @@ public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 		this(input, output, output.getFluid().getTemperature(output));
 	}
 
-	private boolean ingredientMatches(MixAdditive type, ItemStack input) {
+	private boolean additiveMatches(MixAdditive type, ItemStack input) {
 		return !additives.containsKey(type) || additives.get(type).matches(input).isPresent();
 	}
 
 	@Override
 	public boolean matches(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier) {
 		return this.getInput().isFluidEqual(fluid) && (additives == null || (
-				ingredientMatches(MixAdditive.OXIDIZER, oxidizer) &&
-				ingredientMatches(MixAdditive.REDUCER, reducer) &&
-				ingredientMatches(MixAdditive.PURIFIER, purifier)));
+				additiveMatches(MixAdditive.OXIDIZER, oxidizer) &&
+				additiveMatches(MixAdditive.REDUCER, reducer) &&
+				additiveMatches(MixAdditive.PURIFIER, purifier)));
+	}
+
+	private boolean additiveValid(MixAdditive type, ItemStack input, int required) {
+		return additives.containsKey(type) && input.getCount() >= required;
+	}
+
+	@Override
+	public boolean canMix(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temperature) {
+		if (temperature < minTemp) {
+			return false;
+		}
+
+		if (additives == null) {
+			return true;
+		}
+
+		int required = Util.ceilDiv(fluid.amount, getInput().amount);
+		return additiveValid(MixAdditive.OXIDIZER, oxidizer, required) &&
+					 additiveValid(MixAdditive.REDUCER, reducer, required) &&
+					 additiveValid(MixAdditive.PURIFIER, purifier, required);
 	}
 
 	private void removeMatches(MixAdditive type, ItemStack input, int matched) {
@@ -63,7 +84,7 @@ public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 		}
 
 		// default chance to 100% if the item is missing. Should never happen, but just in case
-		int chance = additives.get(type).matches(input).map((m)->m.amount).orElse(100);
+		int chance = additives.get(type).matches(input).map(m -> m.amount).orElse(100);
 		// if 100% chance, just shrink by number
 		if (chance >= 100) {
 			input.shrink(matched);
@@ -81,26 +102,14 @@ public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 
 	@Override
 	public FluidStack getOutput(FluidStack fluid, int temp) {
-		// if the temperature is too low, do nothing
-		if (temp < minTemp) {
-			return fluid;
-		}
 		FluidStack output = this.getOutput();
 		return new FluidStack(output, fluid.amount * output.amount / this.getInput().amount);
 	}
 
 	@Override
 	public void updateAdditives(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temp) {
-		// skip if temperature is too low as the output won't change
-		if(temp < minTemp) {
-			return;
-		}
-
-		// determine how many times we outputed
-		int matches = fluid.amount / getInput().amount;
-		if (fluid.amount % getInput().amount > 0) {
-			matches++;
-		}
+		// determine how many times we outputted
+		int matches = Util.ceilDiv(fluid.amount, getInput().amount);
 
 		// remove matches from each of the three stacks
 		if(matches > 0) {

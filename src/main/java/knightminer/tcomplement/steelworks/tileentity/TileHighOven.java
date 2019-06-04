@@ -1,9 +1,5 @@
 package knightminer.tcomplement.steelworks.tileentity;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import knightminer.tcomplement.library.TCompRegistry;
 import knightminer.tcomplement.library.steelworks.HighOvenFuel;
 import knightminer.tcomplement.library.steelworks.IHeatRecipe;
@@ -46,6 +42,9 @@ import slimeknights.tconstruct.smeltery.block.BlockSearedFurnaceController;
 import slimeknights.tconstruct.smeltery.multiblock.MultiblockDetection;
 import slimeknights.tconstruct.smeltery.network.SmelteryFluidUpdatePacket;
 import slimeknights.tconstruct.smeltery.tileentity.TileHeatingStructure;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> implements ITickable, IInventoryGui, ISmelteryTankHandler {
 
@@ -187,7 +186,7 @@ public class TileHighOven extends TileHeatingStructure<MultiblockHighOven> imple
 			}
 
 			// if we have a recipe, apply it
-			if (mixRecipe != null) {
+			if (mixRecipe != null && mixRecipe.canMix(meltingOutput, oxidizer, reducer, purifier, temperature)) {
 				// if the temperature is too small, this will just return the input
 				FluidStack mixOutput = mixRecipe.getOutput(meltingOutput, temperature);
 				int filled = liquids.fillInternal(mixOutput, false);

@@ -105,4 +105,15 @@ public class Util {
 		IFluidHandler fluidHandler = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, facing);
 		return FluidUtil.interactWithFluidHandler(player, hand, fluidHandler);
 	}
+
+	/**
+	 * Performs integer division on two numbers, rounding any remainder up
+	 *
+	 * @param dividend Number being divided
+	 * @param divisor  Number dividing
+	 * @return Result rounded up
+	 */
+	public static int ceilDiv(int dividend, int divisor) {
+		return dividend / divisor + (dividend % divisor == 0 ? 0 : 1);
+	}
 }

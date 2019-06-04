@@ -6,7 +6,10 @@ import slimeknights.mantle.util.RecipeMatch;
 
 public interface IMixRecipe extends IHighOvenFilter {
 	/**
-	 * Checks if this recipe matches the given input
+	 * Checks if this recipe matches the given input, this should uniquely identify each mix recipe.
+	 * This method skips stack size and temperature checks, use {@link #canMix(FluidStack, ItemStack, ItemStack, ItemStack, int)}
+	 * to determine if this recipe can be used.
+	 *
 	 * @param fluid     Input fluid
 	 * @param oxidizer  Input oxidizer
 	 * @param reducer   Input reducer
@@ -16,12 +19,27 @@ public interface IMixRecipe extends IHighOvenFilter {
 	boolean matches(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier);
 
 	/**
+	 * Checks if this recipe can mix given the current state. This is called after the recipe is cached.
+	 * This assumes {@link #matches(FluidStack, ItemStack, ItemStack, ItemStack)} returned true
+	 *
+	 * @param fluid       Input fluid stack, used to check additive sizes
+	 * @param oxidizer    Input oxidizer, only the stack size is validated
+	 * @param reducer     Input reducer, only the stack size is validated
+	 * @param purifier    Input purifier, only the stack size is validated
+	 * @param temperature Input temperature
+	 * @return True if the recipe is valid under these sizes and temperatures
+	 */
+	default boolean canMix(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temperature) {
+		return true;
+	}
+
+	/**
 	 * Applies the recipe to the input, returning the maximum amount
-	 * @param fluid  Input fluidstack
-	 * @param temp   Current high oven temperature in Celsius, used for minimum temperature requirements
+	 * @param input        Input fluid stack
+	 * @param temperature  Current high oven temperature
 	 * @return  FluidStack result
 	 */
-	FluidStack getOutput(FluidStack fluid, int temp);
+	FluidStack getOutput(FluidStack input, int temperature);
 
 	/**
 	 * Gets the normal output of this recipe
@@ -33,13 +51,13 @@ public interface IMixRecipe extends IHighOvenFilter {
 
 	/**
 	 * Updates the additives based on the result of the recipe
-	 * @param fluid     Input fluidstack, so we know how many times it matched
-	 * @param oxidizer  Input oxidizer, may be modified
-	 * @param reducer   Input reducer, may be modified
-	 * @param purifier  Input purifier, may be modified
-	 * @param temp      High oven temperature in Celsius, should NO-OP this method if the value makes {@link #getOutput(FluidStack, int)} return the input
+	 * @param fluid        Input fluid stack, so we know how many times it matched
+	 * @param oxidizer     Input oxidizer, may be modified
+	 * @param reducer      Input reducer, may be modified
+	 * @param purifier     Input purifier, may be modified
+	 * @param temperature  Current high oven temperature
 	 */
-	void updateAdditives(FluidStack output, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temp);
+	void updateAdditives(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temperature);
 
 	/**
 	 * Adds an oxidizer to this recipe
