@@ -29,17 +29,5 @@ public enum EmptyMixRecipe implements IMixRecipe {
 	public void updateAdditives(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temp) {}
 
 	@Override
-	public IMixRecipe addOxidizer(RecipeMatch oxidizer) {
-		return this;
-	}
-
-	@Override
-	public IMixRecipe addReducer(RecipeMatch reducer) {
-		return this;
-	}
-
-	@Override
-	public IMixRecipe addPurifier(RecipeMatch purifier) {
-		return this;
-	}
+	public void addAdditive(MixAdditive type, RecipeMatch additive) {}
 }

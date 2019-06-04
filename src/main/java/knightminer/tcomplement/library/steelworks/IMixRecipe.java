@@ -5,6 +5,8 @@ import net.minecraftforge.fluids.FluidStack;
 import slimeknights.mantle.util.RecipeMatch;
 
 public interface IMixRecipe extends IHighOvenFilter {
+	/* Matches checks */
+
 	/**
 	 * Checks if this recipe matches the given input, this should uniquely identify each mix recipe.
 	 * This method skips stack size and temperature checks, use {@link #canMix(FluidStack, ItemStack, ItemStack, ItemStack, int)}
@@ -33,6 +35,9 @@ public interface IMixRecipe extends IHighOvenFilter {
 		return true;
 	}
 
+
+	/* Output methods */
+
 	/**
 	 * Applies the recipe to the input, returning the maximum amount
 	 * @param input        Input fluid stack
@@ -59,15 +64,31 @@ public interface IMixRecipe extends IHighOvenFilter {
 	 */
 	void updateAdditives(FluidStack fluid, ItemStack oxidizer, ItemStack reducer, ItemStack purifier, int temperature);
 
+
+	/* Additive addition methods */
+
 	/**
-	 * Adds an oxidizer to this recipe
-	 * @param oxidizer  RecipeMatch entry, note amountMatched is used as consumption chance
-	 * @return  IMixRecipe instance for chaining
+	 * Adds an additive to this recipe
+	 *
+	 * @param type     Type of the additive
+	 * @param additive RecipeMatch entry, amountMatched is used as consumption chance
 	 */
-	IMixRecipe addOxidizer(RecipeMatch oxidizer);
+	void addAdditive(MixAdditive type, RecipeMatch additive);
 
 	/**
 	 * Adds an oxidizer to this recipe
+	 *
+	 * @param oxidizer  RecipeMatch entry, amountMatched is used as consumption chance
+	 * @return  IMixRecipe instance for chaining
+	 */
+	default IMixRecipe addOxidizer(RecipeMatch oxidizer) {
+		addAdditive(MixAdditive.OXIDIZER, oxidizer);
+		return this;
+	}
+
+	/**
+	 * Adds an oxidizer to this recipe
+	 *
 	 * @param stack    Oxidizer stack
 	 * @param consume  Percent chance this oxidizer is consumed on this operation
 	 * @return  IMixRecipe instance for chaining
@@ -78,7 +99,8 @@ public interface IMixRecipe extends IHighOvenFilter {
 
 	/**
 	 * Adds an oxidizer to this recipe
-	 * @param stack    Oxidizer oredict name
+	 *
+	 * @param oredict  Oxidizer oredict name
 	 * @param consume  Percent chance this oxidizer is consumed on this operation
 	 * @return  IMixRecipe instance for chaining
 	 */
@@ -88,13 +110,18 @@ public interface IMixRecipe extends IHighOvenFilter {
 
 	/**
 	 * Adds an reducer to this recipe
-	 * @param reducer  RecipeMatch entry, note amountMatched is used as consumption chance
+	 *
+	 * @param reducer  RecipeMatch entry, amountMatched is used as consumption chance
 	 * @return  IMixRecipe instance for chaining
 	 */
-	IMixRecipe addReducer(RecipeMatch reducer);
+	default IMixRecipe addReducer(RecipeMatch reducer) {
+		addAdditive(MixAdditive.REDUCER, reducer);
+		return this;
+	}
 
 	/**
 	 * Adds an reducer to this recipe
+	 *
 	 * @param stack    Reducer stack
 	 * @param consume  Percent chance this reducer is consumed on this operation
 	 * @return  IMixRecipe instance for chaining
@@ -105,7 +132,8 @@ public interface IMixRecipe extends IHighOvenFilter {
 
 	/**
 	 * Adds an reducer to this recipe
-	 * @param stack    Reducer oredict name
+	 *
+	 * @param oredict  Reducer oredict name
 	 * @param consume  Percent chance this reducer is consumed on this operation
 	 * @return  IMixRecipe instance for chaining
 	 */
@@ -115,13 +143,18 @@ public interface IMixRecipe extends IHighOvenFilter {
 
 	/**
 	 * Adds an purifier to this recipe
-	 * @param purifier  RecipeMatch entry, note amountMatched is used as consumption chance
+	 *
+	 * @param purifier  RecipeMatch entry, amountMatched is used as consumption chance
 	 * @return  IMixRecipe instance for chaining
 	 */
-	IMixRecipe addPurifier(RecipeMatch purifier);
+	default IMixRecipe addPurifier(RecipeMatch purifier) {
+		addAdditive(MixAdditive.PURIFIER, purifier);
+		return this;
+	}
 
 	/**
 	 * Adds an purifier to this recipe
+	 *
 	 * @param stack    Purifier stack
 	 * @param consume  Percent chance this purifier is consumed on this operation
 	 * @return  IMixRecipe instance for chaining
@@ -132,7 +165,8 @@ public interface IMixRecipe extends IHighOvenFilter {
 
 	/**
 	 * Adds an purifier to this recipe
-	 * @param stack    Purifier oredict name
+	 *
+	 * @param oredict  Purifier oredict name
 	 * @param consume  Percent chance this purifier is consumed on this operation
 	 * @return  IMixRecipe instance for chaining
 	 */

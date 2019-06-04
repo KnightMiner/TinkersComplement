@@ -120,7 +120,8 @@ public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 	}
 
 	/* Ingredient methods */
-	private void addAdditive(RecipeMatch additive, MixAdditive type) {
+	@Override
+	public void addAdditive(MixAdditive type, RecipeMatch additive) {
 		if (additive != null) {
 			// fire event so addition of this additive can be canceled
 			if(new TCompRegisterEvent.HighOvenMixAdditiveEvent(this, additive, type).fire()) {
@@ -139,23 +140,7 @@ public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 		}
 	}
 
-	@Override
-	public MixRecipe addOxidizer(RecipeMatch oxidizer) {
-		addAdditive(oxidizer, MixAdditive.OXIDIZER);
-		return this;
-	}
-	@Override
-	public MixRecipe addReducer(RecipeMatch reducer) {
-		addAdditive(reducer, MixAdditive.REDUCER);
-		return this;
-	}
-	@Override
-	public MixRecipe addPurifier(RecipeMatch purifier) {
-		addAdditive(purifier, MixAdditive.PURIFIER);
-		return this;
-	}
-
-	/** JEI */
+	/* JEI */
 
 	@Override
 	public boolean isValid() {
