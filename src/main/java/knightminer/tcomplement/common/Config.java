@@ -1,10 +1,7 @@
 package knightminer.tcomplement.common;
 
-import java.util.function.BooleanSupplier;
-
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-
 import knightminer.tcomplement.TinkersComplement;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.common.config.Config.Comment;
@@ -16,6 +13,8 @@ import net.minecraftforge.common.config.Config.RequiresMcRestart;
 import net.minecraftforge.common.crafting.IConditionFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import slimeknights.mantle.pulsar.config.ForgeCFG;
+
+import java.util.function.BooleanSupplier;
 
 @net.minecraftforge.common.config.Config(modid = TinkersComplement.modID, category = "")
 public class Config {
@@ -97,11 +96,16 @@ public class Config {
 
 		@RequiresMcRestart
 		@Comment({
-			"If true, puts high oven melting recipes in their own tab in JEI to make the overrides more clear.",
-			"If false, the high oven is just added to the normal smeltery tab."
+				"If true, puts high oven melting recipes in their own tab in JEI to make the overrides more clear.",
+				"If false, the high oven is just added to the normal smeltery tab."
 		})
 		@LangKey("tcomplement.config.jei.separateHighOvenTab")
 		public boolean separateHighOvenTab = true;
+
+		@RequiresMcRestart
+		@Comment("If true, shows high oven fuels as a tab. False will still show them in the main melter tab like the smeltery fuels.")
+		@LangKey("tcomplement.config.jei.showHighOvenFuel")
+		public boolean showHighOvenFuel = false;
 	}
 
 	public static class ConfigProperty implements IConditionFactory {

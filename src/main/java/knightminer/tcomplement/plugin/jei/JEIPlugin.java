@@ -1,12 +1,6 @@
 package knightminer.tcomplement.plugin.jei;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableList;
-
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.PulseBase;
 import knightminer.tcomplement.library.steelworks.HeatRecipe;
@@ -46,6 +40,10 @@ import slimeknights.tconstruct.smeltery.block.BlockCasting.CastingType;
 import slimeknights.tconstruct.smeltery.client.IGuiLiquidTank;
 import slimeknights.tconstruct.tools.TinkerMaterials;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+
 @mezz.jei.api.JEIPlugin
 public class JEIPlugin implements IModPlugin {
 	private static final String FURNACE_FUEL = VanillaRecipeCategoryUid.FUEL;
@@ -67,10 +65,12 @@ public class JEIPlugin implements IModPlugin {
 		// High Oven
 		if(PulseBase.isSteelworksLoaded()) {
 			registry.addRecipeCategories(new HighOvenMixCategory(guiHelper));
-			registry.addRecipeCategories(new HighOvenFuelCategory(guiHelper));
 			registry.addRecipeCategories(new HighOvenHeatCategory(guiHelper));
 			if(Config.jei.separateHighOvenTab) {
 				registry.addRecipeCategories(new HighOvenMeltingCategory(guiHelper));
+			}
+			if(Config.jei.showHighOvenFuel) {
+				registry.addRecipeCategories(new HighOvenFuelCategory(guiHelper));
 			}
 		}
 	}
@@ -132,12 +132,18 @@ public class JEIPlugin implements IModPlugin {
 			registry.addRecipes(HighOvenHeatGetter.getHeatRecipes(), HighOvenHeatCategory.CATEGORY);
 
 			// fuel category
-			registry.handleRecipes(HighOvenFuel.class, (fuel)->new HighOvenFuelWrapper(fuel, guiHelper), HighOvenFuelCategory.CATEGORY);
-			registry.addRecipes(HighOvenFuelGetter.getHighOvenFuels(), HighOvenFuelCategory.CATEGORY);
+			if(Config.jei.showHighOvenFuel) {
+				registry.handleRecipes(HighOvenFuel.class, (fuel) -> new HighOvenFuelWrapper(fuel, guiHelper), HighOvenFuelCategory.CATEGORY);
+				registry.addRecipes(HighOvenFuelGetter.getHighOvenFuels(), HighOvenFuelCategory.CATEGORY);
+			}
 
 			// catalysts
 			registry.addRecipeCatalyst(new ItemStack(SteelworksModule.highOvenController),
-					highOvenMelting, HighOvenMixCategory.CATEGORY, HighOvenFuelCategory.CATEGORY, HighOvenHeatCategory.CATEGORY);
+																 highOvenMelting, HighOvenMixCategory.CATEGORY, HighOvenHeatCategory.CATEGORY);
+			if(Config.jei.showHighOvenFuel) {
+				registry.addRecipeCatalyst(new ItemStack(SteelworksModule.highOvenController), HighOvenFuelCategory.CATEGORY);
+			}
+
 			// add scorched casting blocks to casting category
 			for(CastingType type : CastingType.values()) {
 				registry.addRecipeCatalyst(new ItemStack(SteelworksModule.scorchedCasting, 1, type.getMeta()), CastingRecipeCategory.CATEGORY);

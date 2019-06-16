@@ -202,3 +202,4 @@ tcomplement.config.highOven.steamFuel=Steam Fuel
 tcomplement.config.jei=JEI Integration
 tcomplement.config.jei.separateMelterTab=Separate Melter Tab
 tcomplement.config.jei.separateHighOvenTab=Separate High Oven Tab
+tcomplement.config.jei.showHighOvenFuel=Show High Oven Fuel
