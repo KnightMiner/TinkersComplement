@@ -1,7 +1,5 @@
 package knightminer.tcomplement.plugin.jei.highoven.heat;
 
-import javax.annotation.Nonnull;
-
 import knightminer.tcomplement.library.Util;
 import knightminer.tcomplement.library.steelworks.HeatRecipe;
 import mezz.jei.api.ingredients.IIngredients;
@@ -9,15 +7,19 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fluids.FluidStack;
 
+import javax.annotation.Nonnull;
+
 public class HighOvenHeatWrapper implements IRecipeWrapper {
 
 	private FluidStack inputFluid;
 	private FluidStack outputFluid;
 	private int temp;
 	public HighOvenHeatWrapper(HeatRecipe recipe) {
-		// fluids
+		// fluids, multiply by 40 to make per second
 		this.inputFluid = recipe.getInput();
+		this.inputFluid = new FluidStack(this.inputFluid, this.inputFluid.amount * 40);
 		this.outputFluid = recipe.getOutput();
+		this.outputFluid = new FluidStack(this.outputFluid, this.outputFluid.amount * 40);
 		this.temp = recipe.getTemperature();
 	}
 

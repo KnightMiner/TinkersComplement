@@ -1,7 +1,5 @@
 package knightminer.tcomplement.plugin.jei.highoven.heat;
 
-import javax.annotation.Nonnull;
-
 import knightminer.tcomplement.TinkersComplement;
 import knightminer.tcomplement.library.Util;
 import mezz.jei.api.IGuiHelper;
@@ -12,6 +10,10 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 public class HighOvenHeatCategory implements IRecipeCategory<HighOvenHeatWrapper> {
 
@@ -51,6 +53,7 @@ public class HighOvenHeatCategory implements IRecipeCategory<HighOvenHeatWrapper
 	@Override
 	public void setRecipe(IRecipeLayout recipeLayout, HighOvenHeatWrapper recipe, IIngredients ingredients) {
 		IGuiFluidStackGroup fluids = recipeLayout.getFluidStacks();
+		fluids.addTooltipCallback(HighOvenHeatCategory::onFluidTooltip);
 
 		// fluids
 		fluids.init(0, true, 20, 22, 18, 18, 1, false, null);
@@ -61,5 +64,16 @@ public class HighOvenHeatCategory implements IRecipeCategory<HighOvenHeatWrapper
 	@Override
 	public String getModName() {
 		return TinkersComplement.modName;
+	}
+
+
+	public static void onFluidTooltip(int slotIndex, boolean input, FluidStack fluid, List<String> text) {
+		// replace the tooltip with one showing fluid size as a rate
+		String ingredientName = text.get(0);
+		String modName = text.get(text.size() - 1);
+		text.clear();
+		text.add(ingredientName);
+		text.add(Util.translateFormatted("gui.jei.high_oven.heat.rate", fluid.amount));
+		text.add(modName);
 	}
 }
