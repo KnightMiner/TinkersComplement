@@ -313,7 +313,7 @@ public class TCompRegistry {
 	\*-------------------------------------------------------------------------*/
 	private static List<HighOvenFuel> highOvenFuels = Lists.newLinkedList();
 
-	private static void registerFuel(HighOvenFuel fuel) {
+	public static void registerFuel(HighOvenFuel fuel) {
 		if(new TCompRegisterEvent.HighOvenFuelRegisterEvent(fuel).fire()) {
 			highOvenFuels.add(fuel);
 		}
