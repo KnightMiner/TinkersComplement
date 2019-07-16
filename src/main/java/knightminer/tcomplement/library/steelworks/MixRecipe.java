@@ -58,7 +58,7 @@ public class MixRecipe extends HighOvenFilter implements IMixRecipe {
 	}
 
 	private boolean additiveValid(MixAdditive type, ItemStack input, int required) {
-		return additives.containsKey(type) && input.getCount() >= required;
+		return !additives.containsKey(type) || input.getCount() >= required;
 	}
 
 	@Override
