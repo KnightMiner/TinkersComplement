@@ -10,6 +10,16 @@ item.tcomplement.materials.stone_bucket.tooltip=Will not work as a bucket, but g
 item.tcomplement.cast.bucket.name=Bucket Cast
 item.tcomplement.cast_clay.bucket.name=Clay Bucket Cast
 
+item.tcomplement.edibles.milk_chocolate_ingot.name=Milk Chocolate Ingot
+item.tcomplement.edibles.milk_chocolate_nugget.name=Milk Chocolate Nugget
+item.tcomplement.edibles.dark_chocolate_ingot.name=Dark Chocolate Ingot
+item.tcomplement.edibles.dark_chocolate_nugget.name=Dark Chocolate Nugget
+item.tcomplement.edibles.cocoa_butter.name=Cocoa Butter
+
+fluid.tcomplement.chocolate_liquor=Chocolate Liquor
+fluid.tcomplement.milk_chocolate=Milk Chocolate
+fluid.tcomplement.dark_chocolate=Dark Chocolate
+
 
 ################
 #    Melter    #

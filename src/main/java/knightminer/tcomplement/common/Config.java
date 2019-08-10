@@ -42,6 +42,11 @@ public class Config {
 		@Comment("Enables the bucket cast: allows casting buckets using a casting table.")
 		@LangKey("tcomplement.config.general.bucketCast")
 		public boolean bucketCast = true;
+
+		@RequiresMcRestart
+		@Comment("Enables chocolate: made using a smeltery. Its a secret, so don't tell anyone.")
+		@LangKey("tcomplement.config.general.chocolate")
+		public boolean chocolate = true;
 	}
 
 	public static class Melter {

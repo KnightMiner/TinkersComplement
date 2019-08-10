@@ -23,16 +23,21 @@ import knightminer.tcomplement.plugin.jei.highoven.mix.HighOvenMixGetter;
 import knightminer.tcomplement.plugin.jei.highoven.mix.HighOvenMixWrapper;
 import knightminer.tcomplement.plugin.jei.melter.MeltingRecipeCategory;
 import knightminer.tcomplement.plugin.jei.melter.MeltingRecipeWrapper;
+import knightminer.tcomplement.shared.CommonsModule;
 import knightminer.tcomplement.steelworks.SteelworksModule;
 import knightminer.tcomplement.steelworks.client.GuiHighOven;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.gui.IAdvancedGuiHandler;
+import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
 import slimeknights.tconstruct.library.smeltery.MeltingRecipe;
 import slimeknights.tconstruct.plugin.jei.casting.CastingRecipeCategory;
 import slimeknights.tconstruct.plugin.jei.smelting.SmeltingRecipeChecker;
@@ -179,6 +184,28 @@ public class JEIPlugin implements IModPlugin {
 							)),
 					EXNIHILO_HAMMER);
 		}
+
+		// chocolate is a secret, don't tell anyone
+		if(Config.general.chocolate) {
+			IIngredientBlacklist blacklist = registry.getJeiHelpers().getIngredientBlacklist();
+			blacklistFluid(blacklist, CommonsModule.chocolateLiquor);
+			blacklistFluid(blacklist, CommonsModule.milkChocolate);
+			blacklist.addIngredientToBlacklist(CommonsModule.milkChocolateIngot);
+			blacklist.addIngredientToBlacklist(CommonsModule.milkChocolateNugget);
+			blacklist.addIngredientToBlacklist(CommonsModule.cocoaButter);
+			if(PulseBase.isSteelworksLoaded()) {
+				blacklistFluid(blacklist, CommonsModule.darkChocolate);
+				blacklist.addIngredientToBlacklist(CommonsModule.cocoaButter);
+				blacklist.addIngredientToBlacklist(CommonsModule.darkChocolateIngot);
+				blacklist.addIngredientToBlacklist(CommonsModule.darkChocolateNugget);
+			}
+		}
+	}
+
+	private static void blacklistFluid(IIngredientBlacklist blacklist, Fluid fluid) {
+		FluidStack stack = new FluidStack(fluid, Fluid.BUCKET_VOLUME);
+		blacklist.addIngredientToBlacklist(stack);
+		blacklist.addIngredientToBlacklist(FluidUtil.getFilledBucket(stack));
 	}
 
 

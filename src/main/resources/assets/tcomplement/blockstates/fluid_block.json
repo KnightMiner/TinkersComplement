@@ -4,8 +4,9 @@
         "model": "forge:fluid"
     },
     "variants": {
-        "steam": [{
-            "custom": { "fluid": "steam" }
-        }]
+        "steam":            [{"custom": { "fluid": "steam" }}],
+        "chocolate_liquor": [{"custom": { "fluid": "chocolate_liquor" }}],
+        "milk_chocolate":   [{"custom": { "fluid": "milk_chocolate" }}],
+        "dark_chocolate":   [{"custom": { "fluid": "dark_chocolate" }}]
     }
 }

@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-item",
+    "model": "forge:item-layer"
+  },
+  "variants": {
+    "milk_chocolate_ingot":  [{ "textures": { "layer0": "tcomplement:items/materials/milk_chocolate_ingot"  }}],
+    "milk_chocolate_nugget": [{ "textures": { "layer0": "tcomplement:items/materials/milk_chocolate_nugget" }}],
+    "dark_chocolate_ingot":  [{ "textures": { "layer0": "tcomplement:items/materials/dark_chocolate_ingot"  }}],
+    "dark_chocolate_nugget": [{ "textures": { "layer0": "tcomplement:items/materials/dark_chocolate_nugget" }}],
+    "cocoa_butter":          [{ "textures": { "layer0": "tcomplement:items/materials/cocoa_butter" }}]
+  }
+}

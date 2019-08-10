@@ -1,12 +1,7 @@
 package knightminer.tcomplement.steelworks;
 
-import java.util.Set;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import com.google.common.collect.ImmutableSet;
 import com.google.common.eventbus.Subscribe;
-
 import knightminer.tcomplement.common.CommonProxy;
 import knightminer.tcomplement.common.Config;
 import knightminer.tcomplement.common.ModIds;
@@ -44,6 +39,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.commons.lang3.tuple.Pair;
 import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.mantle.util.RecipeMatch;
@@ -62,6 +58,8 @@ import slimeknights.tconstruct.smeltery.block.BlockSeared.SearedType;
 import slimeknights.tconstruct.smeltery.block.BlockSearedSlab;
 import slimeknights.tconstruct.smeltery.block.BlockSearedSlab2;
 import slimeknights.tconstruct.smeltery.item.ItemChannel;
+
+import java.util.Set;
 
 @Pulse(
 		id = SteelworksModule.pulseID,
@@ -230,46 +228,52 @@ public class SteelworksModule extends PulseBase {
 			TCompRegistry.registerHeatRecipe(new FluidStack(FluidRegistry.WATER, Config.highOven.steamRate), new FluidStack(steam, Config.highOven.steamRate), 1300);
 		}
 
-		IMixRecipe mix; // because Eclipse formatter is dumb
-
 		// steel
-		mix = TCompRegistry.registerMix(
-				new FluidStack(TinkerFluids.iron, (int)(Material.VALUE_Ingot*Config.highOven.oreToIngotRatio)),
-				new FluidStack(TinkerFluids.steel, (int)(Material.VALUE_Ingot*Config.highOven.oreToIngotRatio)))
-				// oxidizers
-				.addOxidizer("gunpowder", 33)
-				.addOxidizer("dustSulfur", 29)
-				.addOxidizer("dustSulphur", 29)
-				.addOxidizer("dustSaltpeter", 30)
-				// reducers
-				.addReducer("dustRedstone", 65)
-				.addReducer("dustManganese", 47)
-				.addReducer("dustAluminum", 60)
-				.addReducer("dustAluminium", 60)
-				// purifiers
-				.addPurifier("sand", 100);
+		int amount = (int)(Material.VALUE_Ingot * Config.highOven.oreToIngotRatio);
+		TCompRegistry.registerMix(
+				new FluidStack(TinkerFluids.iron, amount),
+				new FluidStack(TinkerFluids.steel, amount))
+								 // oxidizers
+								 .addOxidizer("gunpowder", 33)
+								 .addOxidizer("dustSulfur", 29)
+								 .addOxidizer("dustSulphur", 29)
+								 .addOxidizer("dustSaltpeter", 30)
+								 // reducers
+								 .addReducer("dustRedstone", 65)
+								 .addReducer("dustManganese", 47)
+								 .addReducer("dustAluminum", 60)
+								 .addReducer("dustAluminium", 60)
+								 // purifiers
+								 .addPurifier("sand", 100);
 
 		// pig iron
-		mix = TCompRegistry.registerMix(
+		IMixRecipe mix = TCompRegistry.registerMix(
 				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot),
 				new FluidStack(TinkerFluids.pigIron, Material.VALUE_Ingot))
-				// additives
-				.addOxidizer(new ItemStack(Items.SUGAR), 60)
-				.addReducer(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage()), 20)
-				.addPurifier(new ItemStack(Items.PORKCHOP), 80);
-
+																	// additives
+																	.addOxidizer(new ItemStack(Items.SUGAR), 60)
+																	.addReducer(new ItemStack(Items.DYE, 1, EnumDyeColor.WHITE.getDyeDamage()), 20)
+																	.addPurifier(new ItemStack(Items.PORKCHOP), 80);
 		ItemStack bacon = GameRegistry.makeItemStack(ModIds.TConstruct.edibles, ModIds.TConstruct.baconMeta, 1, null);
 		if(!bacon.isEmpty()) {
 			mix.addPurifier(bacon, 70);
 		}
 
 		// knightslime
-		mix = TCompRegistry.registerMix(
+		TCompRegistry.registerMix(
 				new FluidStack(TinkerFluids.iron, Material.VALUE_Ingot/2),
 				new FluidStack(TinkerFluids.knightslime, Material.VALUE_Ingot/2))
-				// additives, no oxidizer for this recipe
-				.addReducer("slimeballPurple", 75)
-				.addPurifier("gravel", 80);
+								 // additives, no oxidizer for this recipe
+								 .addReducer("slimeballPurple", 75)
+								 .addPurifier("gravel", 80);
+
+		// dark chocolate
+		if(Config.general.chocolate) {
+			amount = (int)(Material.VALUE_Ingot * Config.highOven.oreToIngotRatio / 3);
+			TCompRegistry.registerMix(new FluidStack(CommonsModule.chocolateLiquor, amount), new FluidStack(CommonsModule.darkChocolate, amount))
+									 .addOxidizer(new ItemStack(Items.SUGAR), 40)
+									 .addReducer(CommonsModule.cocoaButter.copy(), 60);
+		}
 	}
 
 	private void registerFuels() {
