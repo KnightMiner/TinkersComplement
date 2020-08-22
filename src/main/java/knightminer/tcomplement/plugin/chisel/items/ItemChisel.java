@@ -123,6 +123,13 @@ public class ItemChisel extends AoeToolCore implements IChiselItem {
 	@Optional.Method(modid="chisel")
 	@Override
 	public boolean onChisel(World world, EntityPlayer player, ItemStack chisel, ICarvingVariation target) {
+		if (ToolHelper.getCurrentDurability(chisel) <= 0) {
+			NBTTagCompound tags = TagUtil.getTagSafe(chisel);
+			if (tags.getCompoundTag("chiseldata").hasKey("target")) {
+				tags.getCompoundTag("chiseldata").removeTag("target");
+				chisel.setTagCompound(tags);
+			}
+		}
 		return true;
 	}
 
